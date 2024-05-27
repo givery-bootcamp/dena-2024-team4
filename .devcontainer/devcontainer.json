@@ -1,0 +1,14 @@
+{
+    "name": "frontend",
+    "workspaceFolder": "/workspace",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
+    "remoteUser": "root",
+    "customizations": {
+      "vscode": {
+        "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"],
+        "settings": {
+          "terminal.integrated.defaultProfile.linux": "zsh"
+        }
+      }
+    }
+  }
