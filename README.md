@@ -1,4 +1,5 @@
 # Training app 2024
+
 ## docker-compose structure
 
 - backend:
@@ -26,6 +27,9 @@
 
 ## How to develop
 
+1. 左下の青いマークから、`Reopen in container`で devcontainer を立ち上げます
+2. コンテナ内に入ったら、以下のコマンドを実行します
+
 ```
 $ docker-compose up
 ```
@@ -33,11 +37,11 @@ $ docker-compose up
 - backend: `http://localhost:9000`
 - frontend: `http://localhost:3000`
 
-でWebサーバが起動します。
+で Web サーバが起動します。
 
 ### Initial setup
 
-初期状態で、DBから値を読み出してHello worldを表示する構成となっていますが、初回起動時にはテーブルが存在しないためWebサーバへのアクセスがエラーになります。
+初期状態で、DB から値を読み出して Hello world を表示する構成となっていますが、初回起動時にはテーブルが存在しないため Web サーバへのアクセスがエラーになります。
 起動後に以下のスクリプトを実行してテーブルの作成と初期データの投入を行ってください。
 
 ```
@@ -45,7 +49,7 @@ host$ docker-compose exec db sh -c "mysql < /sqlscripts/create.sql"
 host$ docker-compose exec db sh -c "mysql training < /sqlscripts/insert.sql"
 ```
 
-Reactを開発する人はブラウザの拡張機能をインストールしてください。(任意)
+React を開発する人はブラウザの拡張機能をインストールしてください。(任意)
 
 - React Developer Tools
 - Redux DevTools
@@ -63,7 +67,7 @@ host$ docker-compose exec backend bash
 host$ docker-compose exec frontend bash
 ```
 
-ライブラリをインストールする場合はdockerコンテナ側でコマンドを実行してください。
+ライブラリをインストールする場合は docker コンテナ側でコマンドを実行してください。
 
 e.g.
 
@@ -77,20 +81,21 @@ host$ docker-compose exec frontend bash
 frontend$ npm install something
 ```
 
-VS Codeなどで開発する場合、コンテナ側にインストールされたモジュールが参照できないために、エディター上でエラーが表示される場合があります。
+VS Code などで開発する場合、コンテナ側にインストールされたモジュールが参照できないために、エディター上でエラーが表示される場合があります。
 
-その場合はお手数ですが、ホストOS側でもモジュールのインストールをお願いします。
+その場合はお手数ですが、ホスト OS 側でもモジュールのインストールをお願いします。
 
 ```
 host$ cd frontend
 host$ npm install
 ```
 
-[frontend(nodejs)をDocker外で動かすための設定変更](https://github.com/givery-technology/training-app-2023/wiki/Docker%E3%81%AE%E4%B8%AD%E3%81%AENode%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%84%E3%82%84%E3%81%A0%E3%81%A8%E6%80%9D%E3%81%A3%E3%81%9F%E4%BA%BA%E5%90%91%E3%81%91%E3%81%AE%E8%84%B1%E7%8D%84%E3%81%AE%E6%89%8B%E5%BC%95%E3%81%8D)
+[frontend(nodejs)を Docker 外で動かすための設定変更](https://github.com/givery-technology/training-app-2023/wiki/Docker%E3%81%AE%E4%B8%AD%E3%81%AENode%E4%BD%BF%E3%81%86%E3%81%AE%E3%81%84%E3%82%84%E3%81%A0%E3%81%A8%E6%80%9D%E3%81%A3%E3%81%9F%E4%BA%BA%E5%90%91%E3%81%91%E3%81%AE%E8%84%B1%E7%8D%84%E3%81%AE%E6%89%8B%E5%BC%95%E3%81%8D)
 
 ## ディレクトリ構成
 
 ### Backend
+
 ```
 backend/
   internal/ : ソースコード
