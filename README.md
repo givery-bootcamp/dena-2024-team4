@@ -1,4 +1,7 @@
 # Training app 2024
+## リンク集
+- [本プロジェクトのリンク集](https://github.com/givery-bootcamp/dena-2024-team4/wiki)
+
 ## docker-compose structure
 
 - backend:
