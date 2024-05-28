@@ -1,14 +1,27 @@
 {
-    "name": "frontend",
-    "workspaceFolder": "/workspace",
-    "image": "mcr.microsoft.com/devcontainers/typescript-node:20",
-    "remoteUser": "root",
-    "customizations": {
-      "vscode": {
-        "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"],
-        "settings": {
-          "terminal.integrated.defaultProfile.linux": "zsh"
-        }
+  "name": "develop",
+  "service": "frontend",
+  "remoteUser": "root",
+  "workspaceFolder": "/workspace",
+  "dockerComposeFile": "./docker-compose.yml",
+  "postCreateCommand": "zsh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "oderwat.indent-rainbow",
+        "YoavBls.pretty-ts-errors",
+        "golang.Go"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
+  },
+  "features": {
+    "ghcr.io/shyim/devcontainers-features/bun:0": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/go:1": {}
   }
+}
