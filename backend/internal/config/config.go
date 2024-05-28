@@ -12,6 +12,7 @@ var DBHostName = "db"
 var DBPort = 3306
 var DBName = "training"
 
+// init()は特別で、初期実行。envから環境変数をとってくる
 func init() {
 	if v := os.Getenv("HOSTNAME"); v != "" {
 		HostName = v
