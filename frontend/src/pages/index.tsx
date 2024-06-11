@@ -2,12 +2,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import styles from '@/styles/Home.module.css';
-import { css } from '@yamada-ui/react';
+import { Button, ui } from '@yamada-ui/react';
+import { getServerSideCommonProps } from '@/libs/yamada-ui';
 
 const inter = Inter({ subsets: ['latin'] });
-const buttonStyle = css({
-  backgroundColor: 'red',
-});
+
+export const getServerSideProps = getServerSideCommonProps;
 
 export default function Home() {
   return (
@@ -19,6 +19,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
+        <ui.button padding={10} css={{ fontSize: 50 }}>
+          hogheoge
+        </ui.button>
+        <Button padding={10} css={{ fontSize: 50 }}>
+          hogheohge
+        </Button>
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
