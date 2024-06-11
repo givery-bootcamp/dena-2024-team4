@@ -3,18 +3,16 @@ name: Deploy
 on:
   push:
     branches:
-      - 'deploy'
+      - 'main'
+      - 'feature/setup-frontend-docker'
 
 env:
   AWS_REGION: ap-northeast-1
-  REPOSITORY_NAME_BACKEND: dena-training-2024-team-0-backend
-  REPOSITORY_NAME_FRONTEND: dena-training-2024-team-0-frontend
+  REPOSITORY_NAME_FRONTEND: dena-training-2024-team-4-frontend
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   ECS_CLUSTER: dena-training-2024
-  ECS_SERVICE: dena-training-2024-team-0
-  BUCKET_PREFIX: team-0
-  VITE_API_ENDPOINT_PATH: https://team-0_bk.member0005.track-bootcamp.run
+  ECS_SERVICE: dena-training-2024-team-4
 
 jobs:
   # frontendのdeploy(ecrへのpushとサービスのdeploy)
