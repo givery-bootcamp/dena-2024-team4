@@ -1,3 +1,4 @@
+// transaction.go
 package middleware
 
 import (
@@ -8,15 +9,16 @@ import (
 
 func Transaction() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		db := external.DB.Begin()
+		db := external.GetDB() // グローバルなデータベース接続を取得
+		txn := db.Begin()
 		defer func() {
 			if 400 <= ctx.Writer.Status() {
-				db.Rollback()
-				return
+				txn.Rollback()
+			} else {
+				txn.Commit()
 			}
-			db.Commit()
 		}()
-		ctx.Set("db", db)
+		ctx.Set("db", txn)
 		ctx.Next()
 	}
 }

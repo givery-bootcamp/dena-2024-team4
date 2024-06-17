@@ -1,3 +1,4 @@
+// main.go
 package main
 
 import (
@@ -10,13 +11,14 @@ import (
 )
 
 func main() {
-	// Initialize database
-	external.SetupDB()
+	// DBの初期化
+	external.InitializeDB()
 
-	// Setup webserver
-	app := gin.Default()              // Ginのセットアップ
-	app.Use(middleware.Transaction()) // DB
-	app.Use(middleware.Cors())        // クロスオリジンの設定
-	middleware.SetupRoutes(app)       // ルーティングの設定(エンドポイントの設定)
+	// ルーターのセットアップ
+	app := gin.Default()
+	app.Use(middleware.Transaction())
+	middleware.SetupRoutes(app)
+
+	// サーバーの起動
 	app.Run(fmt.Sprintf("%s:%d", config.HostName, config.Port))
 }
