@@ -15,3 +15,5 @@ const MOCK_POST = {
     deleted_at: null,
   }
 }
+
+const MY_USER_ID = 1
