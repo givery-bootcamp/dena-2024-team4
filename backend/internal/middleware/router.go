@@ -12,6 +12,7 @@ func SetupRoutes(app *gin.Engine) {
 	})
 	app.GET("/hello", controllers.HelloWorld)
 	app.GET("/tweets", controllers.AllTweets)
+	app.GET("/tweets/:tweetId", controllers.TweetDetail) // tweetIdでツイートの詳細を取得
 }
 
 // フロントエンドから叩くやつの設定
