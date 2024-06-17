@@ -16,7 +16,7 @@ type TweetDetailRepository struct {
 
 func NewTweetDetailRepository() *TweetDetailRepository {
 	return &TweetDetailRepository{
-		Conn: external.DB,
+		Conn: external.GetDB(),
 	}
 }
 
