@@ -1,9 +1,7 @@
-// ripository層は、DBアクセスを行う層で、DBアクセスを行うメソッドを定義する
-// 基本的にentity層にアクセスし、usecase層にデータを返す
+// repositories/all_tweets_repository.go
 package repositories
 
 import (
-	"errors"
 	"myapp/internal/entities"
 	"myapp/internal/external"
 
@@ -19,7 +17,7 @@ type AllTweetsRepository struct {
 
 func NewAllTweetsRepository(offset int, limit int) *AllTweetsRepository {
 	return &AllTweetsRepository{
-		Conn: external.DB,
+		Conn: external.GetDB(),
 	}
 }
 
@@ -31,9 +29,6 @@ func (r *AllTweetsRepository) GetAll(offset int, limit int) ([]*entities.Post, e
     result := r.Conn.Where("deleted_at IS NULL").Offset(offset).Limit(limit).Find(&tweets)
 
 	if result.Error != nil {
-		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-			return nil, nil
-		}
 		return nil, result.Error
 	}
 	return tweets, nil
