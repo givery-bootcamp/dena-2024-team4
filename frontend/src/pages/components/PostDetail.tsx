@@ -3,27 +3,33 @@ import { FaEllipsis } from "react-icons/fa6";
 import { FaRegFlag } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-const MOCK_POST = {
-  id: 1,
-  user_id: 1,
-  title: '私の戦闘力は53万です',
-  body: 'ですがもちろんフルパワーであなたと戦う気はありませんからご心配なく……',
-  created_at: '2021-01-01 00:00:00',
-  updated_at: '2021-01-01 00:00:00',
-  deleted_at: null,
+// 自分のユーザーID（仮置き）
+const MY_USER_ID = 2
+
+// apiのレスポンスの型（仮置き）
+type Post = {
+  id: number
+  user_id: number
+  title: string
+  body: string
+  created_at: string
+  updated_at: string
+  deleted_at: null
   user: {
-    id: 1,
-    name: 'フリーザ',
-    password: 'password',
-    created_at: '2021-01-01 00:00:00',
-    updated_at: '2021-01-01 00:00:00',
-    deleted_at: null,
+    id: number
+    name: string
+    password: string
+    created_at: string
+    updated_at: string
+    deleted_at: null
   }
 }
 
-const MY_USER_ID = 1
+type PostDetailProps = {
+  post: Post
+}
 
-export default function PostDetail() {
+export default function PostDetail({ post }: PostDetailProps) {
   function timeAgo(date: Date): string {
     const now = new Date();
     const secondsPast = Math.floor((now.getTime() - date.getTime()) / 1000);
@@ -54,23 +60,23 @@ export default function PostDetail() {
   return (
     <Flex direction="column" padding="md">
       <Flex direction="row">
-        <Text paddingEnd={"sm"}>{MOCK_POST.user.name}</Text>
-        <Text color="gray">@{MOCK_POST.user.id}</Text>
+        <Text paddingEnd={"sm"}>{post.user.name}</Text>
+        <Text color="gray">@{post.user.id}</Text>
         <Text color="gray">・</Text>
-        <Text color="gray">{timeAgo(new Date(MOCK_POST.created_at))}</Text>
+        <Text color="gray">{timeAgo(new Date(post.created_at))}</Text>
         <Spacer />
         <Menu>
           <MenuButton as={IconButton} variant="link" icon={<Icon as={FaEllipsis} />} />
           <MenuList>
-            {MY_USER_ID === MOCK_POST.user.id &&
+            {MY_USER_ID === post.user.id &&
               <MenuItem color="red" icon={<Icon as={RiDeleteBinLine} color="red" />} onClick={() => console.log("投稿を削除")}>投稿を削除</MenuItem> ||
               <MenuItem icon={<Icon as={FaRegFlag} />} onClick={() => console.log("投稿を報告")}>投稿を報告</MenuItem>
             }
           </MenuList>
         </Menu>
       </Flex>
-      <Text as="b" fontSize="md">{MOCK_POST.title}</Text>
-      <Text fontSize="md">{MOCK_POST.body}</Text>
+      <Text as="b" fontSize="md">{post.title}</Text>
+      <Text fontSize="md">{post.body}</Text>
     </Flex>
   )
 }
