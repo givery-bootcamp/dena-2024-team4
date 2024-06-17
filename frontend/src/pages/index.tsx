@@ -1,15 +1,18 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
-import { Button, ui } from '@yamada-ui/react';
+import { Button, ui, useDisclosure } from '@yamada-ui/react';
 import { getServerSideCommonProps } from '@/libs/yamada-ui';
 import PostForm from '@/components/PostForm';
+import PostModal from '@/components/PostModal';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const getServerSideProps = getServerSideCommonProps;
 
 export default function Home() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <Head>
@@ -20,6 +23,8 @@ export default function Home() {
       </Head>
       <main>
         <PostForm />
+        <PostModal />
+
         <ui.button padding={10} css={{ fontSize: 50 }}>
           hogheoge
         </ui.button>
