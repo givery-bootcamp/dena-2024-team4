@@ -13,8 +13,8 @@ type AllTweetsUsecase struct {
 }
 
 // Newをつけたメソッドを定義してConstructorを生成
-func NewAllTweetsUsecase() *AllTweetsUsecase {
-	r := repositories.NewAllTweetsRepository()
+func NewAllTweetsUsecase(offset int, limit int) *AllTweetsUsecase {
+	r := repositories.NewAllTweetsRepository(offset, limit)
 
 	return &AllTweetsUsecase{
 		repository: r,
@@ -22,6 +22,6 @@ func NewAllTweetsUsecase() *AllTweetsUsecase {
 }
 
 // AllTweetsUsecaseクラスのメソッド定義みたいなもの
-func (u *AllTweetsUsecase) Execute() ([]*entities.Post, error) {
-	return u.repository.GetAll()
+func (u *AllTweetsUsecase) Execute(offset int, limit int) ([]*entities.Post, error) {
+	return u.repository.GetAll(offset, limit)
 }
