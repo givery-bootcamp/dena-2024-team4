@@ -2,16 +2,13 @@ package controllers
 
 import (
 	"errors"
-	"myapp/internal/repositories"
 	"myapp/internal/usecases"
 
 	"github.com/gin-gonic/gin"
 )
 
 func AllTweets(ctx *gin.Context) {
-	// repositoryをここにおかない方がいい問題は後で解消したい
-	repository := repositories.NewAllTweetsRepository(DB(ctx))
-	usecase := usecases.NewAllTweetsUsecase(repository)
+	usecase := usecases.NewAllTweetsUsecase()
 
 	result, err := usecase.Execute()
 	if err != nil {
