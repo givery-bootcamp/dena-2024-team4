@@ -10,6 +10,9 @@ import (
 
 type AllTweetsRepository struct {
 	Conn *gorm.DB
+	offset int
+	limit int
+
 }
 
 func NewAllTweetsRepository() *AllTweetsRepository {
@@ -18,9 +21,13 @@ func NewAllTweetsRepository() *AllTweetsRepository {
 	}
 }
 
-func (r *AllTweetsRepository) GetAll() ([]*entities.Post, error) {
+func (r *AllTweetsRepository) GetAll(offset int, limit int) ([]*entities.Post, error) {
 	var tweets []*entities.Post
-	result := r.Conn.Where("deleted_at IS NULL").Find(&tweets)
+	// 実際のデータはobjに入る
+	// resultでDBアクセスの状況とかが見れる(エラーハンドリング)
+	// deleted_atがnullのものは、投稿が存在するので、nullのものだけ全部取得
+    result := r.Conn.Where("deleted_at IS NULL").Offset(offset).Limit(limit).Find(&tweets)
+
 	if result.Error != nil {
 		return nil, result.Error
 	}
