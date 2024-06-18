@@ -38,7 +38,7 @@ func AllTweets(ctx *gin.Context) {
 		}
 
 
-	usecase := usecases.NewAllTweetsUsecase(offset, limit)
+	usecase := usecases.NewAllTweetsUsecase()
 
 	result, err := usecase.Execute(offset, limit)
 	if err != nil {

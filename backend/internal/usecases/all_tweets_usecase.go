@@ -10,8 +10,8 @@ type AllTweetsUsecase struct {
 }
 
 // Newをつけたメソッドを定義してConstructorを生成
-func NewAllTweetsUsecase(offset int, limit int) *AllTweetsUsecase {
-	r := repositories.NewAllTweetsRepository(offset, limit)
+func NewAllTweetsUsecase() *AllTweetsUsecase {
+	r := repositories.NewAllTweetsRepository()
 
 	return &AllTweetsUsecase{
 		repository: *r,

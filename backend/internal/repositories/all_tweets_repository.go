@@ -15,7 +15,7 @@ type AllTweetsRepository struct {
 
 }
 
-func NewAllTweetsRepository(offset int, limit int) *AllTweetsRepository {
+func NewAllTweetsRepository() *AllTweetsRepository {
 	return &AllTweetsRepository{
 		Conn: external.GetDB(),
 	}
