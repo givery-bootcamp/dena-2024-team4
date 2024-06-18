@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { getServerSideCommonProps } from '@/libs/yamada-ui';
 import PostForm from '@/components/PostForm';
 import PostModal from '@/components/PostModal';
+import { useDisclosure } from '@yamada-ui/react';
 
 export const getServerSideProps = getServerSideCommonProps;
 
@@ -13,7 +14,10 @@ export default function Home() {
       <Head>
         <title>Clone Twitter</title>
       </Head>
-      <main></main>
+      <main>
+        <PostForm />
+        <PostModal />
+      </main>
     </>
   );
 }
