@@ -25,3 +25,14 @@ services:
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=training
+  frontend:
+    image: oven/bun:latest
+    working_dir: /home/node/myapp
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/home/node/myapp
+      - ./frontend/node_modules:/home/node/myapp/node_modules
+    command: bash -c 'bun i && bun run dev'
+    environment:
+      TZ: Asia/Tokyo
