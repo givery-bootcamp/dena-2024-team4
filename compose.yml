@@ -12,7 +12,6 @@ services:
       - db
     environment:
       TZ: Asia/Tokyo
-
   db:
     build:
       context: ./docker
