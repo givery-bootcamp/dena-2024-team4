@@ -6,5 +6,5 @@ import (
 )
 
 type AllTweetsRepository interface {
-	GetAll() ([]*entities.Post, error)
+	GetAll(offset int, limit int) ([]*entities.Post, error)
 }
