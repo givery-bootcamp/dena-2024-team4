@@ -4,7 +4,6 @@ package repositories
 
 import (
 	"errors"
-	"fmt"
 	"myapp/internal/entities"
 	"myapp/internal/external"
 
@@ -31,7 +30,7 @@ func (r *TweetDetailRepository) Get(tweetId int) (*entities.Post, error) {
 
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-			return nil, fmt.Errorf("tweet with id %d not found", tweetId)
+			return nil, nil
 		}
 		return nil, result.Error
 	}
