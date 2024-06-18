@@ -1,4 +1,4 @@
-import { Input } from '@yamada-ui/react';
+import { Textarea } from '@yamada-ui/react';
 import { ChangeEvent } from 'react';
 
 interface PostFieldProps {
@@ -11,10 +11,9 @@ const PostField: React.FC<PostFieldProps> = ({ onInputChange }) => {
   };
 
   return (
-    <Input 
-      placeholder="いまどうしてる？"
-      size={'lg'}
-      onChange={handleChange}
+    <Textarea
+      autosize
+      placeholder="いまどうしてる"
     />
   );
 };
