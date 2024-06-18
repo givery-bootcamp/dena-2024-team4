@@ -17,5 +17,7 @@ func SetupRoutes(app *gin.Engine) {
 
 	// usernameとpasswordを受けとり、サインインする
 	app.POST("/signin", controllers.SignIn)
-	app.GET("/tweets/:tweetId", controllers.TweetDetail) // tweetIdでツイートの詳細を取得
+
+	// tweetIdでツイートの詳細を取得
+	app.GET("/tweets/:tweetId", controllers.TweetDetail)
 }

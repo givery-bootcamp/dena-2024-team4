@@ -3,6 +3,9 @@ package usecases
 import (
 	"myapp/internal/entities"
 	"myapp/internal/repositories"
+	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
 type SignInUsecase struct {
@@ -23,14 +26,26 @@ func (u *SignInUsecase) Execute(username, password string) (*entities.User, stri
 		return nil, "", err
 	}
 
-	// Convert user ID to JWT token
-	token := generateJWTToken(user.ID)
+	// JWTトークンを生成
+	jwt, err := generateJWTToken(user.ID)
+	if err != nil {
+		return nil, "", err
+	}
 
-	return user, token, nil
+	return user, jwt, nil
 }
 
-func generateJWTToken(userID string) string {
-	// TODO: Implement JWT token generation logic
-	// Generate and return JWT token using the user ID
-	return ""
+func generateJWTToken(ID int) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"id":  ID,
+		"exp": time.Now().Add(time.Hour * 72).Unix(), // トークンの有効期限を設定
+	})
+
+	// 秘密鍵で署名を行い、トークン文字列を取得。トークンは認証で使用する
+	tokenString, err := token.SignedString([]byte("secret-key"))
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
 }

@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"myapp/internal/usecases"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,12 +14,17 @@ func SignIn(ctx *gin.Context) {
 	// response:
 	// サインイン成功時: code=200. body=Userエンティティ
 	// サインイン失敗時: code=400. bodyは任意
-	result, err := usecase.Execute(username, password)
+	user, jwt, err := usecase.Execute(username, password)
 	if err != nil {
+		// サインイン失敗
 		handleError(ctx, 400, err)
-	} else {
-		ctx.JSON(200, result)
+		return
 	}
 
-	// [TODO] Cookie
+	// JWTをCookieに設定。とりあえず期限は24時間
+	// 以降、認証が必要なEndpointではこのCookieをチェックして、不正な場合は401を返す
+	ctx.SetCookie("jwt", jwt, 60*60*24, "/", "localhost", false, true)
+
+	// サインイン成功
+	ctx.JSON(200, user)
 }
