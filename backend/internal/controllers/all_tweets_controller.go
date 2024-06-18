@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"strconv"
+
 )
 
 func AllTweets(ctx *gin.Context) {
@@ -13,9 +14,29 @@ func AllTweets(ctx *gin.Context) {
 	offsetStr := ctx.Query("offset")
 	limitStr := ctx.Query("limit")
 
-	// 文字列を整数に変換（エラー処理は省略）
-	offset, _ := strconv.Atoi(offsetStr)
-	limit, _ := strconv.Atoi(limitStr)
+	    // 文字列を整数に変換（エラー処理は省略）
+		var offset int = 0 // デフォルト値を0
+		var limit int = 50 // デフォルト値を50
+		var err error
+	
+		// offsetのクエリパラメータが存在するか確認
+		if offsetStr != "" {
+			offset, err = strconv.Atoi(offsetStr)
+			if err != nil {
+				handleError(ctx, 400, err)
+				return
+			}
+		}
+	
+		// limitのクエリパラメータが存在するか確認
+		if limitStr != "" {
+			limit, err = strconv.Atoi(limitStr)
+			if err != nil {
+				handleError(ctx, 400, err)
+				return
+			}
+		}
+
 
 	usecase := usecases.NewAllTweetsUsecase(offset, limit)
 
