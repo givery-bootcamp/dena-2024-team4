@@ -14,4 +14,7 @@ func SetupRoutes(app *gin.Engine) {
 	app.GET("/hello", controllers.HelloWorld)
 	// AllTweets の関数を直接呼び出す
 	app.GET("/tweets", controllers.AllTweets)
+
+	// usernameとpasswordを受けとり、サインインする
+	app.POST("/signin", controllers.SignIn)
 }
