@@ -2,18 +2,20 @@ import { Textarea } from '@yamada-ui/react';
 import { ChangeEvent } from 'react';
 
 interface PostFieldProps {
-  onInputChange: (value: string) => void;
+  onInputChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const PostField: React.FC<PostFieldProps> = ({ onInputChange }) => {
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onInputChange(event.target.value);
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    onInputChange(event);
   };
 
   return (
     <Textarea
       autosize
       placeholder="いまどうしてる"
+      onChange={handleChange}
+      required
     />
   );
 };
