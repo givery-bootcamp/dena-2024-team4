@@ -39,7 +39,15 @@ help:
 .PHONY: init
 init:
 	${MAKE} build
+	${MAKE} up
+	${MAKE} open
+
+# init/dコマンドを実行すると、プロジェクトを初期化し、バックグラウンドで実行する
+.PHONY: init/b
+init/b:
+	${MAKE} build
 	${MAKE} up/d
+	${MAKE} open
 
 # compose.ymlを使用して、docker imageをビルドする
 .PHONY: build
@@ -55,28 +63,6 @@ up:
 .PHONY: up/d
 up/d:
 	${DOCKER_COMPOSE_IMPL} up -d
-
-# ねこはしbotを起動する（デフォルトコマンド）
-# run/hotreloadを実行する（ホットリロードあり
-.PHONY: run
-run:
-	${MAKE} run/hotreload
-
-# ねこはしbotを起動する（ホットリロードあり）
-# go mod tidyを実行して、依存関係を解決する
-# go buildを実行して、ねこはしbotをビルドする
-# ねこはしbotを実行する
-.PHONY: run/hotreload
-run/hotreload:
-	${DOCKER_COMPOSE_IMPL} exec slackapp /bin/sh -c 'cd slackapp && go mod tidy && go build . && air -c .air.toml'
-
-# ねこはしbotを起動する（ホットリロードなし）
-# go mod tidyを実行して、依存関係を解決する
-# go buildを実行して、ねこはしbotをビルドする
-# ねこはしbotを実行する
-.PHONY: run/normal
-run/normal:
-	${DOCKER_COMPOSE_IMPL} exec slackapp /bin/sh -c 'cd slackapp && go mod tidy && go build && ./nekohashi_bot'
 
 # compose downを実行する
 .PHONY: down/d
@@ -108,6 +94,22 @@ rebuild/slackapp:
 .PHONY: rebuild/all
 rebuild/all:
 	${MAKE} rebuild/slackapp
+
+# ブラウザで開く
+.PHONY: open
+open:
+	${MAKE} open/fe
+
+# frontendをブラウザで開く
+.PHONY: open/fe
+open/fe:
+	open http://localhost:3000
+
+# backendをブラウザで開く
+.PHONY: open/be
+open/be:
+	open http://localhost:9000
+
 
 # go fmtを実行する
 .PHONY: fmt
