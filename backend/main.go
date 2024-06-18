@@ -1,21 +1,24 @@
+// main.go
 package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"myapp/internal/config"
 	"myapp/internal/external"
 	"myapp/internal/middleware"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// Initialize database
-	external.SetupDB()
+	// DBの初期化
+	external.InitializeDB()
 
-	// Setup webserver
+	// ルーターのセットアップ
 	app := gin.Default()
 	app.Use(middleware.Transaction())
-	app.Use(middleware.Cors())
 	middleware.SetupRoutes(app)
+
+	// サーバーの起動
 	app.Run(fmt.Sprintf("%s:%d", config.HostName, config.Port))
 }
