@@ -50,6 +50,7 @@ $ docker compose up
 host$ docker compose exec db sh -c "mysql < /sqlscripts/000_create.sql"
 host$ docker compose exec db sh -c "mysql training < /sqlscripts/001_insert.sql"
 host$ docker compose exec db sh -c "mysql training < /sqlscripts/002_insert_more_dataset.sql"
+host$ docker compose exec db sh -c "mysql training < /sqlscripts/003_insert_deleted_at_user_and_post.sql"
 ```
 
 React を開発する人はブラウザの拡張機能をインストールしてください。(任意)
