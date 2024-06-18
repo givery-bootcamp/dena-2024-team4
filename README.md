@@ -33,7 +33,7 @@
 2. コンテナ内に入ったら、以下のコマンドを実行します
 
 ```
-$ docker-compose up
+$ docker compose up
 ```
 
 - backend: `http://localhost:9000`
@@ -47,8 +47,10 @@ $ docker-compose up
 起動後に以下のスクリプトを実行してテーブルの作成と初期データの投入を行ってください。
 
 ```
-host$ docker-compose exec db sh -c "mysql < /sqlscripts/create.sql"
-host$ docker-compose exec db sh -c "mysql training < /sqlscripts/insert.sql"
+host$ docker compose exec db sh -c "mysql < /sqlscripts/000_create.sql"
+host$ docker compose exec db sh -c "mysql training < /sqlscripts/001_insert.sql"
+host$ docker compose exec db sh -c "mysql training < /sqlscripts/002_insert_more_dataset.sql"
+host$ docker compose exec db sh -c "mysql training < /sqlscripts/003_insert_deleted_at_user_and_post.sql"
 ```
 
 React を開発する人はブラウザの拡張機能をインストールしてください。(任意)
@@ -59,14 +61,14 @@ React を開発する人はブラウザの拡張機能をインストールし�
 ## How to connect database
 
 ```
-host$ docker-compose exec db mysql training
+host$ docker compose exec db mysql training
 ```
 
 ## How to connect backend/frontend shell
 
 ```
-host$ docker-compose exec backend bash
-host$ docker-compose exec frontend bash
+host$ docker compose exec backend bash
+host$ docker compose exec frontend bash
 ```
 
 ライブラリをインストールする場合は docker コンテナ側でコマンドを実行してください。
@@ -74,12 +76,12 @@ host$ docker-compose exec frontend bash
 e.g.
 
 ```
-host$ docker-compose exec backend bash
+host$ docker compose exec backend bash
 backend$ go get -u gorm.io/gorm
 ```
 
 ```
-host$ docker-compose exec frontend bash
+host$ docker compose exec frontend bash
 frontend$ npm install something
 ```
 
