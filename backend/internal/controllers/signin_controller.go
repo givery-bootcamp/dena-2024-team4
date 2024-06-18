@@ -11,4 +11,5 @@ func SignIn(ctx *gin.Context) {
 	// response:
 	// サインイン成功時: code=200. body=Userエンティティ
 	// サインイン失敗時: code=400. bodyは任意
+
 }
