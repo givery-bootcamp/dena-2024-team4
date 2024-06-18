@@ -1,8 +1,9 @@
 import { Button, Divider, Flex, HStack, Icon, VStack } from "@yamada-ui/react";
 import { IconType } from "react-icons";
+import { FaHouse } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa6";
 
 type SidebarProps = {
-  items: SidebarItem[];
   children: React.ReactNode;
 };
 
@@ -12,7 +13,20 @@ type SidebarItem = {
   action: () => void,
 };
 
-export default function Sidebar({ items, children }: SidebarProps) {
+const items: SidebarItem[] = [
+  {
+    title: "ホーム",
+    icon: FaHouse,
+    action: () => console.log("ホーム"),
+  },
+  {
+    title: "プロフィール",
+    icon: FaUser,
+    action: () => console.log("プロフィール"),
+  }
+]
+
+export default function Sidebar({ children }: SidebarProps) {
   return (
     <Flex w="full" flexDirection="row" overflow="hidden">
       <VStack as="nav" w="300px" h="100vh" padding="md" bg="gray.50">
