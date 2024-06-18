@@ -10,7 +10,6 @@ const PostForm = () => {
     }, []);
 
   return (
-    <div>
       <VStack px={8}>
         <HStack mt={12}>
           <Avatar size="md" name="Hirotomo Yamada" />
@@ -22,7 +21,6 @@ const PostForm = () => {
           </Button>
         </Flex>
       </VStack>
-    </div>
   );
 };
 
