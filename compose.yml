@@ -1,30 +1,4 @@
 services:
-  backend:
-    build:
-      context: ./docker
-      dockerfile: ./backend.Dockerfile
-    ports:
-      - '9000:9000'
-    volumes:
-      - ./backend:/go/src/myapp
-    command: "air -c .air.toml"
-    depends_on:
-      - db
-    environment:
-      TZ: Asia/Tokyo
-  db:
-    build:
-      context: ./docker
-      dockerfile: mysql.Dockerfile
-    volumes:
-      - ./docker/mysql:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./mysql/sql:/sqlscripts
-    ports:
-      - '3306:3306'
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=training
   frontend:
     image: oven/bun:latest
     working_dir: /home/node/myapp
@@ -36,3 +10,36 @@ services:
     command: bash -c 'bun i && bun run dev'
     environment:
       TZ: Asia/Tokyo
+  backend:
+    build:
+      context: ./docker
+      dockerfile: ./backend.Dockerfile
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./backend:/go/src/myapp
+    command: "air -c .air.toml"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      TZ: Asia/Tokyo
+  db:
+    build:
+      context: ./docker
+      dockerfile: mysql.Dockerfile
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/sql:/docker-entrypoint-initdb.d
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=training
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root
+      interval: 5s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
