@@ -17,7 +17,7 @@ export default function PostDetail({ post, onClick }: PostDetailProps) {
   return (
     <Flex direction="column" padding="md" onClick={onClick}>
       <Flex direction="row">
-        <Text paddingEnd={'sm'}>{'ユーザー名なし！！！！'}</Text>
+        <Text paddingEnd={'sm'}>{'unknown'}</Text>
         <Text color="gray">@{post.user_id}</Text>
         <Text color="gray">・</Text>
         <Text color="gray">{timeAgo(new Date(post.created_at))}</Text>
@@ -36,10 +36,10 @@ export default function PostDetail({ post, onClick }: PostDetailProps) {
                 投稿を削除
               </MenuItem>
             )) || (
-              <MenuItem icon={<Icon as={FaRegFlag} />} onClick={() => console.log('投稿を報告')}>
-                投稿を報告
-              </MenuItem>
-            )}
+                <MenuItem icon={<Icon as={FaRegFlag} />} onClick={() => console.log('投稿を報告')}>
+                  投稿を報告
+                </MenuItem>
+              )}
           </MenuList>
         </Menu>
       </Flex>
