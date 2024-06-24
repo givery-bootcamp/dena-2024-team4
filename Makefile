@@ -19,8 +19,8 @@ help:
 	@echo "利用可能なコマンド:"
 	@echo "  cat             : Makefileの内容を表示する"
 	@echo "  help            : Makefileの内容を表示する"
-	@echo "  init            : プロジェクトを初期化する"
-	@echo "  init/b          : プロジェクトを初期化し、バックグラウンドで実行する"
+	@echo "  init            : プロジェクトを初期化し、バックグラウンドで実行する"
+	@echo "  init/l          : プロジェクトを初期化実行する"
 	@echo "  build           : compose.ymlを使用してdockerイメージをビルドする"
 	@echo "  up              : docker compose upを実行する"
 	@echo "  up/d            : docker compose up -dを実行する. バックグラウンドで実行する"
@@ -40,6 +40,7 @@ help:
 	@echo "  rebuild/db      : dbコンテナを再起動する"
 	@echo "  rebuild/all     : すべてのコンテナを再起動する"
 	@echo "  rebuild/all/d   : すべてのコンテナ・ボリューム・イメージを削除して再起動する"
+	@echo "  rebuild/all/d/l : すべてのコンテナ・ボリューム・イメージを削除してバックグラウンドで再起動する"
 	@echo "  open            : ブラウザで開く"
 	@echo "  open/fe         : frontendをブラウザで開く"
 	@echo "  open/be         : backendをブラウザで開く"
@@ -89,41 +90,6 @@ down/d:
 .PHONY: down/d/all
 down/d/all:
 	${DOCKER_COMPOSE_IMPL} down --rmi all --volumes --remove-orphans
-
-# frontendコンテナにログインする
-.PHONY: fe/login
-fe/login:
-	${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh
-
-# backendコンテナにログインする
-.PHONY: be/login
-be/login:
-	${DOCKER_COMPOSE_IMPL} exec backend /bin/sh
-
-# DBコンテナにログインする
-.PHONY: db/login
-db/login:
-	${DOCKER_COMPOSE_IMPL} exec db /bin/sh
-
-# DBクライアントにログインする
-.PHONY: db/client
-db/client:
-	${DOCKER_COMPOSE_IMPL} exec db mysql training
-
-# frontendコンテナのログを表示する
-.PHONY: fe/logs
-slackapp/logs:
-	${DOCKER_COMPOSE_IMPL} logs frontend
-
-# backendコンテナのログを表示する
-.PHONY: be/logs
-be/logs:
-	${DOCKER_COMPOSE_IMPL} logs backend
-
-# dbコンテナのログを表示する
-.PHONY: db/logs
-db/logs:
-	${DOCKER_COMPOSE_IMPL} logs db
 
 # DBのデータを削除しないようにbackendとfrontendのみ再起動する
 .PHONY: rebuild
@@ -180,25 +146,82 @@ open/fe:
 open/be:
 	open http://localhost:9000
 
+# frontendコンテナにログインする
+.PHONY: fe/login
+fe/login:
+	${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh
+
+# backendコンテナにログインする
+.PHONY: be/login
+be/login:
+	${DOCKER_COMPOSE_IMPL} exec backend /bin/sh
+
+# DBコンテナにログインする
+.PHONY: db/login
+db/login:
+	${DOCKER_COMPOSE_IMPL} exec db /bin/sh
+
+# DBクライアントにログインする
+.PHONY: db/client
+db/client:
+	${DOCKER_COMPOSE_IMPL} exec db mysql training
+
+# frontendコンテナのログを表示する
+.PHONY: fe/logs
+slackapp/logs:
+	${DOCKER_COMPOSE_IMPL} logs frontend
+
+# backendコンテナのログを表示する
+.PHONY: be/logs
+be/logs:
+	${DOCKER_COMPOSE_IMPL} logs backend
+
+# dbコンテナのログを表示する
+.PHONY: db/logs
+db/logs:
+	${DOCKER_COMPOSE_IMPL} logs db
+
+## frontend
+# prettierを実行する
+.PHONY: fe/fmt
+fe/fmt:
+	@${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh -c 'bun run prettier . --write'
+
+# eslitを実行する
+.PHONY: fe/lint
+fe/lint:
+	@${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh -c 'bun run eslint src'
+
+# typecheckを実行する
+.PHONY: fe/tsc
+fe/tsc:
+	@${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh -c 'bun run tsc --noEmit'
+
+# pushする前にfrontendのコードを整える
+.PHONY: fe/ci
+fe/ci:
+	${MAKE} fe/fmt
+	${MAKE} fe/lint
+	${MAKE} fe/tsc
+
+## backend
 # go fmtを実行する
-.PHONY: fmt
-fmt:
+.PHONY: be/fmt
+be/fmt:
 	@${DOCKER_COMPOSE_IMPL} exec backend /bin/sh -c 'gofmt -d -w .'
 
 # golangci-lintを実行する
-.PHONY: lint
-lint:
-	@${DOCKER_COMPOSE_IMPL} exec backend /bin/sh -c 'golangci-lint run --config .golangci.yaml'
+# .PHONY: be/lint
+# be/lint:
+# 	@${DOCKER_COMPOSE_IMPL} exec backend /bin/sh -c 'golangci-lint run --config .golangci.yaml'
 
 # go testを実行する
-.PHONY: test
-test:
+.PHONY: be/test
+be/test:
 	@${DOCKER_COMPOSE_IMPL} exec backend /bin/sh -c 'go test -v ./...'
 
-# pushする前にコードを整える
-.PHONY: ci
-ci:
-	${MAKE} fmt
-	${MAKE} lint
-	${MAKE} test
-	
+# pushする前にbackendのコードを整える
+.PHONY: be/ci
+be/ci:
+	${MAKE} be/fmt
+	${MAKE} be/test
