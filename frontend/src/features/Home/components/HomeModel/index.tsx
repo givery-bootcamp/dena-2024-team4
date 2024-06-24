@@ -1,8 +1,6 @@
 import { Divider, VStack } from '@yamada-ui/react';
-import PostDetail from '@/pages/components/PostDetail';
-import { PostResponse, decodePostResponses } from '@/pages/api/PostResponse';
+import { decodePostResponses } from '@/pages/api/PostResponse';
 import { useHomeModal } from './hooks';
-import Sidebar from '@/pages/components/Sidebar';
 import useSWR from 'swr';
 import Sidebar from '@/features/ layouts/components/Sidebar';
 import PostDetail from '@/features/Post/components/PostModel';
