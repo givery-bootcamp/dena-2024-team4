@@ -7,6 +7,7 @@ services:
     volumes:
       - ./frontend:/home/node/myapp
       - ./frontend/node_modules:/home/node/myapp/node_modules
+      - ./docs/:/home/node/myapp/docs/
     command: bash -c 'bun i && bun run dev'
     environment:
       TZ: Asia/Tokyo
