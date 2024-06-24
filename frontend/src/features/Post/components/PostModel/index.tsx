@@ -18,9 +18,7 @@ export default function PostDetail({ post, onClick }: PostDetailProps) {
     <Flex direction="column" padding="md" onClick={onClick}>
       <Flex direction="row">
         <Text paddingEnd={'sm'}>{'unknown'}</Text>
-        <Text color="gray">@{post.user_id}</Text>
-        <Text color="gray">・</Text>
-        <Text color="gray">{timeAgo(new Date(post.created_at))}</Text>
+        <Text color="gray">@{post.user_id}・{timeAgo(new Date(post.created_at))}</Text>
         <Spacer />
         <Menu>
           <MenuButton as={IconButton} variant="link" icon={<Icon as={FaEllipsis} />} onClick={(e) => {
