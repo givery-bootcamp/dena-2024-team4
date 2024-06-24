@@ -11,9 +11,7 @@ const fetcher = (offset: number, limit: number) =>
 export const HomeModal: React.FC = () => {
   const { handleOnTapPost } = useHomeModal();
   const { data, error, isLoading } = useSWR('/tweets', () => fetcher(0, 10));
-  const posts = decodePostResponses(data)
-
-  console.log(data);
+  const posts = decodePostResponses(data || [])
 
   return (
     <Sidebar>
