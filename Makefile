@@ -171,7 +171,7 @@ db/client:
 
 # frontendコンテナのログを表示する
 .PHONY: fe/logs
-slackapp/logs:
+fe/logs:
 	${DOCKER_COMPOSE_IMPL} logs frontend
 
 # backendコンテナのログを表示する

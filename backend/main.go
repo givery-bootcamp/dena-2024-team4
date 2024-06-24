@@ -17,6 +17,7 @@ func main() {
 	// ルーターのセットアップ
 	app := gin.Default()
 	app.Use(middleware.Transaction())
+	app.Use(middleware.Cors())
 	middleware.SetupRoutes(app)
 
 	// サーバーの起動
