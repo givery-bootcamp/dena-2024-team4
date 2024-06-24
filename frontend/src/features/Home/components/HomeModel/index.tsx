@@ -5,6 +5,7 @@ import { useHomeModal } from './hooks';
 import Sidebar from '@/pages/components/Sidebar';
 import useSWR from 'swr';
 import Sidebar from '@/features/ layouts/components/Sidebar';
+import PostDetail from '@/features/Post/components/PostModel';
 
 const fetcher = (offset: number, limit: number) =>
   fetch(`${process.env.NEXT_PUBLIC_API_URL}/tweets?offset=${offset}&limit=${limit}`).then((res) => res.json());

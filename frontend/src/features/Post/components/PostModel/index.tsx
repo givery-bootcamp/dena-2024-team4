@@ -1,12 +1,10 @@
+import { PostResponse } from '@/pages/api/PostResponse';
 import { timeAgo } from '@/utils/date';
 import { Flex, Text, Spacer, Icon, Menu, MenuButton, MenuItem, MenuList, IconButton } from '@yamada-ui/react';
 import { FaEllipsis } from "react-icons/fa6";
 import { FaRegFlag } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { PostResponse } from '../api/PostResponse';
-
-// 自分のユーザーID（仮置き）
-const MY_USER_ID = 2;
+import { usePostModal } from './hooks';
 
 type PostDetailProps = {
   post: PostResponse
@@ -14,6 +12,8 @@ type PostDetailProps = {
 }
 
 export default function PostDetail({ post, onClick }: PostDetailProps) {
+  const { MY_USER_ID } = usePostModal();
+
   return (
     <Flex direction="column" padding="md" onClick={onClick}>
       <Flex direction="row">
