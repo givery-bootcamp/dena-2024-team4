@@ -44,10 +44,13 @@ help:
 	@echo "  open            : ブラウザで開く"
 	@echo "  open/fe         : frontendをブラウザで開く"
 	@echo "  open/be         : backendをブラウザで開く"
-	@echo "  fmt             : go fmtを実行する"
-	@echo "  lint            : golangci-lintを実行する"
-	@echo "  test            : go testを実行する"
-	@echo "  ci              : pushする前にコードを整える"
+	@echo "  fe/fmt          : prettierを実行する"
+	@echo "  fe/lint         : eslitを実行する"
+	@echo "  fe/tsc          : typecheckを実行する"
+	@echo "  fe/ci           : pushする前にfrontendのコードを整える"
+	@echo "  be/fmt          : go fmtを実行する"
+	@echo "  be/test         : go testを実行する"
+	@echo "  be/ci           : pushする前にbackendのコードを整える"
 
 # initコマンドを実行すると、プロジェクトを初期化し、バックグラウンドで実行する
 .PHONY: init
