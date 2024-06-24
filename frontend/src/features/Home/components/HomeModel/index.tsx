@@ -1,6 +1,6 @@
 import { Divider, VStack } from '@yamada-ui/react';
 import { decodePostResponses } from '@/pages/api/PostResponse';
-import { useHomeModal } from './hooks';
+import { useGetPosts, useHomeModal } from './hooks';
 import useSWR from 'swr';
 import Sidebar from '@/components/layouts/Sidebar';
 import PostDetail from '@/features/Post/components/PostModel';
@@ -10,7 +10,7 @@ const fetcher = (offset: number, limit: number) =>
 
 export const HomeModal: React.FC = () => {
   const { handleOnTapPost } = useHomeModal();
-  const { data, error, isLoading } = useSWR('/tweets', () => fetcher(0, 10));
+  const { data, error, isLoading } = useGetPosts(0, 10);
   const posts = decodePostResponses(data || [])
 
   return (
