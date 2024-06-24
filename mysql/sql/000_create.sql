@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS hello_worlds(
 
 CREATE TABLE IF NOT EXISTS users(
   id            INT          AUTO_INCREMENT PRIMARY KEY,
-  username      VARCHAR(40)  NOT NULL,
+  username      VARCHAR(40)  NOT NULL UNIQUE,
   display_name  VARCHAR(40)  NOT NULL,
   password      VARCHAR(100) NOT NULL,
   created_at    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
