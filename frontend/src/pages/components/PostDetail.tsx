@@ -3,36 +3,19 @@ import { Flex, Text, Spacer, Icon, Menu, MenuButton, MenuItem, MenuList, IconBut
 import { FaEllipsis } from "react-icons/fa6";
 import { FaRegFlag } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { PostResponse } from '../api/PostResponse';
 
 // 自分のユーザーID（仮置き）
 const MY_USER_ID = 2
 
-// apiのレスポンスの型（仮置き）
-type Post = {
-  id: number
-  user_id: number
-  title: string
-  body: string
-  created_at: string
-  updated_at: string
-  deleted_at: null
-  user: {
-    id: number
-    name: string
-    password: string
-    created_at: string
-    updated_at: string
-    deleted_at: null
-  }
-}
-
 type PostDetailProps = {
-  post: Post
+  post: PostResponse
+  onClick: () => void
 }
 
-export default function PostDetail({ post }: PostDetailProps) {
+export default function PostDetail({ post, onClick }: PostDetailProps) {
   return (
-    <Flex direction="column" padding="md">
+    <Flex direction="column" padding="md" onClick={onClick}>
       <Flex direction="row">
         <Text paddingEnd={"sm"}>{post.user.name}</Text>
         <Text color="gray">@{post.user.id}</Text>
@@ -40,7 +23,9 @@ export default function PostDetail({ post }: PostDetailProps) {
         <Text color="gray">{timeAgo(new Date(post.created_at))}</Text>
         <Spacer />
         <Menu>
-          <MenuButton as={IconButton} variant="link" icon={<Icon as={FaEllipsis} />} />
+          <MenuButton as={IconButton} variant="link" icon={<Icon as={FaEllipsis} />} onClick={(e) => {
+            e.stopPropagation();
+          }} />
           <MenuList>
             {MY_USER_ID === post.user.id &&
               <MenuItem color="red" icon={<Icon as={RiDeleteBinLine} color="red" />} onClick={() => console.log("投稿を削除")}>投稿を削除</MenuItem> ||
