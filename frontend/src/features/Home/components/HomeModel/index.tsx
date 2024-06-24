@@ -5,12 +5,12 @@ import { useHomeModal } from './hooks';
 import Sidebar from '@/pages/components/Sidebar';
 import useSWR from 'swr';
 
-const fetcher = () =>
-  fetch('http://localhost:9000/tweets?offset=0&limit=10').then((res) => res.json());
+const fetcher = (offset: number, limit: number) =>
+  fetch(`http://localhost:9000/tweets?offset=${offset}&limit=${limit}`).then((res) => res.json());
 
 export const HomeModal: React.FC = () => {
   const { handleOnTapPost } = useHomeModal();
-  const { data, error, isLoading } = useSWR('/tweets', fetcher);
+  const { data, error, isLoading } = useSWR('/tweets', () => fetcher(0, 10));
   const posts = decodePostResponses(data)
 
   console.log(data);
