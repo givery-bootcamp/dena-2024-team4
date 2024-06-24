@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
-const fetcher = () => fetch('').then(res => res.json())
-
 export const useHomeModal = () => {
   const router = useRouter();
 
@@ -12,6 +10,6 @@ export const useHomeModal = () => {
     },
     [router],
   );
-  
+
   return { handleOnTapPost };
 };
