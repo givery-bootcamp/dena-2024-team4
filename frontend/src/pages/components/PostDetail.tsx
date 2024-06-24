@@ -17,8 +17,8 @@ export default function PostDetail({ post, onClick }: PostDetailProps) {
   return (
     <Flex direction="column" padding="md" onClick={onClick}>
       <Flex direction="row">
-        <Text paddingEnd={'sm'}>{post.user.name}</Text>
-        <Text color="gray">@{post.user.id}</Text>
+        <Text paddingEnd={'sm'}>{'ユーザー名なし！！！！'}</Text>
+        <Text color="gray">@{post.user_id}</Text>
         <Text color="gray">・</Text>
         <Text color="gray">{timeAgo(new Date(post.created_at))}</Text>
         <Spacer />
@@ -27,7 +27,7 @@ export default function PostDetail({ post, onClick }: PostDetailProps) {
             e.stopPropagation();
           }} />
           <MenuList>
-            {(MY_USER_ID === post.user.id && (
+            {(MY_USER_ID === post.user_id && (
               <MenuItem
                 color="red"
                 icon={<Icon as={RiDeleteBinLine} color="red" />}
