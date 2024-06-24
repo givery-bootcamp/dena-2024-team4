@@ -6,7 +6,7 @@ import Sidebar from '@/pages/components/Sidebar';
 import useSWR from 'swr';
 
 const fetcher = (offset: number, limit: number) =>
-  fetch(`http://localhost:9000/tweets?offset=${offset}&limit=${limit}`).then((res) => res.json());
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}/tweets?offset=${offset}&limit=${limit}`).then((res) => res.json());
 
 export const HomeModal: React.FC = () => {
   const { handleOnTapPost } = useHomeModal();
