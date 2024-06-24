@@ -6,7 +6,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { PostResponse } from '../api/PostResponse';
 
 // 自分のユーザーID（仮置き）
-const MY_USER_ID = 2
+const MY_USER_ID = 2;
 
 type PostDetailProps = {
   post: PostResponse
@@ -17,7 +17,7 @@ export default function PostDetail({ post, onClick }: PostDetailProps) {
   return (
     <Flex direction="column" padding="md" onClick={onClick}>
       <Flex direction="row">
-        <Text paddingEnd={"sm"}>{post.user.name}</Text>
+        <Text paddingEnd={'sm'}>{post.user.name}</Text>
         <Text color="gray">@{post.user.id}</Text>
         <Text color="gray">・</Text>
         <Text color="gray">{timeAgo(new Date(post.created_at))}</Text>
@@ -27,15 +27,26 @@ export default function PostDetail({ post, onClick }: PostDetailProps) {
             e.stopPropagation();
           }} />
           <MenuList>
-            {MY_USER_ID === post.user.id &&
-              <MenuItem color="red" icon={<Icon as={RiDeleteBinLine} color="red" />} onClick={() => console.log("投稿を削除")}>投稿を削除</MenuItem> ||
-              <MenuItem icon={<Icon as={FaRegFlag} />} onClick={() => console.log("投稿を報告")}>投稿を報告</MenuItem>
-            }
+            {(MY_USER_ID === post.user.id && (
+              <MenuItem
+                color="red"
+                icon={<Icon as={RiDeleteBinLine} color="red" />}
+                onClick={() => console.log('投稿を削除')}
+              >
+                投稿を削除
+              </MenuItem>
+            )) || (
+              <MenuItem icon={<Icon as={FaRegFlag} />} onClick={() => console.log('投稿を報告')}>
+                投稿を報告
+              </MenuItem>
+            )}
           </MenuList>
         </Menu>
       </Flex>
-      <Text as="b" fontSize="md">{post.title}</Text>
+      <Text as="b" fontSize="md">
+        {post.title}
+      </Text>
       <Text fontSize="md">{post.body}</Text>
     </Flex>
-  )
+  );
 }
