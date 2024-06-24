@@ -14,6 +14,7 @@
     "prettier": "^3.2.5",
     "react": "^18",
     "react-dom": "^18",
+    "sonner": "^1.5.0",
     "react-icons": "^5.2.1"
   },
   "devDependencies": {
