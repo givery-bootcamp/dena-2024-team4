@@ -1,0 +1,256 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: Twitter API
+  description: >-
+    This is a sample server Twitter API server.
+
+servers:
+  - url: http://localhost:9000
+    description: Development server
+  - url: https://ecs-alb-1730402.ap-northeast-1.elb.amazonaws.com/
+    description: Production server
+
+paths:
+  /:
+    get:
+      summary: Root API
+      description: Return root message
+      responses:
+        "200":
+          description: A successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: It works
+  /hello:
+    get:
+      summary: Hello API
+      description: Return Hello message
+      parameters:
+        - name: lang
+          in: query
+          description: Language selection
+          required: false
+          schema:
+            type: string
+            enum:
+              - ja
+              - en
+            default: ja
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: こんにちは 世界
+        "400":
+          description: Invalid language
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid language parameter
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+  /tweets:
+    get:
+      summary: Get tweets
+      description: Return tweets
+      parameters:
+        - name: limit
+          in: query
+          description: Limit
+          required: false
+          schema:
+            type: integer
+            default: 50
+        - name: offset
+          in: query
+          description: Offset
+          required: false
+          schema:
+            type: integer
+            default: 0
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TweetList"
+        "400":
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid parameter
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+  /tweets/{tweetId}:
+    get:
+      summary: Get tweet
+      description: Return tweet
+      parameters:
+        - name: tweetId
+          in: path
+          description: Tweet ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tweet"
+        "400":
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid parameter
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          readOnly: true
+        username:
+          type: string
+          example: Alice
+        display_name:
+          type: string
+          example: alice
+        password:
+          type: string
+          example: password
+        created_at:
+          type: string
+          format: date-time
+          example: 2021-01-01T00:00:00Z
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          example: 2021-01-01T00:00:00Z
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          example: 2021-01-01T00:00:00Z
+          readOnly: true
+    Tweet:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+          readOnly: true
+        user_id:
+          type: integer
+          description: "Reference to User ID"
+          example: 1
+        title:
+          type: string
+          example: Hello World
+        body:
+          type: string
+          example: Hello World
+        created_at:
+          type: string
+          format: date-time
+          example: 2021-01-01T00:00:00Z
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          example: 2021-01-01T00:00:00Z
+          readOnly: true
+        deleted_at:
+          type: string
+          format: date-time
+          example: 2021-01-01T00:00:00Z
+          readOnly: true
+    TweetList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Tweet"
