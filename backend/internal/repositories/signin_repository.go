@@ -5,8 +5,6 @@ import (
 	"myapp/internal/external"
 
 	"gorm.io/gorm"
-
-	"fmt"
 )
 
 type SignInRepository struct {
@@ -23,7 +21,7 @@ func (r *SignInRepository) SignIn(username, password string) (*entities.User, er
 	var user *entities.User
 	// username(一意)とpasswordが一致するユーザーを取得。存在しない場合はエラーを返す
 	result := r.Conn.Where("username = ? AND password = ?", username, password).First(&user)
-	fmt.Pinrtln(result)
+
 	if result.Error != nil {
 		return nil, result.Error
 	}
