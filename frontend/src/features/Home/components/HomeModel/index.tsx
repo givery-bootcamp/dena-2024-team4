@@ -2,7 +2,7 @@ import { Divider, VStack } from '@yamada-ui/react';
 import { decodePostResponses } from '@/pages/api/PostResponse';
 import { useHomeModal } from './hooks';
 import useSWR from 'swr';
-import Sidebar from '@/features/ layouts/components/Sidebar';
+import Sidebar from '@/components/layouts/Sidebar';
 import PostDetail from '@/features/Post/components/PostModel';
 
 const fetcher = (offset: number, limit: number) =>
