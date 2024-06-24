@@ -19,8 +19,8 @@ func NewSignInRepository() *SignInRepository {
 
 func (r *SignInRepository) SignIn(username, password string) (*entities.User, error) {
 	var user *entities.User
-	// usernameとpasswordが一致するユーザーを取得。存在しない場合はエラーを返す
-	result := r.Conn.Where("name = ? AND password = ?", username, password).First(&user)
+	// username(一意)とpasswordが一致するユーザーを取得。存在しない場合はエラーを返す
+	result := r.Conn.Where("username = ? AND password = ?", username, password).First(&user)
 	if result.Error != nil {
 		return nil, result.Error
 	}
