@@ -3,8 +3,9 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import useSWR from 'swr';
 
-export const useHome = () => {
+export const useHome = (offset: number, limit: number) => {
   const router = useRouter();
+  const { data, error, isLoading } = useSWR('/tweets', () => getPostsFetcher(offset, limit));
 
   const handleOnTapPost = useCallback(
     (postId: string) => {
@@ -13,11 +14,5 @@ export const useHome = () => {
     [router],
   );
 
-  return { handleOnTapPost };
-};
-
-export const useGetPosts = (offset: number, limit: number) => {
-  const { data, error, isLoading } = useSWR('/tweets', () => getPostsFetcher(offset, limit));
-
-  return { data, error, isLoading };
+  return { handleOnTapPost, data, error, isLoading };
 };
