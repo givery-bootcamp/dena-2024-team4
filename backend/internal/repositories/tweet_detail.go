@@ -36,3 +36,21 @@ func (r *TweetDetailRepository) Get(tweetId int) (*entities.Post, error) {
 	}
 	return tweet, nil
 }
+
+func (r *TweetDetailRepository) Create(body entities.CreatePostBody) (*entities.Post, error) {
+	var tweet *entities.Post
+
+	result := r.Conn.Create(&entities.Post{
+		UserID: body.UserID,
+		Title:  body.Title,
+		Body:   body.Body,
+	}).Scan(&tweet)
+
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		return nil, result.Error
+	}
+	return tweet, nil
+}
