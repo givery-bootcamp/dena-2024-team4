@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import useSWR from 'swr';
 
-export const useHomeModal = () => {
+export const useHome = () => {
   const router = useRouter();
 
   const handleOnTapPost = useCallback(
-    (postID: string) => {
-      router.push(`post/${postID}`);
+    (postId: string) => {
+      router.push(`post/${postId}`);
     },
     [router],
   );
