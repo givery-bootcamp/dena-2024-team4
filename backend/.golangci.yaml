@@ -1,0 +1,32 @@
+linters-settings:
+  structcheck:
+    type-check:
+      disabled: true
+    unused-fields: true
+  govet:
+    check-shadowing: false
+  gocyclo:
+    min-complexity: 30
+  gocognit:
+    min-complexity: 40
+
+issues:
+  exclude-files:
+    - .*_test\.go
+  timeout: 20m
+  go: '1.22'
+
+linters:
+  disable-all: true
+  enable:
+    - goimports
+    - unused
+    - errcheck
+    - gocognit
+    - gocyclo
+    - gofmt
+    - govet
+    - misspell
+    - staticcheck
+    - whitespace
+    - gosec
