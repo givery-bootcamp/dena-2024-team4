@@ -15,4 +15,5 @@ func SetupRoutes(app *gin.Engine) {
 	// AllTweets の関数を直接呼び出す
 	app.GET("/tweets", controllers.AllTweets)
 	app.GET("/tweets/:tweetId", controllers.TweetDetail) // tweetIdでツイートの詳細を取得
+	app.POST("/tweets", controllers.PostTweetDetail)     // ツイートを投稿
 }
