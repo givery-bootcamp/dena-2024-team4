@@ -28,8 +28,8 @@ const items: SidebarItem[] = [
 
 export default function Sidebar({ children }: SidebarProps) {
   return (
-    <Flex w="full" flexDirection="row" overflow="hidden">
-      <VStack as="nav" w="300px" h="100vh" padding="md" bg="gray.50">
+    <Flex w="full" flexDirection="row">
+      <VStack w="300px" h="100vh" padding="md" position="sticky" top="0">
         {items.map((item, index) => (
           <Button
             key={index}
