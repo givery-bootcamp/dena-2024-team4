@@ -232,6 +232,7 @@ be/ci:
 # FrontendのAPI Modelをdocs/openapi.yamlから生成する
 .PHONY: fe/gen
 fe/gen:
+	@${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh -c 'rm -rf src/libs/aspida'
 	@${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh -c 'bunx openapi2aspida -i docs/openapi.yaml -o src/libs/aspida'
 
 # BackendのAPI Modelをdocs/openapi.yamlから生成する

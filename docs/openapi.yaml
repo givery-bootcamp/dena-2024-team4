@@ -218,6 +218,13 @@ components:
           format: date-time
           example: 2021-01-01T00:00:00Z
           readOnly: true
+      required:
+        - id
+        - username
+        - display_name
+        - password
+        - created_at
+        - updated_at
     Tweet:
       type: object
       properties:
@@ -250,6 +257,13 @@ components:
           format: date-time
           example: 2021-01-01T00:00:00Z
           readOnly: true
+      required:
+        - id
+        - user_id
+        - title
+        - body
+        - created_at
+        - updated_at
     TweetList:
       type: array
       items:
