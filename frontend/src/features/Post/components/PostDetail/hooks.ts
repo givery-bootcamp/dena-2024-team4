@@ -9,7 +9,7 @@ export const usePost = () => {
 };
 
 export const useGetPost = (postId: number) => {
-  const { data, error, isLoading } = useSWR('/tweets/:tweetId"', () => getPostFetcher(postId));
+  const { data, error, isLoading } = useSWR(`/tweets/${postId}`, () => getPostFetcher(postId));
 
   return { data, error, isLoading };
 };
