@@ -24,7 +24,7 @@ func PostTweetDetail(ctx *gin.Context) {
 	if err != nil {
 		handleError(ctx, 500, err)
 	} else if result != nil {
-		ctx.JSON(http.StatusCreated, gin.H{"id": result.ID})
+		ctx.JSON(http.StatusCreated, gin.H{"id": result.ID, "created_at": result.CreatedAt})
 	} else {
 		handleError(ctx, 404, errors.New("not found"))
 	}
