@@ -12,3 +12,10 @@ type Post struct {
 	UpdatedAt time.Time  `json:"updated_at" db:"updated_at"`
 	DeletedAt *time.Time `json:"deleted_at" db:"deleted_at"`
 }
+
+// 投稿用のリクエストボディ
+type CreatePostBody struct {
+	UserID int    `json:"user_id"`
+	Title  string `json:"title"`
+	Body   string `json:"body"`
+}
