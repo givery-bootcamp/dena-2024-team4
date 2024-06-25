@@ -1,11 +1,10 @@
 import { Divider, VStack } from '@yamada-ui/react';
 import { decodePostResponses } from '@/pages/api/PostResponse';
-import { useGetPosts, useHome } from './hooks';
+import { useHome } from './hooks';
 import PostCard from '@/features/Post/components/PostCard';
 
 export const Home: React.FC = () => {
-  const { handleOnTapPost } = useHome();
-  const { data, error, isLoading } = useGetPosts(0, 10);
+  const { handleOnTapPost, data, error, isLoading } = useHome(0, 10);
   const posts = decodePostResponses(data || [])
 
   return (
