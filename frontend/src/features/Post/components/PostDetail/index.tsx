@@ -8,13 +8,13 @@ type PostDetailProps = {
 }
 
 export default function PostDetailModel({ postId }: PostDetailProps) {
-  const { MY_USER_ID } = usePost();
+  const { myUserId } = usePost();
   const { data, error, isLoading } = useGetPost(Number(postId));
   const post = decodePostResponse(data || {})
 
   return (
     <Flex direction="column" padding="md">
-      <Post MY_USER_ID={MY_USER_ID} post={post} />
+      <Post myUserId={myUserId} post={post} />
     </Flex>
   );
 }

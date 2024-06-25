@@ -9,11 +9,11 @@ type PostCardProps = {
 }
 
 export default function PostCard({ post, onClick }: PostCardProps) {
-  const { MY_USER_ID } = usePostCard();
+  const { myUserId } = usePostCard();
 
   return (
     <Flex direction="column" padding="md" onClick={onClick}>
-      <Post MY_USER_ID={MY_USER_ID} post={post} />
+      <Post myUserId={myUserId} post={post} />
     </Flex>
   );
 }

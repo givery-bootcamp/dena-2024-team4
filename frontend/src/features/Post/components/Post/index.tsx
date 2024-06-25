@@ -6,11 +6,11 @@ import { FaRegFlag } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
 
 type PostProps = {
-  MY_USER_ID: number
+  myUserId: number
   post: PostResponse
 }
 
-export default function Post({ MY_USER_ID, post }: PostProps) {
+export default function Post({ myUserId, post }: PostProps) {
   return (
     <>
       <Flex direction="row">
@@ -22,7 +22,7 @@ export default function Post({ MY_USER_ID, post }: PostProps) {
             e.stopPropagation();
           }} />
           <MenuList>
-            {(MY_USER_ID === post.user_id && (
+            {(myUserId === post.user_id && (
               <MenuItem
                 color="red"
                 icon={<Icon as={RiDeleteBinLine} color="red" />}
