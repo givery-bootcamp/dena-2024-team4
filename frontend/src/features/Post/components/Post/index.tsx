@@ -4,18 +4,15 @@ import { Flex, Text, Spacer, Icon, Menu, MenuButton, MenuItem, MenuList, IconBut
 import { FaEllipsis } from "react-icons/fa6";
 import { FaRegFlag } from "react-icons/fa6";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { usePostModal } from './hooks';
 
-type PostDetailProps = {
+type PostProps = {
+  MY_USER_ID: number
   post: PostResponse
-  onClick: () => void
 }
 
-export default function PostDetail({ post, onClick }: PostDetailProps) {
-  const { MY_USER_ID } = usePostModal();
-
+export default function Post({ MY_USER_ID, post }: PostProps) {
   return (
-    <Flex direction="column" padding="md" onClick={onClick}>
+    <>
       <Flex direction="row">
         <Text paddingEnd={'sm'}>{'unknown'}</Text>
         <Text color="gray">@{post.user_id}・{timeAgo(new Date(post.created_at))}</Text>
@@ -45,6 +42,6 @@ export default function PostDetail({ post, onClick }: PostDetailProps) {
         {post.title}
       </Text>
       <Text fontSize="md">{post.body}</Text>
-    </Flex>
+    </>
   );
 }
