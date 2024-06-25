@@ -21,5 +21,7 @@ func main() {
 	middleware.SetupRoutes(app)
 
 	// サーバーの起動
-	app.Run(fmt.Sprintf("%s:%d", config.HostName, config.Port))
+	if err := app.Run(fmt.Sprintf("%s:%d", config.HostName, config.Port)); err != nil {
+		fmt.Printf("Failed to start server: %v", err)
+	}
 }

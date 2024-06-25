@@ -30,7 +30,6 @@ services:
       context: ./docker
       dockerfile: mysql.Dockerfile
     volumes:
-      - ./docker/mysql:/var/lib/mysql
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./mysql/sql:/docker-entrypoint-initdb.d
     ports:

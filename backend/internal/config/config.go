@@ -14,6 +14,7 @@ var DBUserName = "root"
 var DBPassword = ""
 var DBPort = 3306
 var DBName = "training"
+var Secret = "secret-key"
 
 // init()は特別で、初期実行。envから環境変数をとってくる
 func init() {
@@ -43,5 +44,8 @@ func init() {
 	}
 	if v := os.Getenv("DB_NAME"); v != "" {
 		DBName = v
+	}
+	if v := os.Getenv("JWT_SECRET"); v != "" {
+		Secret = v
 	}
 }
