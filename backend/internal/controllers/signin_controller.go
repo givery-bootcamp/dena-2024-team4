@@ -22,6 +22,7 @@ func SignIn(ctx *gin.Context) {
 	}
 
 	// JWTをCookieに設定。とりあえず期限は24時間
+	// クライアント側のCookieに保存される
 	// 以降、認証が必要なEndpointではこのCookieをチェックして、不正な場合は401を返す
 	ctx.SetCookie("jwt", jwt, 60*60*24, "/", "localhost", false, true)
 

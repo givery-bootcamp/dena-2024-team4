@@ -12,11 +12,12 @@ func SetupRoutes(app *gin.Engine) {
 	})
 	// HelloWorld が DB 接続を必要としない場合はそのまま
 	app.GET("/hello", controllers.HelloWorld)
-	// AllTweets の関数を直接呼び出す
-	app.GET("/tweets", controllers.AllTweets)
 
 	// usernameとpasswordを受けとり、サインインする
 	app.POST("/signin", controllers.SignIn)
+
+	// AllTweets の関数を直接呼び出す
+	app.GET("/tweets", controllers.AllTweets)
 
 	// tweetIdでツイートの詳細を取得
 	app.GET("/tweets/:tweetId", controllers.TweetDetail)
