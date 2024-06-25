@@ -4,8 +4,9 @@ import (
 	"errors"
 	"myapp/internal/usecases"
 
-	"github.com/gin-gonic/gin"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 func AllTweets(ctx *gin.Context) {
