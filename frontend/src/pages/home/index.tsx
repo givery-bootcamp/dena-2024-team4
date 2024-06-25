@@ -1,10 +1,11 @@
-import { HomeModal } from "@/features/Home/components/HomeModel";
+import Sidebar from "@/components/layouts/Sidebar";
+import { Home } from "@/features/Home/components/Home";
 
 const Page: React.FC = () => {
   return (
-    <main>
-      <HomeModal />
-    </main>
+    <Sidebar>
+      <Home />
+    </Sidebar>
   );
 };
 
