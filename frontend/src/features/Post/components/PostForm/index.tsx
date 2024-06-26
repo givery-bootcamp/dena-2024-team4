@@ -6,7 +6,7 @@ import { PostBodyField } from '../PostBodyField';
 
 
 const PostForm: React.FC  = () => {
-  const { handleTitleTextAreaChange, handleBodyTextAreaChange, handleOnSubmit } = usePostForm();
+  const { handleOnSubmit } = usePostForm();
   const formData = new FormData();
   const [isBodyTextAreaFocus, setIsBodyTextAreaFocus] = useState(false);
 
@@ -15,8 +15,8 @@ const PostForm: React.FC  = () => {
       <HStack my={4} alignItems={'flex-start'}>
         <Avatar size="md" name="Hirotomo Yamada" />
         <VStack>
-          <PostField onInputChange={handleTitleTextAreaChange} isHidden={!isBodyTextAreaFocus} name="title" setIsBodyTextAreaFocus={setIsBodyTextAreaFocus} required={false} />
-          <PostBodyField onInputChange={handleBodyTextAreaChange} isHidden={false} name="body" setIsBodyTextAreaFocus={setIsBodyTextAreaFocus} required={true} />
+          <PostField isHidden={!isBodyTextAreaFocus} name="title" setIsBodyTextAreaFocus={setIsBodyTextAreaFocus} required={false} />
+          <PostBodyField isHidden={false} name="body" setIsBodyTextAreaFocus={setIsBodyTextAreaFocus} required={true} />
         </VStack>
       </HStack>
       <Flex justify={'right'}>
