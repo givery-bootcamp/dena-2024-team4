@@ -24,6 +24,6 @@ func TweetDetail(ctx *gin.Context) {
 	} else if result != nil {
 		ctx.JSON(200, result)
 	} else {
-		handleError(ctx, 404, errors.New("Not found"))
+		handleError(ctx, 404, errors.New("not found"))
 	}
 }
