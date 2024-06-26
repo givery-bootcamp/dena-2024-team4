@@ -26,12 +26,19 @@ export default function Post({ myUserId, post }: PostProps) {
               <MenuItem
                 color="red"
                 icon={<Icon as={RiDeleteBinLine} color="red" />}
-                onClick={() => console.log('投稿を削除')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
               >
                 投稿を削除
               </MenuItem>
             )) || (
-                <MenuItem icon={<Icon as={FaRegFlag} />} onClick={() => console.log('投稿を報告')}>
+                <MenuItem
+                  icon={<Icon as={FaRegFlag} />}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
                   投稿を報告
                 </MenuItem>
               )}
