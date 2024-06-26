@@ -16,7 +16,7 @@ func PutTweetDetail(ctx *gin.Context) {
 	tweetIdStr := ctx.Param("tweetId")
 	tweetId, err := strconv.Atoi(tweetIdStr)
 	if err != nil {
-		handleError(ctx, 400, errors.New("Invalid tweetId"))
+		handleError(ctx, 400, errors.New("invalid tweetId"))
 		return
 	}
 
