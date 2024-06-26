@@ -7,6 +7,7 @@ services:
     volumes:
       - ./frontend:/home/node/myapp
       - ./frontend/node_modules:/home/node/myapp/node_modules
+      - ./docs/:/home/node/myapp/docs/
     command: bash -c 'bun i && bun run dev'
     environment:
       TZ: Asia/Tokyo
@@ -42,3 +43,24 @@ services:
       timeout: 5s
       retries: 6
       start_period: 10s
+
+  swagger-editor:
+    image: swaggerapi/swagger-editor
+    platform: linux/amd64
+    container_name: swagger-editor
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./docs/openapi.yaml:/openapi.yaml
+    environment:
+      - SWAGGER_FILE=/openapi.yaml
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swagger-ui
+    ports:
+      - "8081:8080"
+    environment:
+      - SWAGGER_JSON=/openapi.yaml
+    volumes:
+      - ./docs/openapi.yaml:/openapi.yaml

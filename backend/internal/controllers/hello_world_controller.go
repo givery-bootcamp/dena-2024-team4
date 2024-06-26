@@ -3,6 +3,7 @@ package controllers
 import (
 	"errors"
 	"fmt"
+	openapi "myapp/internal/api"
 	"myapp/internal/repositories"
 	"myapp/internal/usecases"
 
@@ -12,7 +13,9 @@ import (
 func HelloWorld(ctx *gin.Context) {
 	lang := ctx.DefaultQuery("lang", "ja")
 	if err := validateHelloWorldParameters(lang); err != nil {
-		handleError(ctx, 400, err)
+		response400 := openapi.NewHelloGet400Response()
+		response400.SetMessage(err.Error())
+		ctx.JSON(400, response400)
 		return
 	}
 	repository := repositories.NewHelloWorldRepository(DB(ctx))
@@ -20,11 +23,17 @@ func HelloWorld(ctx *gin.Context) {
 	// router->controller->usecase->repository->DB
 	result, err := usecase.Execute(lang)
 	if err != nil {
-		handleError(ctx, 500, err)
+		response500 := openapi.NewHelloGet500Response()
+		response500.SetMessage(err.Error())
+		ctx.JSON(500, response500)
 	} else if result != nil {
-		ctx.JSON(200, result)
+		response200 := openapi.NewHelloGet200Response()
+		response200.SetMessage(result.Message)
+		ctx.JSON(200, response200)
 	} else {
-		handleError(ctx, 404, errors.New("not found"))
+		response404 := openapi.NewHelloGet404Response()
+		response404.SetMessage("not found")
+		ctx.JSON(404, response404)
 	}
 }
 

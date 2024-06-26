@@ -228,3 +228,18 @@ be/test:
 be/ci:
 	${MAKE} be/fmt
 	${MAKE} be/test
+
+# FrontendのAPI Modelをdocs/openapi.yamlから生成する
+.PHONY: fe/gen
+fe/gen:
+	@${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh -c 'rm -rf src/libs/aspida'
+	@${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh -c 'bunx openapi2aspida -i docs/openapi.yaml -o src/libs/aspida'
+
+# BackendのAPI Modelをdocs/openapi.yamlから生成する
+.PHONY: be/gen
+be/gen:
+	docker run --rm \
+		-v ${PWD}:/local openapitools/openapi-generator-cli generate \
+		-i /local/docs/openapi.yaml \
+		-g go \
+		-o /local/backend/internal/api --global-property models,supportingFiles=utils.go,modelDocs=false
