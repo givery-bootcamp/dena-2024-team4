@@ -16,6 +16,13 @@ func SetupRoutes(app *gin.Engine) {
 	// usernameとpasswordを受けとり、サインインする
 	app.POST("/signin", controllers.SignIn)
 
+	// 認証が必要なエンドポイント
+	auth := app.Group("/")
+	auth.Use(AuthRequired())
+	{
+		auth.GET("/user", controllers.AuthUser)
+	}
+
 	// AllTweets の関数を直接呼び出す
 	app.GET("/tweets", controllers.AllTweets)
 	app.GET("/tweets/:tweetId", controllers.TweetDetail) // tweetIdでツイートの詳細を取得
