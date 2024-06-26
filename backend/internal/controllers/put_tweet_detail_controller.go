@@ -37,13 +37,13 @@ func PutTweetDetail(ctx *gin.Context) {
 	})
 
 	if err != nil {
-		handleError(ctx, 500, err)
+		handleError(ctx, http.StatusInternalServerError, err)
 	} else if result != nil {
 		response204 := openapi.NewTweetsTweetIdPut204Response()
 		response204.SetId(*result.Id)
 		response204.SetUpdatedAt(*result.UpdatedAt)
-		ctx.JSON(http.StatusCreated, response204)
+		ctx.JSON(http.StatusNoContent, response204)
 	} else {
-		handleError(ctx, 404, errors.New("not found"))
+		handleError(ctx, http.StatusNotFound, errors.New("not found"))
 	}
 }
