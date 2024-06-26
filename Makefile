@@ -238,6 +238,7 @@ fe/gen:
 # BackendのAPI Modelをdocs/openapi.yamlから生成する
 .PHONY: be/gen
 be/gen:
+	@${DOCKER_COMPOSE_IMPL} exec backend /bin/sh -c 'rm -rf internal/api'
 	docker run --rm \
 		-v ${PWD}:/local openapitools/openapi-generator-cli generate \
 		-i /local/docs/openapi.yaml \

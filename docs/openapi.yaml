@@ -90,14 +90,14 @@ paths:
           description: Limit
           required: false
           schema:
-            type: integer
+            type: int
             default: 50
         - name: offset
           in: query
           description: Offset
           required: false
           schema:
-            type: integer
+            type: int
             default: 0
       responses:
         "200":
@@ -136,6 +136,65 @@ paths:
                   message:
                     type: string
                     example: Internal server error
+    post:
+      summary: Post tweet
+      description: Return id and created time
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: int
+                  description: "Reference to User ID"
+                  example: 1
+                title:
+                  type: string
+                  example: Hello World
+                body:
+                  type: string
+                  example: Hello World
+              required:
+                - user_id
+                - title
+                - body
+      responses:
+        "201":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: int
+                    example: 1
+                  created_at:
+                    type: string
+                    format: date-time
+                    example: 2021-01-01T00:00:00Z
+        "400":
+          description: Invalid requestBody
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid requestBody
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: failed to parse request body
   /tweets/{tweetId}:
     get:
       summary: Get tweet
@@ -146,7 +205,7 @@ paths:
           description: Tweet ID
           required: true
           schema:
-            type: integer
+            type: int
       responses:
         "200":
           description: A successful response
@@ -184,14 +243,84 @@ paths:
                   message:
                     type: string
                     example: Internal server error
-
+    put:
+      summary: Update tweet
+      description: Return updated time
+      parameters:
+        - name: tweetId
+          in: path
+          description: Tweet ID
+          required: true
+          schema:
+            type: int
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Hello World
+                body:
+                  type: string
+                  example: Hello World
+              required:
+                - title
+                - body
+      responses:
+        "204":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: int
+                    example: 1
+                  updated_at:
+                    type: string
+                    format: date-time
+                    example: 2021-01-01T00:00:00Z
+        "400":
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid parameter
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
 components:
   schemas:
     User:
       type: object
       properties:
         id:
-          type: integer
+          type: int
           example: 1
           readOnly: true
         username:
@@ -229,11 +358,11 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: int
           example: 1
           readOnly: true
         user_id:
-          type: integer
+          type: int
           description: "Reference to User ID"
           example: 1
         title:

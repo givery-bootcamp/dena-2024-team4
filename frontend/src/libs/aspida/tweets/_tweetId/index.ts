@@ -1,17 +1,17 @@
 /* eslint-disable */
-import type * as Types from '../@types'
+import type * as Types from '../../@types'
 
 export type Methods = {
-  /** Return tweets */
+  /** Return tweet */
   get: {
     status: 200
     /** A successful response */
-    resBody: Types.TweetList
+    resBody: Types.Tweet
   }
 
-  /** Return id and created time */
-  post: {
-    status: 201
+  /** Return updated time */
+  put: {
+    status: 204
 
     /** A successful response */
     resBody: {
