@@ -8,4 +8,5 @@ import (
 type TweetDetailRepository interface {
 	Get(tweetId int) (*entities.Post, error)
 	Create(body entities.CreatePostBody) (*entities.Post, error)
+	Update(tweetId int, body entities.UpdatePostBody) (*entities.Post, error)
 }
