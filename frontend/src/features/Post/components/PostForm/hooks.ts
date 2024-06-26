@@ -6,14 +6,6 @@ export const usePostForm = () => {
     const formData = new FormData();
     const USER_ID = 1;
 
-    const handleTitleTextAreaChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-        formData.append("title", e.target.value);
-    }, []);
-
-    const handleBodyTextAreaChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-        formData.append("body", e.target.value);
-    }, []);
-
     const handleOnSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
         const { formData, form } = validateFormEventTarget(e.target)
         const { title, body } = Object.fromEntries(
@@ -30,8 +22,6 @@ export const usePostForm = () => {
     }, []);
 
     return {
-        handleTitleTextAreaChange,
-        handleBodyTextAreaChange,
         handleOnSubmit,
       };
 }
