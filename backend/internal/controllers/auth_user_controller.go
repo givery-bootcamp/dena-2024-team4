@@ -2,6 +2,7 @@
 package controllers
 
 import (
+	openapi "myapp/internal/api"
 	"myapp/internal/usecases"
 	"net/http"
 
@@ -12,16 +13,23 @@ import (
 func AuthUser(ctx *gin.Context) {
 	userID, exists := ctx.Get("userID")
 	if !exists {
-		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+		respose401 := openapi.NewUserGet401Response()
+		respose401.SetMessage("Unauthorized")
+		ctx.JSON(http.StatusUnauthorized, respose401)
 		return
 	}
 
 	usecase := usecases.NewAuthUserUsecase()
-	user, err := usecase.Execute(userID.(int))
+	result, err := usecase.Execute(userID.(int))
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
 		return
 	}
 
-	ctx.JSON(http.StatusOK, user)
+	response200 := openapi.NewUserGet200Response()
+	response200.SetId(int32(result.ID))
+	response200.SetUsername(result.Username)
+	response200.SetDisplayName(result.DisplayName)
+
+	ctx.JSON(http.StatusOK, response200)
 }

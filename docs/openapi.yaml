@@ -16,6 +16,8 @@ paths:
     get:
       summary: Root API
       description: Return root message
+      tags:
+        - NoAuth
       responses:
         "200":
           description: A successful response
@@ -28,6 +30,8 @@ paths:
     get:
       summary: Hello API
       description: Return Hello message
+      tags:
+        - NoAuth
       parameters:
         - name: lang
           in: query
@@ -84,6 +88,8 @@ paths:
     get:
       summary: Get tweets
       description: Return tweets
+      tags:
+        - NoAuth
       parameters:
         - name: limit
           in: query
@@ -140,6 +146,8 @@ paths:
     get:
       summary: Get tweet
       description: Return tweet
+      tags:
+        - NoAuth
       parameters:
         - name: tweetId
           in: path
@@ -174,6 +182,51 @@ paths:
                   message:
                     type: string
                     example: Not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+  /user:
+    get:
+      summary: Get user
+      description: Return user
+      tags:
+        - Auth
+      security:
+        - coockieAuth: []
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  username:
+                    type: string
+                    example: Alice
+                  display_name:
+                    type: string
+                    example: alice
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
         "500":
           description: Internal server error
           content:
@@ -268,3 +321,14 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Tweet"
+  securitySchemes:
+    coockieAuth:
+      type: apiKey
+      in: cookie
+      name: cookies # Cookie name
+
+tags:
+  - name: Auth
+    description: Need to login
+  - name: NoAuth
+    description: Not need to login

@@ -13,6 +13,8 @@ package openapi
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the Tweet type satisfies the MappedNullable interface at compile time
@@ -20,22 +22,30 @@ var _ MappedNullable = &Tweet{}
 
 // Tweet struct for Tweet
 type Tweet struct {
-	Id *int32 `json:"id,omitempty"`
+	Id int32 `json:"id"`
 	// Reference to User ID
-	UserId *int32 `json:"user_id,omitempty"`
-	Title *string `json:"title,omitempty"`
-	Body *string `json:"body,omitempty"`
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	UserId int32 `json:"user_id"`
+	Title string `json:"title"`
+	Body string `json:"body"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 }
+
+type _Tweet Tweet
 
 // NewTweet instantiates a new Tweet object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTweet() *Tweet {
+func NewTweet(id int32, userId int32, title string, body string, createdAt time.Time, updatedAt time.Time) *Tweet {
 	this := Tweet{}
+	this.Id = id
+	this.UserId = userId
+	this.Title = title
+	this.Body = body
+	this.CreatedAt = createdAt
+	this.UpdatedAt = updatedAt
 	return &this
 }
 
@@ -47,196 +57,148 @@ func NewTweetWithDefaults() *Tweet {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *Tweet) GetId() int32 {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *Tweet) GetIdOk() (*int32, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Tweet) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given int32 and assigns it to the Id field.
+// SetId sets field value
 func (o *Tweet) SetId(v int32) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *Tweet) GetUserId() int32 {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *Tweet) GetUserIdOk() (*int32, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *Tweet) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given int32 and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *Tweet) SetUserId(v int32) {
-	o.UserId = &v
+	o.UserId = v
 }
 
-// GetTitle returns the Title field value if set, zero value otherwise.
+// GetTitle returns the Title field value
 func (o *Tweet) GetTitle() string {
-	if o == nil || IsNil(o.Title) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Title
+
+	return o.Title
 }
 
-// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
+// GetTitleOk returns a tuple with the Title field value
 // and a boolean to check if the value has been set.
 func (o *Tweet) GetTitleOk() (*string, bool) {
-	if o == nil || IsNil(o.Title) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Title, true
+	return &o.Title, true
 }
 
-// HasTitle returns a boolean if a field has been set.
-func (o *Tweet) HasTitle() bool {
-	if o != nil && !IsNil(o.Title) {
-		return true
-	}
-
-	return false
-}
-
-// SetTitle gets a reference to the given string and assigns it to the Title field.
+// SetTitle sets field value
 func (o *Tweet) SetTitle(v string) {
-	o.Title = &v
+	o.Title = v
 }
 
-// GetBody returns the Body field value if set, zero value otherwise.
+// GetBody returns the Body field value
 func (o *Tweet) GetBody() string {
-	if o == nil || IsNil(o.Body) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Body
+
+	return o.Body
 }
 
-// GetBodyOk returns a tuple with the Body field value if set, nil otherwise
+// GetBodyOk returns a tuple with the Body field value
 // and a boolean to check if the value has been set.
 func (o *Tweet) GetBodyOk() (*string, bool) {
-	if o == nil || IsNil(o.Body) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Body, true
+	return &o.Body, true
 }
 
-// HasBody returns a boolean if a field has been set.
-func (o *Tweet) HasBody() bool {
-	if o != nil && !IsNil(o.Body) {
-		return true
-	}
-
-	return false
-}
-
-// SetBody gets a reference to the given string and assigns it to the Body field.
+// SetBody sets field value
 func (o *Tweet) SetBody(v string) {
-	o.Body = &v
+	o.Body = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *Tweet) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *Tweet) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *Tweet) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *Tweet) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+// GetUpdatedAt returns the UpdatedAt field value
 func (o *Tweet) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.UpdatedAt
+
+	return o.UpdatedAt
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *Tweet) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpdatedAt, true
+	return &o.UpdatedAt, true
 }
 
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *Tweet) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+// SetUpdatedAt sets field value
 func (o *Tweet) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
+	o.UpdatedAt = v
 }
 
 // GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
@@ -281,28 +243,58 @@ func (o Tweet) MarshalJSON() ([]byte, error) {
 
 func (o Tweet) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.UserId) {
-		toSerialize["user_id"] = o.UserId
-	}
-	if !IsNil(o.Title) {
-		toSerialize["title"] = o.Title
-	}
-	if !IsNil(o.Body) {
-		toSerialize["body"] = o.Body
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
-	}
+	toSerialize["id"] = o.Id
+	toSerialize["user_id"] = o.UserId
+	toSerialize["title"] = o.Title
+	toSerialize["body"] = o.Body
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["updated_at"] = o.UpdatedAt
 	if !IsNil(o.DeletedAt) {
 		toSerialize["deleted_at"] = o.DeletedAt
 	}
 	return toSerialize, nil
+}
+
+func (o *Tweet) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"user_id",
+		"title",
+		"body",
+		"created_at",
+		"updated_at",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTweet := _Tweet{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varTweet)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Tweet(varTweet)
+
+	return err
 }
 
 type NullableTweet struct {

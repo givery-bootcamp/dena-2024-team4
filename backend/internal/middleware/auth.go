@@ -2,6 +2,7 @@
 package middleware
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -13,19 +14,30 @@ import (
 func AuthRequired() gin.HandlerFunc {
 	secretKey := os.Getenv("JWT_SECRET")
 	return func(ctx *gin.Context) {
-		tokenString, err := ctx.Cookie("jwt")
-		if err != nil {
-			ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
-			ctx.Abort()
-			return
+		tokenString := ctx.GetHeader("Cookie")
+		if len(tokenString) > 4 && tokenString[:4] == "jwt=" {
+			tokenString = tokenString[4:]
 		}
+		fmt.Println(tokenString)
+
+		// tokenString, err := ctx.Cookie("jwt")
+		// fmt.Println(tokenString)
+		// if err != nil {
+		// 	ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+		// 	ctx.Abort()
+		// 	return
+		// }
 
 		token, parseErr := jwt.ParseWithClaims(tokenString, &jwt.MapClaims{}, func(token *jwt.Token) (interface{}, error) {
 			return []byte(secretKey), nil
 		})
 
 		if parseErr != nil {
-			ctx.JSON(http.StatusInternalServerError, gin.H{"error": parseErr.Error()})
+			if parseErr.Error() == "token contains an invalid number of segments" {
+				ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			} else {
+				ctx.JSON(http.StatusInternalServerError, gin.H{"error": parseErr.Error()})
+			}
 			ctx.Abort()
 			return
 		}
