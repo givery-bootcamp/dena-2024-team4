@@ -28,7 +28,6 @@ type PostProps = {
 };
 
 export default function Post({ myUserId, post }: PostProps) {
-  const [size, setSize] = useState('md');
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -72,7 +71,7 @@ export default function Post({ myUserId, post }: PostProps) {
               )}
           </MenuList>
         </Menu>
-        <Modal isOpen={isOpen} onClose={onClose} size={size}>
+        <Modal isOpen={isOpen} onClose={onClose} size="md">
           <ModalHeader>投稿を削除</ModalHeader>
           <ModalBody>この投稿を削除しますか？</ModalBody>
           <ModalFooter>
