@@ -28,7 +28,7 @@ const items: SidebarItem[] = [
 
 export default function Sidebar({ children }: SidebarProps) {
   return (
-    <Flex w="full" flexDirection="row">
+    <Flex flexDirection="row">
       <VStack w="300px" h="100vh" padding="md" position="sticky" top="0">
         {items.map((item, index) => (
           <Button
@@ -48,6 +48,7 @@ export default function Sidebar({ children }: SidebarProps) {
           ポストする
         </Button>
       </VStack>
+      <Divider orientation="vertical" h="100vh" position="sticky" top="0" />
       {children}
     </Flex>
   );
