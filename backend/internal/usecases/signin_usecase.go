@@ -3,6 +3,7 @@ package usecases
 import (
 	"myapp/internal/entities"
 	"myapp/internal/repositories"
+	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -36,13 +37,14 @@ func (u *SignInUsecase) Execute(username, password string) (*entities.User, stri
 }
 
 func generateJWTToken(ID int) (string, error) {
+	secretKey := os.Getenv("JWT_SECRET")
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"id":  ID,
 		"exp": time.Now().Add(time.Hour * 72).Unix(), // トークンの有効期限を設定
 	})
 
 	// 秘密鍵で署名を行い、トークン文字列を取得。トークンは認証で使用する
-	tokenString, err := token.SignedString([]byte("secret-key"))
+	tokenString, err := token.SignedString([]byte(secretKey))
 	if err != nil {
 		return "", err
 	}

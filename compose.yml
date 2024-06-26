@@ -13,8 +13,8 @@ services:
       TZ: Asia/Tokyo
   backend:
     build:
-      context: ./docker
-      dockerfile: ./backend.Dockerfile
+      context: .
+      dockerfile: ./docker/backend.Dockerfile
     ports:
       - '9000:9000'
     volumes:
@@ -25,6 +25,8 @@ services:
         condition: service_healthy
     environment:
       TZ: Asia/Tokyo
+    env_file:
+      - ./backend/.env
   db:
     build:
       context: ./docker

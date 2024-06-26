@@ -53,8 +53,29 @@ help:
 	@echo "  be/ci           : pushする前にbackendのコードを整える"
 
 # initコマンドを実行すると、プロジェクトを初期化し、バックグラウンドで実行する
+.PHONY: cp/be/env
+cp/be/env:
+	cp ./backend/.env.dev ./backend/.env
+
 .PHONY: init
 init:
+	@if [ ! -f ./backend/.env ]; then \
+		echo "backend/.envファイルが存在しません。backend/.envファイルを作成します。"; \
+		${MAKE} cp/be/env; \
+		echo "新しいbackend/.envファイルが作成されました。必要な環境変数を設定してください。"; \
+	fi
+	@if [ -f ./backend/.env ]; then \
+		while IFS= read -r line; do \
+			if [[ ! -z "$$line" && "$$line" != \#* ]]; then \
+				key=$${line%%=*}; \
+				value=$${line#*=}; \
+				if [[ -z "$$value" ]]; then \
+					echo "環境変数 $$key は設定されていません。すべての値を埋めてください。"; \
+					exit 1; \
+				fi; \
+			fi; \
+		done < ./backend/.env; \
+	fi
 	${MAKE} build
 	${MAKE} up/d
 

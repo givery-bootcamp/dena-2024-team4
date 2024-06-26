@@ -3,6 +3,7 @@ package middleware
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -10,6 +11,7 @@ import (
 
 // AuthRequired ミドルウェアはJWTトークンの検証を行います
 func AuthRequired() gin.HandlerFunc {
+	secretKey := os.Getenv("JWT_SECRET")
 	return func(ctx *gin.Context) {
 		tokenString, err := ctx.Cookie("jwt")
 		if err != nil {
@@ -19,7 +21,7 @@ func AuthRequired() gin.HandlerFunc {
 		}
 
 		token, parseErr := jwt.ParseWithClaims(tokenString, &jwt.MapClaims{}, func(token *jwt.Token) (interface{}, error) {
-			return []byte("secret-key"), nil
+			return []byte(secretKey), nil
 		})
 
 		if parseErr != nil {
