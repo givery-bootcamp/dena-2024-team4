@@ -19,10 +19,11 @@ export const usePostForm = () => {
         const { title, body } = Object.fromEntries(
             [...formData.entries()].filter((v): v is [string, string] => typeof v[1] === 'string'),
         );
-        
+
         e.preventDefault();
         try {
             savePostFetcher(USER_ID, title, body)
+            form.reset();
         } catch (error) {
             console.error('Error:', error);
         }
