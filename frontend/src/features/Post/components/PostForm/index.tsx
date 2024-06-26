@@ -2,6 +2,7 @@ import { ui, Avatar, Button, Flex, HStack, VStack } from '@yamada-ui/react';
 import { ChangeEvent, useCallback, useState, FormEvent } from 'react';
 import PostField from '../PostField';
 import { usePostForm } from './hooks';
+import { PostBodyField } from '../PostBodyField';
 
 
 const PostForm: React.FC  = () => {
@@ -15,7 +16,7 @@ const PostForm: React.FC  = () => {
         <Avatar size="md" name="Hirotomo Yamada" />
         <VStack>
           <PostField onInputChange={handleTitleTextAreaChange} isHidden={!isBodyTextAreaFocus} name="title" setIsBodyTextAreaFocus={setIsBodyTextAreaFocus} required={false} />
-          <PostField onInputChange={handleBodyTextAreaChange} isHidden={false} name="body" setIsBodyTextAreaFocus={setIsBodyTextAreaFocus} required={true} />
+          <PostBodyField onInputChange={handleBodyTextAreaChange} isHidden={false} name="body" setIsBodyTextAreaFocus={setIsBodyTextAreaFocus} required={true} />
         </VStack>
       </HStack>
       <Flex justify={'right'}>
