@@ -4,11 +4,11 @@ import { ChangeEvent, useState } from 'react';
 interface PostFieldProps {
   isHidden: boolean;
   name: string;
-  setIsBodyTextAreaFocus: React.Dispatch<React.SetStateAction<boolean>>;
+  onFocus: () => void;
   required: boolean;
 }
 
-const PostField: React.FC<PostFieldProps> = ({ isHidden, name, setIsBodyTextAreaFocus, required }) => {
+const PostField: React.FC<PostFieldProps> = ({ isHidden, name, onFocus, required }) => {
   return (
     <Textarea
       display={isHidden ? 'none' : 'block'}
@@ -16,7 +16,7 @@ const PostField: React.FC<PostFieldProps> = ({ isHidden, name, setIsBodyTextArea
       placeholder="いまどうしてる"
       isDisabled={isHidden}
       name={name}
-      onFocus={() => setIsBodyTextAreaFocus(true)}
+      onFocus={onFocus}
       required={required}
     />
   );
