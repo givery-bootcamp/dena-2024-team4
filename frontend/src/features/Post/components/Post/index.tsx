@@ -20,7 +20,7 @@ import {
 import { useState } from 'react';
 import { FaEllipsis } from 'react-icons/fa6';
 import { FaRegFlag } from 'react-icons/fa6';
-import { RiDeleteBinLine } from 'react-icons/ri';
+import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
 
 type PostProps = {
   myUserId: number;
@@ -49,16 +49,26 @@ export default function Post({ myUserId, post }: PostProps) {
           />
           <MenuList>
             {(myUserId === post.user_id && (
-              <MenuItem
-                color="red"
-                icon={<Icon as={RiDeleteBinLine} color="red" />}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  isOpen ? onClose() : onOpen();
-                }}
-              >
-                投稿を削除
-              </MenuItem>
+              <>
+                <MenuItem
+                  icon={<Icon as={RiEditLine} />}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                  }}
+                >
+                  投稿を編集
+                </MenuItem>
+                <MenuItem
+                  color="red"
+                  icon={<Icon as={RiDeleteBinLine} color="red" />}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    isOpen ? onClose() : onOpen();
+                  }}
+                >
+                  投稿を削除
+                </MenuItem>
+              </>
             )) || (
                 <MenuItem
                   icon={<Icon as={FaRegFlag} />}
