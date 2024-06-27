@@ -198,8 +198,14 @@ paths:
       description: Return user
       tags:
         - Auth
-      security:
-        - coockieAuth: []
+      parameters:
+        - in: cookie
+          name: jwt
+          schema:
+            type: string
+          required: true
+      # security:
+      #   - cookieAuth: []
       responses:
         "200":
           description: A successful response
@@ -322,10 +328,10 @@ components:
       items:
         $ref: "#/components/schemas/Tweet"
   securitySchemes:
-    coockieAuth:
+    cookieAuth:
       type: apiKey
       in: cookie
-      name: cookies # Cookie name
+      name: jwt # Cookie name
 
 tags:
   - name: Auth

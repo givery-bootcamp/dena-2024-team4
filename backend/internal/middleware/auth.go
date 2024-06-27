@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -14,14 +15,23 @@ import (
 func AuthRequired() gin.HandlerFunc {
 	secretKey := os.Getenv("JWT_SECRET")
 	return func(ctx *gin.Context) {
-		tokenString := ctx.GetHeader("Cookie")
-		if len(tokenString) > 4 && tokenString[:4] == "jwt=" {
-			tokenString = tokenString[4:]
+		cookieHeader := ctx.GetHeader("Cookie")
+		tokenString := extractTokenFromCookie(cookieHeader)
+
+		fmt.Println(cookieHeader)
+
+		if tokenString == "" {
+			ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			ctx.Abort()
+			return
 		}
-		fmt.Println(tokenString)
+		// tokenString := ctx.GetHeader("Cookie")
+		// if len(tokenString) > 4 && tokenString[:4] == "jwt=" {
+		// 	tokenString = tokenString[4:]
+		// }
+		// fmt.Println(tokenString)
 
 		// tokenString, err := ctx.Cookie("jwt")
-		// fmt.Println(tokenString)
 		// if err != nil {
 		// 	ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
 		// 	ctx.Abort()
@@ -50,4 +60,15 @@ func AuthRequired() gin.HandlerFunc {
 			ctx.Abort()
 		}
 	}
+}
+
+// extractTokenFromCookie クッキーヘッダーからJWTトークンを抽出します
+func extractTokenFromCookie(cookieHeader string) string {
+	cookies := strings.Split(cookieHeader, "; ")
+	for _, cookie := range cookies {
+		if strings.HasPrefix(cookie, "jwt=") {
+			return strings.TrimPrefix(cookie, "jwt=")
+		}
+	}
+	return ""
 }
