@@ -65,21 +65,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Not found
+                $ref: "#/components/schemas/Error404Response"
         "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Internal server error
+                $ref: "#/components/schemas/Error500Response"
   /tweets:
     get:
       summary: Get tweets
@@ -105,7 +97,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/TweetList"
+                $ref: "#/components/schemas/TweetsList"
         "400":
           description: Invalid parameter
           content:
@@ -121,21 +113,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Not found
+                $ref: "#/components/schemas/Error404Response"
         "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Internal server error
+                $ref: "#/components/schemas/Error500Response"
   /tweets/{tweetId}:
     get:
       summary: Get tweet
@@ -169,13 +153,43 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Not found
+                $ref: "#/components/schemas/Error404Response"
         "500":
           description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error500Response"
+  /signin:
+    post:
+      summary: Sign in
+      description: Sign in
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: Alice
+                password:
+                  type: string
+                  example: password
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: xxxxxxxx
+        "400":
+          description: Invalid parameter
           content:
             application/json:
               schema:
@@ -183,7 +197,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Internal server error
+                    example: Invalid parameter
 
 components:
   schemas:
@@ -264,7 +278,22 @@ components:
         - body
         - created_at
         - updated_at
-    TweetList:
+    TweetsList:
       type: array
       items:
-        $ref: "#/components/schemas/Tweet"
+        type: object
+        properties:
+          tweet:
+            $ref: "#/components/schemas/Tweet"
+    Error404Response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Not found
+    Error500Response:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Internal server error
