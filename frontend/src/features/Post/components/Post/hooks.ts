@@ -1,6 +1,8 @@
+import { updatePost } from '@/features/apis/updatePost';
 import { PostResponse } from '@/pages/api/PostResponse';
 import { m, useDisclosure } from '@yamada-ui/react';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 export enum Model {
   Edit,
@@ -44,18 +46,30 @@ export const usePost = (post: PostResponse) => {
     setModel(null);
   };
   // 編集を確定した時の処理（モーダルで更新ボタンを押した時）
-  const handleEditButtonAction = (event: React.MouseEvent) => {
+  const handleEditButtonAction = async (event: React.MouseEvent, updateSuccess: () => void) => {
     event.stopPropagation();
+    const response = await updatePost(post.id, { title: title, body: body });
+    if (!response.ok) return toast.error('更新に失敗しました');
+    updateSuccess();
+    onClose();
     setModel(null);
   };
   // 削除を確定した時の処理（モーダルで削除ボタンを押した時）
   const handleDeleteButtonAction = (event: React.MouseEvent) => {
     event.stopPropagation();
+    // ~~~~~~
+    // ここに削除処理
+    // ~~~~~~
+    onClose();
     setModel(null);
   };
   // 報告を確定した時の処理（モーダルで報告ボタンを押した時）
   const handleReportButtonAction = (event: React.MouseEvent) => {
     event.stopPropagation();
+    // ~~~~~~
+    // ここに報告処理
+    // ~~~~~~
+    onClose();
     setModel(null);
   };
 

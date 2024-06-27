@@ -23,9 +23,10 @@ import { PostMenuModel } from '../PostMenuModel';
 type PostProps = {
   myUserId: number;
   post: PostResponse;
+  updateSuccess: () => void;
 };
 
-export default function Post({ myUserId, post }: PostProps) {
+export default function Post({ myUserId, post, updateSuccess }: PostProps) {
   const {
     isOpen,
     model,
@@ -88,7 +89,7 @@ export default function Post({ myUserId, post }: PostProps) {
           <>
             <Button variant="outline" colorScheme="primary" onClick={handleCancelButtonAction}>キャンセル</Button>
             {
-              model === Model.Edit && <Button colorScheme="primary" onClick={handleEditButtonAction} isDisabled={title === "" || body === ""}>編集</Button> ||
+              model === Model.Edit && <Button colorScheme="primary" onClick={(event) => handleEditButtonAction(event, updateSuccess)} isDisabled={title === "" || body === ""}>編集</Button> ||
               model === Model.Delete && <Button colorScheme="red" onClick={handleDeleteButtonAction}>削除</Button> ||
               model === Model.Report && <Button colorScheme="primary" onClick={handleReportButtonAction}>報告</Button>
             }
