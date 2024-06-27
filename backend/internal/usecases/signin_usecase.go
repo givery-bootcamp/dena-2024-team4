@@ -27,7 +27,7 @@ func (u *SignInUsecase) Execute(username, password string) (*entities.User, stri
 	}
 
 	// JWTトークンを生成
-	jwt, err := generateJWTToken(user.ID)
+	jwt, err := generateJWTToken(user.Id)
 	if err != nil {
 		return nil, "", err
 	}

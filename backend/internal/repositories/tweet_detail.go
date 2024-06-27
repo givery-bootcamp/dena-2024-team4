@@ -41,9 +41,26 @@ func (r *TweetDetailRepository) Create(body entities.CreatePostBody) (*entities.
 	var tweet *entities.Post
 
 	result := r.Conn.Create(&entities.Post{
-		UserID: body.UserID,
+		UserId: body.UserId,
 		Title:  body.Title,
 		Body:   body.Body,
+	}).Scan(&tweet)
+
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		return nil, result.Error
+	}
+	return tweet, nil
+}
+
+func (r *TweetDetailRepository) Update(tweetId int, body entities.UpdatePostBody) (*entities.Post, error) {
+	var tweet *entities.Post
+
+	result := r.Conn.Where("deleted_at IS NULL AND id = ?", tweetId).Updates(&entities.Post{
+		Title: body.Title,
+		Body:  body.Body,
 	}).Scan(&tweet)
 
 	if result.Error != nil {

@@ -13,7 +13,7 @@ func TweetDetail(ctx *gin.Context) {
 	tweetIdStr := ctx.Param("tweetId")
 	tweetId, err := strconv.Atoi(tweetIdStr)
 	if err != nil {
-		handleError(ctx, 400, errors.New("Invalid tweetId"))
+		handleError(ctx, 400, errors.New("invalid tweetId"))
 		return
 	}
 	usecase := usecases.NewTweetDetailUsecase()
@@ -24,6 +24,6 @@ func TweetDetail(ctx *gin.Context) {
 	} else if result != nil {
 		ctx.JSON(200, result)
 	} else {
-		handleError(ctx, 404, errors.New("Not found"))
+		handleError(ctx, 404, errors.New("not found"))
 	}
 }
