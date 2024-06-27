@@ -1,18 +1,10 @@
 import { savePostFetcher } from "@/features/apis/savePost";
 import { validateFormEventTarget } from "@/utils/form";
-import { ChangeEvent, FormEvent, useCallback, useRef } from "react";
+import { FormEvent, useCallback, useState } from "react";
 
 export const usePostForm = () => {
-    const formData = new FormData();
     const USER_ID = 1;
-    const ref = useRef<HTMLDivElement | null>(null  );
-
-    const handleFocusChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-      if (event.type !== "focus" || ref.current === null) {
-        return
-      }
-      ref.current.style.display = "block";
-    };
+    const [isFocus, setIsFocus] = useState(false);
 
     const handleOnSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
         const { formData, form } = validateFormEventTarget(e.target);
@@ -31,7 +23,7 @@ export const usePostForm = () => {
 
     return {
         handleOnSubmit,
-        ref,
-        handleFocusChange,
+        isFocus,
+        setIsFocus
       };
 }

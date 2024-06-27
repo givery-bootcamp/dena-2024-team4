@@ -3,25 +3,24 @@ import { usePostForm } from './hooks';
 
 
 const PostForm: React.FC  = () => {
-  const { handleOnSubmit, ref, handleFocusChange } = usePostForm();
+  const { handleOnSubmit, isFocus, setIsFocus } = usePostForm();
 
   return (
     <ui.form padding={8} onSubmit={handleOnSubmit}>
       <HStack my={4} alignItems={'flex-start'}>
         <Avatar size="md" name="Hirotomo Yamada" />
         <VStack>
-          <ui.div ref={ref} display={"none"}>
             <Input
               placeholder="タイトルを入力"
               name="title"
+              display={isFocus ? "block" : "none"}
             >
             </Input>
-          </ui.div>
           <Textarea
               autosize
               placeholder="いまどうしてる"
               name="body"
-              onFocus={handleFocusChange}
+              onFocus={() => setIsFocus(true)}
               required
           ></Textarea>
         </VStack>
