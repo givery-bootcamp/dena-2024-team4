@@ -1,4 +1,5 @@
-import { Button, Divider, Flex, HStack, Icon, VStack } from '@yamada-ui/react';
+import { UserMenu } from '@/features/User/UserMenu';
+import { Button, Divider, Flex, HStack, Icon, Spacer, VStack } from '@yamada-ui/react';
 import { IconType } from 'react-icons';
 import { FaHouse } from 'react-icons/fa6';
 import { FaUser } from 'react-icons/fa6';
@@ -47,6 +48,8 @@ export default function Sidebar({ children }: SidebarProps) {
         <Button fontSize="lg" p="md" rounded="40" bg="sky.400">
           ポストする
         </Button>
+        <Spacer />
+        <UserMenu />
       </VStack>
       <Divider orientation="vertical" h="100vh" position="sticky" top="0" />
       {children}
