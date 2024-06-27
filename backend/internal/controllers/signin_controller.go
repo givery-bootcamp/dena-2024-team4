@@ -38,6 +38,6 @@ func SignIn(ctx *gin.Context) {
 
 	// サインイン成功
 	response200 := openapi.NewSigninPost200Response()
-	response200.SetUser(user)
+	response200.SetUser(openapi.User{Id: user.Id, Username: user.Username, DisplayName: user.DisplayName})
 	ctx.JSON(http.StatusOK, response200)
 }

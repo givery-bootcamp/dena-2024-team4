@@ -19,7 +19,7 @@ var _ MappedNullable = &SigninPost200Response{}
 
 // SigninPost200Response struct for SigninPost200Response
 type SigninPost200Response struct {
-	User *User `json:"User,omitempty"`
+	User *User `json:"user,omitempty"`
 }
 
 // NewSigninPost200Response instantiates a new SigninPost200Response object
@@ -82,7 +82,7 @@ func (o SigninPost200Response) MarshalJSON() ([]byte, error) {
 func (o SigninPost200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.User) {
-		toSerialize["User"] = o.User
+		toSerialize["user"] = o.User
 	}
 	return toSerialize, nil
 }

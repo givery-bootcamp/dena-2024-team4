@@ -119,14 +119,7 @@ paths:
           content:
             application/json:
               schema:
-<<<<<<< HEAD
                 $ref: "#/components/schemas/Error500Response"
-=======
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Internal server error
     post:
       summary: Post tweet
       description: Return id and created time
@@ -186,7 +179,6 @@ paths:
                   message:
                     type: string
                     example: failed to parse request body
->>>>>>> dev
   /tweets/{tweetId}:
     get:
       summary: Get tweet
@@ -227,47 +219,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error500Response"
-  /signin:
-    post:
-      summary: Sign in
-      description: Sign in
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                  example: Alice
-                password:
-                  type: string
-                  example: password
-      responses:
-        "200":
-          description: A successful response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  User:
-                    $ref: "#/components/schemas/User"
-        "400":
-          description: Invalid parameter
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-<<<<<<< HEAD
-                    example: Invalid parameter
-
-=======
-                    example: Internal server error
     put:
       summary: Update tweet
       description: Return updated time
@@ -339,7 +290,44 @@ paths:
                   message:
                     type: string
                     example: Internal server error
->>>>>>> dev
+  /signin:
+    post:
+      summary: Sign in
+      description: Sign in
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: Alice
+                password:
+                  type: string
+                  example: password
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+
 components:
   schemas:
     User:
