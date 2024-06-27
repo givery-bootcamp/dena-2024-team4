@@ -77,11 +77,11 @@ export default function Post({ myUserId, post }: PostProps) {
         </Menu>
 
         <PostMenuModel isOpen={isOpen} header={
-          model === Model.Edit && <Input placeholder="タイトル" value={title} onClick={(event) => event.stopPropagation()} onChange={handleOnChangeTitle} /> ||
+          model === Model.Edit && <Input placeholder="タイトルを入力" value={title} onClick={(event) => event.stopPropagation()} onChange={handleOnChangeTitle} /> ||
           model === Model.Delete && <Text>投稿を削除</Text> ||
           model === Model.Report && <Text>投稿を報告</Text>
         } body={
-          model === Model.Edit && <Textarea variant="outline" placeholder="本文" value={body} onClick={(event) => event.stopPropagation()} onChange={handleOnChangeBody} /> ||
+          model === Model.Edit && <Textarea variant="outline" placeholder="いまどうしてる" value={body} onClick={(event) => event.stopPropagation()} onChange={handleOnChangeBody} /> ||
           model === Model.Delete && <Text>この投稿を削除しますか？</Text> ||
           model === Model.Report && <Text>この投稿を報告しますか？</Text>
         } footer={
