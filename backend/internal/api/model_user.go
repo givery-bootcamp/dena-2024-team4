@@ -12,6 +12,10 @@ package openapi
 
 import (
 	"encoding/json"
+<<<<<<< HEAD
+=======
+	"time"
+>>>>>>> dev
 	"bytes"
 	"fmt"
 )
@@ -21,9 +25,19 @@ var _ MappedNullable = &User{}
 
 // User struct for User
 type User struct {
+<<<<<<< HEAD
 	Id int32 `json:"id"`
 	Username string `json:"username"`
 	DisplayName string `json:"display_name"`
+=======
+	Id int `json:"id"`
+	Username string `json:"username"`
+	DisplayName string `json:"display_name"`
+	Password string `json:"password"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+	DeletedAt *time.Time `json:"deleted_at,omitempty"`
+>>>>>>> dev
 }
 
 type _User User
@@ -32,11 +46,21 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
+<<<<<<< HEAD
 func NewUser(id int32, username string, displayName string) *User {
+=======
+func NewUser(id int, username string, displayName string, password string, createdAt time.Time, updatedAt time.Time) *User {
+>>>>>>> dev
 	this := User{}
 	this.Id = id
 	this.Username = username
 	this.DisplayName = displayName
+<<<<<<< HEAD
+=======
+	this.Password = password
+	this.CreatedAt = createdAt
+	this.UpdatedAt = updatedAt
+>>>>>>> dev
 	return &this
 }
 
@@ -49,9 +73,15 @@ func NewUserWithDefaults() *User {
 }
 
 // GetId returns the Id field value
+<<<<<<< HEAD
 func (o *User) GetId() int32 {
 	if o == nil {
 		var ret int32
+=======
+func (o *User) GetId() int {
+	if o == nil {
+		var ret int
+>>>>>>> dev
 		return ret
 	}
 
@@ -60,7 +90,11 @@ func (o *User) GetId() int32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
+<<<<<<< HEAD
 func (o *User) GetIdOk() (*int32, bool) {
+=======
+func (o *User) GetIdOk() (*int, bool) {
+>>>>>>> dev
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +102,11 @@ func (o *User) GetIdOk() (*int32, bool) {
 }
 
 // SetId sets field value
+<<<<<<< HEAD
 func (o *User) SetId(v int32) {
+=======
+func (o *User) SetId(v int) {
+>>>>>>> dev
 	o.Id = v
 }
 
@@ -118,6 +156,113 @@ func (o *User) GetDisplayNameOk() (*string, bool) {
 // SetDisplayName sets field value
 func (o *User) SetDisplayName(v string) {
 	o.DisplayName = v
+<<<<<<< HEAD
+=======
+}
+
+// GetPassword returns the Password field value
+func (o *User) GetPassword() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Password
+}
+
+// GetPasswordOk returns a tuple with the Password field value
+// and a boolean to check if the value has been set.
+func (o *User) GetPasswordOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Password, true
+}
+
+// SetPassword sets field value
+func (o *User) SetPassword(v string) {
+	o.Password = v
+}
+
+// GetCreatedAt returns the CreatedAt field value
+func (o *User) GetCreatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *User) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *User) SetCreatedAt(v time.Time) {
+	o.CreatedAt = v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value
+func (o *User) GetUpdatedAt() time.Time {
+	if o == nil {
+		var ret time.Time
+		return ret
+	}
+
+	return o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// and a boolean to check if the value has been set.
+func (o *User) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdatedAt, true
+}
+
+// SetUpdatedAt sets field value
+func (o *User) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = v
+}
+
+// GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
+func (o *User) GetDeletedAt() time.Time {
+	if o == nil || IsNil(o.DeletedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.DeletedAt
+}
+
+// GetDeletedAtOk returns a tuple with the DeletedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *User) GetDeletedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.DeletedAt) {
+		return nil, false
+	}
+	return o.DeletedAt, true
+}
+
+// HasDeletedAt returns a boolean if a field has been set.
+func (o *User) HasDeletedAt() bool {
+	if o != nil && !IsNil(o.DeletedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetDeletedAt gets a reference to the given time.Time and assigns it to the DeletedAt field.
+func (o *User) SetDeletedAt(v time.Time) {
+	o.DeletedAt = &v
+>>>>>>> dev
 }
 
 func (o User) MarshalJSON() ([]byte, error) {
@@ -133,6 +278,15 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["username"] = o.Username
 	toSerialize["display_name"] = o.DisplayName
+<<<<<<< HEAD
+=======
+	toSerialize["password"] = o.Password
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["updated_at"] = o.UpdatedAt
+	if !IsNil(o.DeletedAt) {
+		toSerialize["deleted_at"] = o.DeletedAt
+	}
+>>>>>>> dev
 	return toSerialize, nil
 }
 
@@ -144,6 +298,12 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"username",
 		"display_name",
+<<<<<<< HEAD
+=======
+		"password",
+		"created_at",
+		"updated_at",
+>>>>>>> dev
 	}
 
 	allProperties := make(map[string]interface{})
