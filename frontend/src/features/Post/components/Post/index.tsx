@@ -17,7 +17,6 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@yamada-ui/react';
-import { useState } from 'react';
 import { FaEllipsis } from 'react-icons/fa6';
 import { FaRegFlag } from 'react-icons/fa6';
 import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
