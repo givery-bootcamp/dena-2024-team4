@@ -25,18 +25,6 @@ func AuthRequired() gin.HandlerFunc {
 			ctx.Abort()
 			return
 		}
-		// tokenString := ctx.GetHeader("Cookie")
-		// if len(tokenString) > 4 && tokenString[:4] == "jwt=" {
-		// 	tokenString = tokenString[4:]
-		// }
-		// fmt.Println(tokenString)
-
-		// tokenString, err := ctx.Cookie("jwt")
-		// if err != nil {
-		// 	ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
-		// 	ctx.Abort()
-		// 	return
-		// }
 
 		token, parseErr := jwt.ParseWithClaims(tokenString, &jwt.MapClaims{}, func(token *jwt.Token) (interface{}, error) {
 			return []byte(secretKey), nil
