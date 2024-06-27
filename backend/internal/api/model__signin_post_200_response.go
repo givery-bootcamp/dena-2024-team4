@@ -19,7 +19,7 @@ var _ MappedNullable = &SigninPost200Response{}
 
 // SigninPost200Response struct for SigninPost200Response
 type SigninPost200Response struct {
-	Token *string `json:"token,omitempty"`
+	User *User `json:"User,omitempty"`
 }
 
 // NewSigninPost200Response instantiates a new SigninPost200Response object
@@ -39,36 +39,36 @@ func NewSigninPost200ResponseWithDefaults() *SigninPost200Response {
 	return &this
 }
 
-// GetToken returns the Token field value if set, zero value otherwise.
-func (o *SigninPost200Response) GetToken() string {
-	if o == nil || IsNil(o.Token) {
-		var ret string
+// GetUser returns the User field value if set, zero value otherwise.
+func (o *SigninPost200Response) GetUser() User {
+	if o == nil || IsNil(o.User) {
+		var ret User
 		return ret
 	}
-	return *o.Token
+	return *o.User
 }
 
-// GetTokenOk returns a tuple with the Token field value if set, nil otherwise
+// GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SigninPost200Response) GetTokenOk() (*string, bool) {
-	if o == nil || IsNil(o.Token) {
+func (o *SigninPost200Response) GetUserOk() (*User, bool) {
+	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
-	return o.Token, true
+	return o.User, true
 }
 
-// HasToken returns a boolean if a field has been set.
-func (o *SigninPost200Response) HasToken() bool {
-	if o != nil && !IsNil(o.Token) {
+// HasUser returns a boolean if a field has been set.
+func (o *SigninPost200Response) HasUser() bool {
+	if o != nil && !IsNil(o.User) {
 		return true
 	}
 
 	return false
 }
 
-// SetToken gets a reference to the given string and assigns it to the Token field.
-func (o *SigninPost200Response) SetToken(v string) {
-	o.Token = &v
+// SetUser gets a reference to the given User and assigns it to the User field.
+func (o *SigninPost200Response) SetUser(v User) {
+	o.User = &v
 }
 
 func (o SigninPost200Response) MarshalJSON() ([]byte, error) {
@@ -81,8 +81,8 @@ func (o SigninPost200Response) MarshalJSON() ([]byte, error) {
 
 func (o SigninPost200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Token) {
-		toSerialize["token"] = o.Token
+	if !IsNil(o.User) {
+		toSerialize["User"] = o.User
 	}
 	return toSerialize, nil
 }

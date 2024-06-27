@@ -185,9 +185,8 @@ paths:
               schema:
                 type: object
                 properties:
-                  token:
-                    type: string
-                    example: xxxxxxxx
+                  User:
+                    $ref: "#/components/schemas/User"
         "400":
           description: Invalid parameter
           content:
@@ -214,31 +213,10 @@ components:
         display_name:
           type: string
           example: alice
-        password:
-          type: string
-          example: password
-        created_at:
-          type: string
-          format: date-time
-          example: 2021-01-01T00:00:00Z
-          readOnly: true
-        updated_at:
-          type: string
-          format: date-time
-          example: 2021-01-01T00:00:00Z
-          readOnly: true
-        deleted_at:
-          type: string
-          format: date-time
-          example: 2021-01-01T00:00:00Z
-          readOnly: true
       required:
         - id
         - username
         - display_name
-        - password
-        - created_at
-        - updated_at
     Tweet:
       type: object
       properties:
