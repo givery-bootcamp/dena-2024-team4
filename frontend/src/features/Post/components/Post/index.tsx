@@ -10,17 +10,15 @@ import {
   MenuItem,
   MenuList,
   IconButton,
-  useDisclosure,
+  Input,
   Button,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
+  Textarea,
 } from '@yamada-ui/react';
 import { FaEllipsis } from 'react-icons/fa6';
 import { FaRegFlag } from 'react-icons/fa6';
 import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
-import { usePost } from './hooks';
+import { Model, usePost } from './hooks';
+import { PostMenuModel } from '../PostMenuModel';
 
 type PostProps = {
   myUserId: number;
@@ -30,7 +28,7 @@ type PostProps = {
 export default function Post({ myUserId, post }: PostProps) {
   const {
     isOpen,
-    onClose,
+    model,
     handleMenuButtonAction,
     handleEditMenuButtonAction,
     handleDeleteMenuButtonAction,
@@ -38,6 +36,7 @@ export default function Post({ myUserId, post }: PostProps) {
     handleCancelButtonAction,
     handleEditButtonAction,
     handleDeleteButtonAction,
+    handleReportButtonAction,
   } = usePost();
 
   return (
@@ -72,26 +71,25 @@ export default function Post({ myUserId, post }: PostProps) {
             )}
           </MenuList>
         </Menu>
-        <Modal isOpen={isOpen} onClose={onClose} size="md">
-          <ModalHeader>投稿を削除</ModalHeader>
-          <ModalBody>この投稿を削除しますか？</ModalBody>
-          <ModalFooter>
-            <Button
-              variant="outline"
-              colorScheme="primary"
-              onClick={handleCancelButtonAction}
-            >
-              キャンセル
-            </Button>
-            <Button
-              variant="solid"
-              colorScheme="red"
-              onClick={handleDeleteButtonAction}
-            >
-              削除
-            </Button>
-          </ModalFooter>
-        </Modal>
+
+        <PostMenuModel isOpen={isOpen} header={
+          model === Model.Edit && <Input placeholder="basic" value={post.title} onClick={(event) => event.stopPropagation()} /> ||
+          model === Model.Delete && <Text>投稿を削除</Text> ||
+          model === Model.Report && <Text>投稿を報告</Text>
+        } body={
+          model === Model.Edit && <Textarea variant="outline" placeholder="outline" value={post.body} onClick={(event) => event.stopPropagation()} /> ||
+          model === Model.Delete && <Text>この投稿を削除しますか？</Text> ||
+          model === Model.Report && <Text>この投稿を報告しますか？</Text>
+        } footer={
+          <>
+            <Button variant="outline" colorScheme="primary" onClick={handleCancelButtonAction}>キャンセル</Button>
+            {
+              model === Model.Edit && <Button colorScheme="primary" onClick={handleEditButtonAction}>編集</Button> ||
+              model === Model.Delete && <Button colorScheme="red" onClick={handleDeleteButtonAction}>削除</Button> ||
+              model === Model.Report && <Button colorScheme="primary" onClick={handleReportButtonAction}>報告</Button>
+            }
+          </>
+        } />
       </Flex>
       <Text as="b" fontSize="md">
         {post.title}
