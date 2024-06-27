@@ -20,7 +20,7 @@ var _ MappedNullable = &TweetsPost201Response{}
 
 // TweetsPost201Response struct for TweetsPost201Response
 type TweetsPost201Response struct {
-	Id *int32 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 }
 
@@ -42,9 +42,9 @@ func NewTweetsPost201ResponseWithDefaults() *TweetsPost201Response {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *TweetsPost201Response) GetId() int32 {
+func (o *TweetsPost201Response) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int32
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -52,7 +52,7 @@ func (o *TweetsPost201Response) GetId() int32 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TweetsPost201Response) GetIdOk() (*int32, bool) {
+func (o *TweetsPost201Response) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -68,8 +68,8 @@ func (o *TweetsPost201Response) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int32 and assigns it to the Id field.
-func (o *TweetsPost201Response) SetId(v int32) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *TweetsPost201Response) SetId(v int) {
 	o.Id = &v
 }
 
