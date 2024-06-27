@@ -90,14 +90,14 @@ paths:
           description: Limit
           required: false
           schema:
-            type: int
+            type: integer
             default: 50
         - name: offset
           in: query
           description: Offset
           required: false
           schema:
-            type: int
+            type: integer
             default: 0
       responses:
         "200":
@@ -147,7 +147,7 @@ paths:
               type: object
               properties:
                 user_id:
-                  type: int
+                  type: integer
                   description: "Reference to User ID"
                   example: 1
                 title:
@@ -169,7 +169,7 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: int
+                    type: integer
                     example: 1
                   created_at:
                     type: string
@@ -205,7 +205,7 @@ paths:
           description: Tweet ID
           required: true
           schema:
-            type: int
+            type: integer
       responses:
         "200":
           description: A successful response
@@ -252,7 +252,7 @@ paths:
           description: Tweet ID
           required: true
           schema:
-            type: int
+            type: integer
       requestBody:
         required: true
         content:
@@ -278,7 +278,7 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: int
+                    type: integer
                     example: 1
                   updated_at:
                     type: string
@@ -320,7 +320,7 @@ components:
       type: object
       properties:
         id:
-          type: int
+          type: integer
           example: 1
           readOnly: true
         username:
@@ -358,11 +358,11 @@ components:
       type: object
       properties:
         id:
-          type: int
+          type: integer
           example: 1
           readOnly: true
         user_id:
-          type: int
+          type: integer
           description: "Reference to User ID"
           example: 1
         title:

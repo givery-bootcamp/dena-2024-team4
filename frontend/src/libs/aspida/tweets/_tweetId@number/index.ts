@@ -15,7 +15,8 @@ export type Methods = {
 
     /** A successful response */
     resBody: {
-      created_at?: string | undefined
+      id?: number | undefined
+      updated_at?: string | undefined
     }
 
     reqBody: {

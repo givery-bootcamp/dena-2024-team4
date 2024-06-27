@@ -22,7 +22,7 @@ var _ MappedNullable = &TweetsPostRequest{}
 // TweetsPostRequest struct for TweetsPostRequest
 type TweetsPostRequest struct {
 	// Reference to User ID
-	UserId int `json:"user_id"`
+	UserId int32 `json:"user_id"`
 	Title string `json:"title"`
 	Body string `json:"body"`
 }
@@ -33,7 +33,7 @@ type _TweetsPostRequest TweetsPostRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTweetsPostRequest(userId int, title string, body string) *TweetsPostRequest {
+func NewTweetsPostRequest(userId int32, title string, body string) *TweetsPostRequest {
 	this := TweetsPostRequest{}
 	this.UserId = userId
 	this.Title = title
@@ -50,9 +50,9 @@ func NewTweetsPostRequestWithDefaults() *TweetsPostRequest {
 }
 
 // GetUserId returns the UserId field value
-func (o *TweetsPostRequest) GetUserId() int {
+func (o *TweetsPostRequest) GetUserId() int32 {
 	if o == nil {
-		var ret int
+		var ret int32
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *TweetsPostRequest) GetUserId() int {
 
 // GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
-func (o *TweetsPostRequest) GetUserIdOk() (*int, bool) {
+func (o *TweetsPostRequest) GetUserIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,7 +69,7 @@ func (o *TweetsPostRequest) GetUserIdOk() (*int, bool) {
 }
 
 // SetUserId sets field value
-func (o *TweetsPostRequest) SetUserId(v int) {
+func (o *TweetsPostRequest) SetUserId(v int32) {
 	o.UserId = v
 }
 

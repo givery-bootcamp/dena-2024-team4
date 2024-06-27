@@ -244,3 +244,4 @@ be/gen:
 		-i /local/docs/openapi.yaml \
 		-g go \
 		-o /local/backend/internal/api --global-property models,supportingFiles=utils.go,modelDocs=false
+		--type-mappings=integer=int,int32=int32,int64=int64,string=string,bool=bool,float=float,double=float

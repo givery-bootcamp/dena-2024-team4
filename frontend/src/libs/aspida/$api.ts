@@ -3,7 +3,7 @@ import { dataToURLString } from 'aspida';
 import type { Methods as Methods_by08hd } from '.';
 import type { Methods as Methods_1r1gcz6 } from './hello';
 import type { Methods as Methods_sjgy3w } from './tweets';
-import type { Methods as Methods_yydavm } from './tweets/_tweetId';
+import type { Methods as Methods_ogekxv } from './tweets/_tweetId@number';
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'http://localhost:9000' : baseURL).replace(/\/$/, '');
@@ -31,7 +31,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         `${prefix}${PATH0}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
     tweets: {
-      _tweetId: (val1: number | string) => {
+      _tweetId: (val1: number) => {
         const prefix1 = `${PATH1}/${val1}`;
 
         return {
@@ -40,25 +40,25 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
            * @returns A successful response
            */
           get: (option?: { config?: T | undefined } | undefined) =>
-            fetch<Methods_yydavm['get']['resBody'], BasicHeaders, Methods_yydavm['get']['status']>(prefix, prefix1, GET, option).json(),
+            fetch<Methods_ogekxv['get']['resBody'], BasicHeaders, Methods_ogekxv['get']['status']>(prefix, prefix1, GET, option).json(),
           /**
            * Return tweet
            * @returns A successful response
            */
           $get: (option?: { config?: T | undefined } | undefined) =>
-            fetch<Methods_yydavm['get']['resBody'], BasicHeaders, Methods_yydavm['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+            fetch<Methods_ogekxv['get']['resBody'], BasicHeaders, Methods_ogekxv['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
           /**
            * Return updated time
            * @returns A successful response
            */
-          put: (option: { body: Methods_yydavm['put']['reqBody'], config?: T | undefined }) =>
-            fetch<Methods_yydavm['put']['resBody'], BasicHeaders, Methods_yydavm['put']['status']>(prefix, prefix1, PUT, option).json(),
+          put: (option: { body: Methods_ogekxv['put']['reqBody'], config?: T | undefined }) =>
+            fetch<Methods_ogekxv['put']['resBody'], BasicHeaders, Methods_ogekxv['put']['status']>(prefix, prefix1, PUT, option).json(),
           /**
            * Return updated time
            * @returns A successful response
            */
-          $put: (option: { body: Methods_yydavm['put']['reqBody'], config?: T | undefined }) =>
-            fetch<Methods_yydavm['put']['resBody'], BasicHeaders, Methods_yydavm['put']['status']>(prefix, prefix1, PUT, option).json().then(r => r.body),
+          $put: (option: { body: Methods_ogekxv['put']['reqBody'], config?: T | undefined }) =>
+            fetch<Methods_ogekxv['put']['resBody'], BasicHeaders, Methods_ogekxv['put']['status']>(prefix, prefix1, PUT, option).json().then(r => r.body),
           $path: () => `${prefix}${prefix1}`,
         };
       },
@@ -66,13 +66,13 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
        * Return tweets
        * @returns A successful response
        */
-      get: (option?: { config?: T | undefined } | undefined) =>
+      get: (option?: { query?: Methods_sjgy3w['get']['query'] | undefined, config?: T | undefined } | undefined) =>
         fetch<Methods_sjgy3w['get']['resBody'], BasicHeaders, Methods_sjgy3w['get']['status']>(prefix, PATH1, GET, option).json(),
       /**
        * Return tweets
        * @returns A successful response
        */
-      $get: (option?: { config?: T | undefined } | undefined) =>
+      $get: (option?: { query?: Methods_sjgy3w['get']['query'] | undefined, config?: T | undefined } | undefined) =>
         fetch<Methods_sjgy3w['get']['resBody'], BasicHeaders, Methods_sjgy3w['get']['status']>(prefix, PATH1, GET, option).json().then(r => r.body),
       /**
        * Return id and created time
@@ -86,7 +86,8 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
        */
       $post: (option: { body: Methods_sjgy3w['post']['reqBody'], config?: T | undefined }) =>
         fetch<Methods_sjgy3w['post']['resBody'], BasicHeaders, Methods_sjgy3w['post']['status']>(prefix, PATH1, POST, option).json().then(r => r.body),
-      $path: () => `${prefix}${PATH1}`,
+      $path: (option?: { method?: 'get' | undefined; query: Methods_sjgy3w['get']['query'] } | undefined) =>
+        `${prefix}${PATH1}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
     /**
      * Return root message
