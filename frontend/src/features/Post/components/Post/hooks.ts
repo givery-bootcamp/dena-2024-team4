@@ -1,4 +1,5 @@
-import { useDisclosure } from '@yamada-ui/react';
+import { PostResponse } from '@/pages/api/PostResponse';
+import { m, useDisclosure } from '@yamada-ui/react';
 import { useState } from 'react';
 
 export enum Model {
@@ -7,10 +8,11 @@ export enum Model {
   Report,
 }
 
-export const usePost = () => {
+export const usePost = (post: PostResponse) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const [model, setModel] = useState<Model | null>(null);
+  const [title, setTitle] = useState(post.title);
+  const [body, setBody] = useState(post.body);
 
   const handleMenuButtonAction = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -57,9 +59,18 @@ export const usePost = () => {
     setModel(null);
   };
 
+  const handleOnChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+  const handleOnChangeBody = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setBody(event.target.value);
+  };
+
   return {
     isOpen,
     model,
+    title,
+    body,
     handleMenuButtonAction,
     handleEditMenuButtonAction,
     handleDeleteMenuButtonAction,
@@ -68,5 +79,7 @@ export const usePost = () => {
     handleEditButtonAction,
     handleDeleteButtonAction,
     handleReportButtonAction,
+    handleOnChangeTitle,
+    handleOnChangeBody,
   };
 };
