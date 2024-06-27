@@ -1,5 +1,5 @@
 export const savePostFetcher = (userId: number, title: string, body: string) =>
-  fetch(`http://localhost:9000/tweets`, {
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}/tweets`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

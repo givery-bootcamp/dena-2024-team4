@@ -1,22 +1,29 @@
-import { ui, Avatar, Button, Flex, HStack, VStack } from '@yamada-ui/react';
-import { ChangeEvent, useCallback, useState, FormEvent } from 'react';
-import PostField from '../PostField';
+import { ui, Avatar, Flex, HStack, VStack, Textarea, Input } from '@yamada-ui/react';
 import { usePostForm } from './hooks';
-import { PostBodyField } from '../PostBodyField';
 
 
 const PostForm: React.FC  = () => {
-  const { handleOnSubmit } = usePostForm();
-  const formData = new FormData();
-  const [isBodyTextAreaFocus, setIsBodyTextAreaFocus] = useState(false);
+  const { handleOnSubmit, ref, handleFocusChange } = usePostForm();
 
   return (
     <ui.form padding={8} onSubmit={handleOnSubmit}>
       <HStack my={4} alignItems={'flex-start'}>
         <Avatar size="md" name="Hirotomo Yamada" />
         <VStack>
-          <PostField isHidden={!isBodyTextAreaFocus} name="title" setIsBodyTextAreaFocus={setIsBodyTextAreaFocus} required={false} />
-          <PostBodyField isHidden={false} name="body" setIsBodyTextAreaFocus={setIsBodyTextAreaFocus} required={true} />
+          <ui.div ref={ref} display={"none"}>
+            <Input
+              placeholder="タイトルを入力"
+              name="title"
+            >
+            </Input>
+          </ui.div>
+          <Textarea
+              autosize
+              placeholder="いまどうしてる"
+              name="body"
+              onFocus={handleFocusChange}
+              required
+          ></Textarea>
         </VStack>
       </HStack>
       <Flex justify={'right'}>
