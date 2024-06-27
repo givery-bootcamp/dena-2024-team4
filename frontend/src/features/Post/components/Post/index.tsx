@@ -20,6 +20,7 @@ import {
 import { FaEllipsis } from 'react-icons/fa6';
 import { FaRegFlag } from 'react-icons/fa6';
 import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
+import { usePost } from './hooks';
 
 type PostProps = {
   myUserId: number;
@@ -27,7 +28,7 @@ type PostProps = {
 };
 
 export default function Post({ myUserId, post }: PostProps) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose, handleMenuButtonAction, handleEditAction, handleDeleteAction, handleReportAction, } = usePost();
 
   return (
     <>
@@ -42,42 +43,23 @@ export default function Post({ myUserId, post }: PostProps) {
             as={IconButton}
             variant="link"
             icon={<Icon as={FaEllipsis} />}
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
+            onClick={handleMenuButtonAction}
           />
           <MenuList>
-            {(myUserId === post.user_id && (
+            {myUserId === post.user_id ? (
               <>
-                <MenuItem
-                  icon={<Icon as={RiEditLine} />}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                  }}
-                >
+                <MenuItem icon={<Icon as={RiEditLine} />} onClick={handleEditAction}>
                   投稿を編集
                 </MenuItem>
-                <MenuItem
-                  color="red"
-                  icon={<Icon as={RiDeleteBinLine} color="red" />}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    isOpen ? onClose() : onOpen();
-                  }}
-                >
+                <MenuItem color="red" icon={<Icon as={RiDeleteBinLine} color="red" />} onClick={handleDeleteAction}>
                   投稿を削除
                 </MenuItem>
               </>
-            )) || (
-                <MenuItem
-                  icon={<Icon as={FaRegFlag} />}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                  }}
-                >
-                  投稿を報告
-                </MenuItem>
-              )}
+            ) : (
+              <MenuItem icon={<Icon as={FaRegFlag} />} onClick={handleReportAction}>
+                投稿を報告
+              </MenuItem>
+            )}
           </MenuList>
         </Menu>
         <Modal isOpen={isOpen} onClose={onClose} size="md">
