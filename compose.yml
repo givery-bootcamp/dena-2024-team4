@@ -37,6 +37,8 @@ services:
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=training
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=dena-training-2024-team-4
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u root
       interval: 5s
