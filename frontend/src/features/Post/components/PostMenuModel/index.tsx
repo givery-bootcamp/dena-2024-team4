@@ -11,7 +11,7 @@ interface Props {
 
 export const PostMenuModel: React.FC<Props> = ({ isOpen, onClose, header, body, footer }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="md">
+    <Modal isOpen={isOpen} onClose={onClose} size="md" onClick={(event) => event.stopPropagation()}>
       <ModalHeader>{header}</ModalHeader>
       <ModalBody>{body}</ModalBody>
       <ModalFooter>{footer}</ModalFooter>
