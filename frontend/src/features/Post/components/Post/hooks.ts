@@ -8,18 +8,31 @@ export const usePost = () => {
     event.stopPropagation();
   };
 
-  // 編集時の処理
-  const handleEditAction = (event: React.MouseEvent) => {
+  // 編集メニューを押した時の処理
+  const handleEditMenuButtonAction = (event: React.MouseEvent) => {
     event.stopPropagation();
     isOpen ? onClose() : onOpen();
   };
-  // 削除時の処理
-  const handleDeleteAction = (event: React.MouseEvent) => {
+  // 削除メニューを押した時の処理
+  const handleDeleteMenuButtonAction = (event: React.MouseEvent) => {
     event.stopPropagation();
     isOpen ? onClose() : onOpen();
   };
-  // 報告時の処理
-  const handleReportAction = (event: React.MouseEvent) => {
+  // 報告メニューを押した時の処理
+  const handleReportMenuButtonAction = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
+
+  // キャンセルした時の処理（モーダルでキャンセルボタンを押した時）
+  const handleCancelButtonAction = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
+  // 編集を確定した時の処理（モーダルで更新ボタンを押した時）
+  const handleEditButtonAction = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
+  // 削除を確定した時の処理（モーダルで削除ボタンを押した時）
+  const handleDeleteButtonAction = (event: React.MouseEvent) => {
     event.stopPropagation();
   };
 
@@ -27,8 +40,11 @@ export const usePost = () => {
     isOpen,
     onClose,
     handleMenuButtonAction,
-    handleEditAction,
-    handleDeleteAction,
-    handleReportAction,
+    handleEditMenuButtonAction,
+    handleDeleteMenuButtonAction,
+    handleReportMenuButtonAction,
+    handleCancelButtonAction,
+    handleEditButtonAction,
+    handleDeleteButtonAction,
   };
 };

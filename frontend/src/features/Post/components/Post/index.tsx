@@ -28,7 +28,17 @@ type PostProps = {
 };
 
 export default function Post({ myUserId, post }: PostProps) {
-  const { isOpen, onClose, handleMenuButtonAction, handleEditAction, handleDeleteAction, handleReportAction, } = usePost();
+  const {
+    isOpen,
+    onClose,
+    handleMenuButtonAction,
+    handleEditMenuButtonAction,
+    handleDeleteMenuButtonAction,
+    handleReportMenuButtonAction,
+    handleCancelButtonAction,
+    handleEditButtonAction,
+    handleDeleteButtonAction,
+  } = usePost();
 
   return (
     <>
@@ -48,15 +58,15 @@ export default function Post({ myUserId, post }: PostProps) {
           <MenuList>
             {myUserId === post.user_id ? (
               <>
-                <MenuItem icon={<Icon as={RiEditLine} />} onClick={handleEditAction}>
+                <MenuItem icon={<Icon as={RiEditLine} />} onClick={handleEditMenuButtonAction}>
                   投稿を編集
                 </MenuItem>
-                <MenuItem color="red" icon={<Icon as={RiDeleteBinLine} color="red" />} onClick={handleDeleteAction}>
+                <MenuItem color="red" icon={<Icon as={RiDeleteBinLine} color="red" />} onClick={handleDeleteMenuButtonAction}>
                   投稿を削除
                 </MenuItem>
               </>
             ) : (
-              <MenuItem icon={<Icon as={FaRegFlag} />} onClick={handleReportAction}>
+              <MenuItem icon={<Icon as={FaRegFlag} />} onClick={handleReportMenuButtonAction}>
                 投稿を報告
               </MenuItem>
             )}
@@ -69,20 +79,14 @@ export default function Post({ myUserId, post }: PostProps) {
             <Button
               variant="outline"
               colorScheme="primary"
-              onClick={(event) => {
-                event.stopPropagation();
-                onClose();
-              }}
+              onClick={handleCancelButtonAction}
             >
               キャンセル
             </Button>
             <Button
               variant="solid"
               colorScheme="red"
-              onClick={(event) => {
-                event.stopPropagation();
-                onClose();
-              }}
+              onClick={handleDeleteButtonAction}
             >
               削除
             </Button>
