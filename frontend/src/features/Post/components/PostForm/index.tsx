@@ -2,7 +2,7 @@ import { ui, Avatar, Flex, HStack, VStack, Textarea, Input } from '@yamada-ui/re
 import { usePostForm } from './hooks';
 
 interface PostFormProps {
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const PostForm: React.FC<PostFormProps>  = ({ onClose }) => {
