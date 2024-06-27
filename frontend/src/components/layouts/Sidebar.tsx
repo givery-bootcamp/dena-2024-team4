@@ -51,7 +51,7 @@ export default function Sidebar({ children }: SidebarProps) {
           ポストする
         </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
-          <PostForm />
+          <PostForm onClose={onClose} />
         </Modal>
       </VStack>
       {children}

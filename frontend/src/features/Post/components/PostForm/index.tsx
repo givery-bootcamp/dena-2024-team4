@@ -1,12 +1,15 @@
 import { ui, Avatar, Flex, HStack, VStack, Textarea, Input } from '@yamada-ui/react';
 import { usePostForm } from './hooks';
 
+interface PostFormProps {
+  onClose: () => void;
+}
 
-const PostForm: React.FC  = () => {
+const PostForm: React.FC<PostFormProps>  = ({ onClose }) => {
   const { handleOnSubmit, isFocus, setIsFocus } = usePostForm();
 
   return (
-    <ui.form padding={8} onSubmit={handleOnSubmit}>
+    <ui.form padding={8} onSubmit={handleOnSubmit(onClose)}>
       <HStack my={4} alignItems={'flex-start'}>
         <Avatar size="md" name="Hirotomo Yamada" />
         <VStack>

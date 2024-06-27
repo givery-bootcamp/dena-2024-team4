@@ -6,7 +6,7 @@ export const usePostForm = () => {
     const USER_ID = 1;
     const [isFocus, setIsFocus] = useState(false);
 
-    const handleOnSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
+    const handleOnSubmit = (onClose: () => void) => useCallback(async (e: FormEvent<HTMLFormElement>) => {
         const { formData, form } = validateFormEventTarget(e.target);
         const { title, body } = Object.fromEntries(
             [...formData.entries()].filter((v): v is [string, string] => typeof v[1] === 'string'),
@@ -16,6 +16,7 @@ export const usePostForm = () => {
         try {
             savePostFetcher(USER_ID, title, body)
             form.reset();
+            onClose();
         } catch (error) {
             console.error('Error:', error);
         }
