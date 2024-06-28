@@ -3,8 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - 'main'
-      - 'feature/setup-frontend-docker'
+      - "main"
 
 env:
   AWS_REGION: ap-northeast-1
@@ -21,30 +20,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    # - name: Set up Docker Buildx
-    #   uses: docker/setup-buildx-action@v3
+      - name: Make envfile
+        run: |
+          echo 'NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}' > frontend/.env.production
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-region: ${{ env.AWS_REGION }}
-        aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
 
-    - name: Log in to Amazon ECR
-      uses: aws-actions/amazon-ecr-login@v2
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
 
-    - name: Build and push Docker image
-      run: |
-        ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-        IMAGE_TAG=latest
+      - name: Build and push Docker image
+        run: |
+          ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+          IMAGE_TAG=latest
 
-        docker build -f docker/frontend-ci.Dockerfile -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_NAME_FRONTEND:$IMAGE_TAG .
-        docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_NAME_FRONTEND:$IMAGE_TAG
+          docker build -f docker/frontend-ci.Dockerfile -t $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_NAME_FRONTEND:$IMAGE_TAG .
+          docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_NAME_FRONTEND:$IMAGE_TAG
 
-    - name: Update ECS service to force new deployment
-      run: |
-        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
+      - name: Update ECS service to force new deployment
+        run: |
+          aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment

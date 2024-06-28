@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"errors"
+	openapi "myapp/internal/api"
 	"myapp/internal/usecases"
-
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -19,11 +19,14 @@ func AllTweets(ctx *gin.Context) {
 	var limit int = 50 // デフォルト値を50
 	var err error
 
+	response400 := openapi.NewTweetsGet400Response()
+
 	// offsetのクエリパラメータが存在するか確認
 	if offsetStr != "" {
 		offset, err = strconv.Atoi(offsetStr)
+		response400.SetMessage("offset is invalid")
 		if err != nil {
-			handleError(ctx, 400, err)
+			ctx.JSON(400, response400)
 			return
 		}
 	}
@@ -31,8 +34,9 @@ func AllTweets(ctx *gin.Context) {
 	// limitのクエリパラメータが存在するか確認
 	if limitStr != "" {
 		limit, err = strconv.Atoi(limitStr)
+		response400.SetMessage("limit is invalid")
 		if err != nil {
-			handleError(ctx, 400, err)
+			ctx.JSON(400, response400)
 			return
 		}
 	}
