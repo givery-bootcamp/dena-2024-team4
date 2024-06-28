@@ -18,15 +18,13 @@ export const UserMenu: React.FC = () => {
   return (
     <Popover placement="top">
       <PopoverTrigger>
-          <Button lineHeight={"1.3"} bg={"white"} _hover={{ backgroundColor: "gray.100" }}>
-            <HStack cursor={"pointer"} rounded="32px" p={2} >
+          <Button display={"grid"} gridTemplateColumns={"auto 1fr auto"} variant="unstyled" _hover={{ backgroundColor: "gray.100" }} height={"max-content"} padding={2}>
                 <Avatar size="sm" name="Hirotomo Yamada" />
                 <Flex direction={"column"}>
                     <Text whiteSpace={"nowrap"}>ユーザー名</Text>
                     <Text whiteSpace={"nowrap"} fontWeight={'normal'}>@user-12345</Text>
                 </Flex>
                 <BsThreeDots />
-            </HStack>
           </Button>
       </PopoverTrigger>
 
