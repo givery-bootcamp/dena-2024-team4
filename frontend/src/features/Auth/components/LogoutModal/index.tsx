@@ -20,16 +20,16 @@ const LogoutModal = () => {
       <div>
         <Modal isOpen={true}>
         <ModalHeader display={"flex"} justifyContent={"center"}>Xからログアウトしますか</ModalHeader>
-            <ModalBody>
+            <ModalBody fontSize={"sm"}>
             いつでもログインし直すことができます。アカウントを切り替える場合は、既存のアカウントを追加すると切り替えることができます。
             </ModalBody>
 
             <ModalFooter justifyContent={"center"}>
-                <Flex direction={"column"}>
-                    <Button variant="ghost" onClick={logout}>
+                <Flex direction={"column"} gap={"sm"}>
+                    <Button colorScheme="primary" onClick={logout} isRounded={true} px={16} py={2} fontSize={"sm"}>
                     ログアウト
                     </Button>
-                    <Button colorScheme="primary" onClick={handleCancel}>キャンセル</Button>
+                    <Button variant="outline" onClick={handleCancel} isRounded={true} px={16} py={2} fontSize={"sm"}>キャンセル</Button>
                 </Flex>
             </ModalFooter>
         </Modal>
