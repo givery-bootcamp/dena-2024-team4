@@ -55,8 +55,6 @@ export const useSigninModal = () => {
 
         if (!response.ok) return toast.error('ユーザー名またはパスワードが間違っています');
 
-        console.log([...response.headers.entries()]);
-
         router.push('/home');
       } catch {
         toast.error('エラーが発生しました');
