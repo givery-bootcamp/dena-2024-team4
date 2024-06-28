@@ -12,7 +12,7 @@ export const verifyUser: GetServerSideProps = async ({ req, res }) => {
       },
     };
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+  const response = await fetch(`${process.env.API_URL}/user`, {
     headers: { cookie: `jwt=${jwt}` },
   });
 
