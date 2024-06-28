@@ -314,6 +314,57 @@ paths:
                   message:
                     type: string
                     example: Internal server error
+  /user:
+    get:
+      summary: Get user
+      description: Return user
+      tags:
+        - Auth
+      parameters:
+        - in: cookie
+          name: jwt
+          schema:
+            type: string
+          required: true
+      # security:
+      #   - cookieAuth: []
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  username:
+                    type: string
+                    example: Alice
+                  display_name:
+                    type: string
+                    example: alice
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
 components:
   schemas:
     User:

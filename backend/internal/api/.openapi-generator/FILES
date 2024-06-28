@@ -5,15 +5,12 @@ model__hello_get_500_response.go
 model__tweets__tweet_id__put_204_response.go
 model__tweets__tweet_id__put_request.go
 model__tweets_get_400_response.go
-<<<<<<< HEAD
-model__user_get_200_response.go
-model__user_get_401_response.go
-=======
 model__tweets_post_201_response.go
 model__tweets_post_400_response.go
 model__tweets_post_500_response.go
 model__tweets_post_request.go
->>>>>>> dev
+model__user_get_200_response.go
+model__user_get_401_response.go
 model_tweet.go
 model_user.go
 utils.go
