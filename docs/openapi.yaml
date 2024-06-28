@@ -16,8 +16,6 @@ paths:
     get:
       summary: Root API
       description: Return root message
-      tags:
-        - NoAuth
       responses:
         "200":
           description: A successful response
@@ -30,8 +28,6 @@ paths:
     get:
       summary: Hello API
       description: Return Hello message
-      tags:
-        - NoAuth
       parameters:
         - name: lang
           in: query
@@ -88,8 +84,6 @@ paths:
     get:
       summary: Get tweets
       description: Return tweets
-      tags:
-        - NoAuth
       parameters:
         - name: limit
           in: query
@@ -142,12 +136,69 @@ paths:
                   message:
                     type: string
                     example: Internal server error
+    post:
+      summary: Post tweet
+      description: Return id and created time
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: "Reference to User ID"
+                  example: 1
+                title:
+                  type: string
+                  example: Hello World
+                body:
+                  type: string
+                  example: Hello World
+              required:
+                - user_id
+                - title
+                - body
+      responses:
+        "201":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  created_at:
+                    type: string
+                    format: date-time
+                    example: 2021-01-01T00:00:00Z
+        "400":
+          description: Invalid requestBody
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid requestBody
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: failed to parse request body
   /tweets/{tweetId}:
     get:
       summary: Get tweet
       description: Return tweet
-      tags:
-        - NoAuth
       parameters:
         - name: tweetId
           in: path
@@ -162,6 +213,77 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Tweet"
+        "400":
+          description: Invalid parameter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid parameter
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Not found
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Internal server error
+    put:
+      summary: Update tweet
+      description: Return updated time
+      parameters:
+        - name: tweetId
+          in: path
+          description: Tweet ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Hello World
+                body:
+                  type: string
+                  example: Hello World
+              required:
+                - title
+                - body
+      responses:
+        "204":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  updated_at:
+                    type: string
+                    format: date-time
+                    example: 2021-01-01T00:00:00Z
         "400":
           description: Invalid parameter
           content:
@@ -352,14 +474,3 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/Tweet"
-  securitySchemes:
-    cookieAuth:
-      type: apiKey
-      in: cookie
-      name: jwt # Cookie name
-
-tags:
-  - name: Auth
-    description: Need to login
-  - name: NoAuth
-    description: Not need to login

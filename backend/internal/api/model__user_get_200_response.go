@@ -19,7 +19,7 @@ var _ MappedNullable = &UserGet200Response{}
 
 // UserGet200Response struct for UserGet200Response
 type UserGet200Response struct {
-	Id *int32 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	Username *string `json:"username,omitempty"`
 	DisplayName *string `json:"display_name,omitempty"`
 }
@@ -42,9 +42,9 @@ func NewUserGet200ResponseWithDefaults() *UserGet200Response {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *UserGet200Response) GetId() int32 {
+func (o *UserGet200Response) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int32
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -52,7 +52,7 @@ func (o *UserGet200Response) GetId() int32 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserGet200Response) GetIdOk() (*int32, bool) {
+func (o *UserGet200Response) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -68,8 +68,8 @@ func (o *UserGet200Response) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int32 and assigns it to the Id field.
-func (o *UserGet200Response) SetId(v int32) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *UserGet200Response) SetId(v int) {
 	o.Id = &v
 }
 

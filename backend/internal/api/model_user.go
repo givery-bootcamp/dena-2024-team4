@@ -22,7 +22,7 @@ var _ MappedNullable = &User{}
 
 // User struct for User
 type User struct {
-	Id int32 `json:"id"`
+	Id int `json:"id"`
 	Username string `json:"username"`
 	DisplayName string `json:"display_name"`
 	Password string `json:"password"`
@@ -37,7 +37,7 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(id int32, username string, displayName string, password string, createdAt time.Time, updatedAt time.Time) *User {
+func NewUser(id int, username string, displayName string, password string, createdAt time.Time, updatedAt time.Time) *User {
 	this := User{}
 	this.Id = id
 	this.Username = username
@@ -57,9 +57,9 @@ func NewUserWithDefaults() *User {
 }
 
 // GetId returns the Id field value
-func (o *User) GetId() int32 {
+func (o *User) GetId() int {
 	if o == nil {
-		var ret int32
+		var ret int
 		return ret
 	}
 
@@ -68,7 +68,7 @@ func (o *User) GetId() int32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *User) GetIdOk() (*int32, bool) {
+func (o *User) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -76,7 +76,7 @@ func (o *User) GetIdOk() (*int32, bool) {
 }
 
 // SetId sets field value
-func (o *User) SetId(v int32) {
+func (o *User) SetId(v int) {
 	o.Id = v
 }
 

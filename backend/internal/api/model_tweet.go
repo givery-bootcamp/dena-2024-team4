@@ -22,9 +22,9 @@ var _ MappedNullable = &Tweet{}
 
 // Tweet struct for Tweet
 type Tweet struct {
-	Id int32 `json:"id"`
+	Id int `json:"id"`
 	// Reference to User ID
-	UserId int32 `json:"user_id"`
+	UserId int `json:"user_id"`
 	Title string `json:"title"`
 	Body string `json:"body"`
 	CreatedAt time.Time `json:"created_at"`
@@ -38,7 +38,7 @@ type _Tweet Tweet
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTweet(id int32, userId int32, title string, body string, createdAt time.Time, updatedAt time.Time) *Tweet {
+func NewTweet(id int, userId int, title string, body string, createdAt time.Time, updatedAt time.Time) *Tweet {
 	this := Tweet{}
 	this.Id = id
 	this.UserId = userId
@@ -58,9 +58,9 @@ func NewTweetWithDefaults() *Tweet {
 }
 
 // GetId returns the Id field value
-func (o *Tweet) GetId() int32 {
+func (o *Tweet) GetId() int {
 	if o == nil {
-		var ret int32
+		var ret int
 		return ret
 	}
 
@@ -69,7 +69,7 @@ func (o *Tweet) GetId() int32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *Tweet) GetIdOk() (*int32, bool) {
+func (o *Tweet) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,14 +77,14 @@ func (o *Tweet) GetIdOk() (*int32, bool) {
 }
 
 // SetId sets field value
-func (o *Tweet) SetId(v int32) {
+func (o *Tweet) SetId(v int) {
 	o.Id = v
 }
 
 // GetUserId returns the UserId field value
-func (o *Tweet) GetUserId() int32 {
+func (o *Tweet) GetUserId() int {
 	if o == nil {
-		var ret int32
+		var ret int
 		return ret
 	}
 
@@ -93,7 +93,7 @@ func (o *Tweet) GetUserId() int32 {
 
 // GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
-func (o *Tweet) GetUserIdOk() (*int32, bool) {
+func (o *Tweet) GetUserIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *Tweet) GetUserIdOk() (*int32, bool) {
 }
 
 // SetUserId sets field value
-func (o *Tweet) SetUserId(v int32) {
+func (o *Tweet) SetUserId(v int) {
 	o.UserId = v
 }
 

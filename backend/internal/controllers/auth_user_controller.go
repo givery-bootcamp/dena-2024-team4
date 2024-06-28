@@ -27,7 +27,7 @@ func AuthUser(ctx *gin.Context) {
 	}
 
 	response200 := openapi.NewUserGet200Response()
-	response200.SetId(int32(result.ID))
+	response200.SetId(int(result.Id))
 	response200.SetUsername(result.Username)
 	response200.SetDisplayName(result.DisplayName)
 

@@ -2,6 +2,7 @@ package usecases
 
 import (
 	"myapp/internal/entities"
+	"myapp/internal/interfaces"
 	"myapp/internal/repositories"
 	"os"
 	"time"
@@ -10,14 +11,14 @@ import (
 )
 
 type SignInUsecase struct {
-	repository repositories.SignInRepository
+	repository interfaces.SignInRepository
 }
 
 func NewSignInUsecase() *SignInUsecase {
 	r := repositories.NewSignInRepository()
 
 	return &SignInUsecase{
-		repository: *r,
+		repository: r,
 	}
 }
 
@@ -28,7 +29,7 @@ func (u *SignInUsecase) Execute(username, password string) (*entities.User, stri
 	}
 
 	// JWTトークンを生成
-	jwt, err := generateJWTToken(user.ID)
+	jwt, err := generateJWTToken(user.Id)
 	if err != nil {
 		return nil, "", err
 	}
