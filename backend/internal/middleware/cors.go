@@ -9,7 +9,11 @@ import (
 
 func Cors() gin.HandlerFunc {
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{myConfig.CorsAllowOrigin, myConfig.CorsAllowOriginSwagger}
+	config.AllowOrigins = []string{
+		myConfig.CorsAllowOrigin,
+		myConfig.CorsAllowOriginSwagger,
+		myConfig.CorsAllowOriginProdFrontend,
+	}
 	config.AllowCredentials = true
 	return cors.New(config)
 }
