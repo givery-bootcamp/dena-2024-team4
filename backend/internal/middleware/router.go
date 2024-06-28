@@ -21,6 +21,7 @@ func SetupRoutes(app *gin.Engine) {
 	auth.Use(AuthRequired())
 	{
 		auth.GET("/user", controllers.AuthUser)
+		auth.GET("/status", controllers.AuthStatus)
 	}
 
 	// AllTweets の関数を直接呼び出す
