@@ -3,8 +3,10 @@ package repositories
 import (
 	"errors"
 	"fmt"
-	"gorm.io/gorm"
 	"myapp/internal/entities"
+	"myapp/internal/external"
+
+	"gorm.io/gorm"
 )
 
 type HelloWorldRepository struct {
@@ -18,9 +20,9 @@ type HelloWorld struct {
 	Message string
 }
 
-func NewHelloWorldRepository(conn *gorm.DB) *HelloWorldRepository {
+func NewHelloWorldRepository() *HelloWorldRepository {
 	return &HelloWorldRepository{
-		Conn: conn,
+		Conn: external.GetDB(),
 	}
 }
 
