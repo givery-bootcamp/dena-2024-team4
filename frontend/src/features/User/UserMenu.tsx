@@ -19,20 +19,22 @@ export const UserMenu: React.FC = () => {
 
   return (
     <Popover placement="top">
-    <PopoverTrigger>
-    <HStack ref={ref} cursor={"pointer"} onClick={handleClick} bg={hovered ? "gray.100" : "transparent" } rounded="32px" p={2} >
-            <Avatar size="md" name="Hirotomo Yamada" />
-            <Flex direction={"column"}>
-                <Text whiteSpace={"nowrap"}>ユーザー名</Text>
-                <Text whiteSpace={"nowrap"}>@user-12345</Text>
-            </Flex>
-            <BsThreeDots />
-        </HStack>
-    </PopoverTrigger>
+      <PopoverTrigger>
+          <Button lineHeight={"1.3"}>
+            <HStack ref={ref} cursor={"pointer"} bg={hovered ? "gray.100" : "transparent" } rounded="32px" p={2} >
+                <Avatar size="sm" name="Hirotomo Yamada" />
+                <Flex direction={"column"}>
+                    <Text whiteSpace={"nowrap"}>ユーザー名</Text>
+                    <Text whiteSpace={"nowrap"} fontWeight={'normal'}>@user-12345</Text>
+                </Flex>
+                <BsThreeDots />
+            </HStack>
+          </Button>
+      </PopoverTrigger>
 
-    <PopoverContent>
-      <Button onClick={logout}>@user-12345からログアウト</Button>
-    </PopoverContent>
+      <PopoverContent>
+        <Button onClick={logout}>@user-12345からログアウト</Button>
+      </PopoverContent>
   </Popover>
   );
 };
