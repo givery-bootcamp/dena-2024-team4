@@ -51,7 +51,7 @@ export const useSigninModal = () => {
           return;
         }
 
-        const response = await postSignin(formData);
+        const response = await postSignin({ username, password });
 
         if (!response.ok) return toast.error('ユーザー名またはパスワードが間違っています');
 
