@@ -26,5 +26,7 @@ func SetupRoutes(app *gin.Engine) {
 		auth.POST("/tweets", controllers.PostTweetDetail)        // ツイートを投稿
 		auth.GET("/tweets/:tweetId", controllers.TweetDetail)    // tweetIdでツイートの詳細を取得
 		auth.PUT("/tweets/:tweetId", controllers.PutTweetDetail) // ツイートを更新
+
+		auth.GET("/comments", controllers.GetAllComments) // AllComments の関数を直接呼び出す
 	}
 }

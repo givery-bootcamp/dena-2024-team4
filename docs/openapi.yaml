@@ -16,6 +16,8 @@ paths:
     get:
       summary: Root API
       description: Return root message
+      tags:
+        - NoAuth
       responses:
         "200":
           description: A successful response
@@ -28,6 +30,8 @@ paths:
     get:
       summary: Hello API
       description: Return Hello message
+      tags:
+        - NoAuth
       parameters:
         - name: lang
           in: query
@@ -76,6 +80,8 @@ paths:
     get:
       summary: Get tweets
       description: Return tweets
+      tags:
+        - Auth
       parameters:
         - name: limit
           in: query
@@ -123,6 +129,8 @@ paths:
     post:
       summary: Post tweet
       description: Return id and created time
+      tags:
+        - Auth
       requestBody:
         required: true
         content:
@@ -180,6 +188,8 @@ paths:
     get:
       summary: Get tweet
       description: Return tweet
+      tags:
+        - Auth
       parameters:
         - name: tweetId
           in: path
@@ -219,6 +229,8 @@ paths:
     put:
       summary: Update tweet
       description: Return updated time
+      tags:
+        - Auth
       parameters:
         - name: tweetId
           in: path
@@ -340,6 +352,8 @@ paths:
     post:
       summary: Sign in
       description: Sign in
+      tags:
+        - NoAuth
       requestBody:
         required: true
         content:
@@ -404,7 +418,14 @@ paths:
     get:
       summary: Get comments
       description: Return comments
+      tags:
+        - Auth
       parameters:
+        - in: cookie
+          name: jwt
+          schema:
+            type: string
+          required: true
         - name: limit
           in: query
           description: Limit
@@ -427,15 +448,14 @@ paths:
             type: integer
         - name: sort
           in: query
-          description: Sort
+          description: Sort comments by a specified property. Use 'created_at' or 'updated_at' for time sorting. Append ':asc' or ':desc' to specify sorting order.
           required: false
           schema:
             type: string
             enum:
               - created_at
-              - created_at:
-                  - asc
-                  - desc
+              - created_at:asc
+              - created_at:desc
             default: created_at:desc
       responses:
         "200":
@@ -443,7 +463,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Comments"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Comments"
         "400":
           description: Invalid parameter
           content:
@@ -466,9 +488,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error500Response"
+
     post:
       summary: Create a new comment
       description: Create a new comment for a post.
+      tags:
+        - Auth
+      parameters:
+        - in: cookie
+          name: jwt
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -526,7 +557,14 @@ paths:
     put:
       summary: Update a comment
       description: Update a specific comment by ID.
+      tags:
+        - Auth
       parameters:
+        - in: cookie
+          name: jwt
+          schema:
+            type: string
+          required: true
         - name: commentId
           in: path
           required: true
@@ -572,7 +610,14 @@ paths:
     delete:
       summary: Delete a comment
       description: Delete a specific comment by ID.
+      tags:
+        - Auth
       parameters:
+        - in: cookie
+          name: jwt
+          schema:
+            type: string
+          required: true
         - name: commentId
           in: path
           required: true
