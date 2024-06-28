@@ -20,6 +20,7 @@ func SetupRoutes(app *gin.Engine) {
 	auth := app.Group("/")
 	auth.Use(AuthRequired())
 	{
+		auth.GET("/status", controllers.AuthStatus)              // 認証が通っているか確認
 		auth.GET("/user", controllers.AuthUser)                  // ログイン中のユーザー情報を取得
 		auth.GET("/tweets", controllers.AllTweets)               // AllTweets の関数を直接呼び出す
 		auth.POST("/tweets", controllers.PostTweetDetail)        // ツイートを投稿
