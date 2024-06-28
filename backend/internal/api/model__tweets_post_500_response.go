@@ -14,33 +14,33 @@ import (
 	"encoding/json"
 )
 
-// checks if the HelloGet500Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &HelloGet500Response{}
+// checks if the TweetsPost500Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TweetsPost500Response{}
 
-// HelloGet500Response struct for HelloGet500Response
-type HelloGet500Response struct {
+// TweetsPost500Response struct for TweetsPost500Response
+type TweetsPost500Response struct {
 	Message *string `json:"message,omitempty"`
 }
 
-// NewHelloGet500Response instantiates a new HelloGet500Response object
+// NewTweetsPost500Response instantiates a new TweetsPost500Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHelloGet500Response() *HelloGet500Response {
-	this := HelloGet500Response{}
+func NewTweetsPost500Response() *TweetsPost500Response {
+	this := TweetsPost500Response{}
 	return &this
 }
 
-// NewHelloGet500ResponseWithDefaults instantiates a new HelloGet500Response object
+// NewTweetsPost500ResponseWithDefaults instantiates a new TweetsPost500Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewHelloGet500ResponseWithDefaults() *HelloGet500Response {
-	this := HelloGet500Response{}
+func NewTweetsPost500ResponseWithDefaults() *TweetsPost500Response {
+	this := TweetsPost500Response{}
 	return &this
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise.
-func (o *HelloGet500Response) GetMessage() string {
+func (o *TweetsPost500Response) GetMessage() string {
 	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
@@ -50,7 +50,7 @@ func (o *HelloGet500Response) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelloGet500Response) GetMessageOk() (*string, bool) {
+func (o *TweetsPost500Response) GetMessageOk() (*string, bool) {
 	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
@@ -58,7 +58,7 @@ func (o *HelloGet500Response) GetMessageOk() (*string, bool) {
 }
 
 // HasMessage returns a boolean if a field has been set.
-func (o *HelloGet500Response) HasMessage() bool {
+func (o *TweetsPost500Response) HasMessage() bool {
 	if o != nil && !IsNil(o.Message) {
 		return true
 	}
@@ -67,11 +67,11 @@ func (o *HelloGet500Response) HasMessage() bool {
 }
 
 // SetMessage gets a reference to the given string and assigns it to the Message field.
-func (o *HelloGet500Response) SetMessage(v string) {
+func (o *TweetsPost500Response) SetMessage(v string) {
 	o.Message = &v
 }
 
-func (o HelloGet500Response) MarshalJSON() ([]byte, error) {
+func (o TweetsPost500Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -79,7 +79,7 @@ func (o HelloGet500Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o HelloGet500Response) ToMap() (map[string]interface{}, error) {
+func (o TweetsPost500Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
@@ -87,38 +87,38 @@ func (o HelloGet500Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableHelloGet500Response struct {
-	value *HelloGet500Response
+type NullableTweetsPost500Response struct {
+	value *TweetsPost500Response
 	isSet bool
 }
 
-func (v NullableHelloGet500Response) Get() *HelloGet500Response {
+func (v NullableTweetsPost500Response) Get() *TweetsPost500Response {
 	return v.value
 }
 
-func (v *NullableHelloGet500Response) Set(val *HelloGet500Response) {
+func (v *NullableTweetsPost500Response) Set(val *TweetsPost500Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableHelloGet500Response) IsSet() bool {
+func (v NullableTweetsPost500Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableHelloGet500Response) Unset() {
+func (v *NullableTweetsPost500Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableHelloGet500Response(val *HelloGet500Response) *NullableHelloGet500Response {
-	return &NullableHelloGet500Response{value: val, isSet: true}
+func NewNullableTweetsPost500Response(val *TweetsPost500Response) *NullableTweetsPost500Response {
+	return &NullableTweetsPost500Response{value: val, isSet: true}
 }
 
-func (v NullableHelloGet500Response) MarshalJSON() ([]byte, error) {
+func (v NullableTweetsPost500Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableHelloGet500Response) UnmarshalJSON(src []byte) error {
+func (v *NullableTweetsPost500Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

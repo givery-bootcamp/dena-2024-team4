@@ -14,33 +14,33 @@ import (
 	"encoding/json"
 )
 
-// checks if the HelloGet404Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &HelloGet404Response{}
+// checks if the TweetsPost400Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TweetsPost400Response{}
 
-// HelloGet404Response struct for HelloGet404Response
-type HelloGet404Response struct {
+// TweetsPost400Response struct for TweetsPost400Response
+type TweetsPost400Response struct {
 	Message *string `json:"message,omitempty"`
 }
 
-// NewHelloGet404Response instantiates a new HelloGet404Response object
+// NewTweetsPost400Response instantiates a new TweetsPost400Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewHelloGet404Response() *HelloGet404Response {
-	this := HelloGet404Response{}
+func NewTweetsPost400Response() *TweetsPost400Response {
+	this := TweetsPost400Response{}
 	return &this
 }
 
-// NewHelloGet404ResponseWithDefaults instantiates a new HelloGet404Response object
+// NewTweetsPost400ResponseWithDefaults instantiates a new TweetsPost400Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewHelloGet404ResponseWithDefaults() *HelloGet404Response {
-	this := HelloGet404Response{}
+func NewTweetsPost400ResponseWithDefaults() *TweetsPost400Response {
+	this := TweetsPost400Response{}
 	return &this
 }
 
 // GetMessage returns the Message field value if set, zero value otherwise.
-func (o *HelloGet404Response) GetMessage() string {
+func (o *TweetsPost400Response) GetMessage() string {
 	if o == nil || IsNil(o.Message) {
 		var ret string
 		return ret
@@ -50,7 +50,7 @@ func (o *HelloGet404Response) GetMessage() string {
 
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *HelloGet404Response) GetMessageOk() (*string, bool) {
+func (o *TweetsPost400Response) GetMessageOk() (*string, bool) {
 	if o == nil || IsNil(o.Message) {
 		return nil, false
 	}
@@ -58,7 +58,7 @@ func (o *HelloGet404Response) GetMessageOk() (*string, bool) {
 }
 
 // HasMessage returns a boolean if a field has been set.
-func (o *HelloGet404Response) HasMessage() bool {
+func (o *TweetsPost400Response) HasMessage() bool {
 	if o != nil && !IsNil(o.Message) {
 		return true
 	}
@@ -67,11 +67,11 @@ func (o *HelloGet404Response) HasMessage() bool {
 }
 
 // SetMessage gets a reference to the given string and assigns it to the Message field.
-func (o *HelloGet404Response) SetMessage(v string) {
+func (o *TweetsPost400Response) SetMessage(v string) {
 	o.Message = &v
 }
 
-func (o HelloGet404Response) MarshalJSON() ([]byte, error) {
+func (o TweetsPost400Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -79,7 +79,7 @@ func (o HelloGet404Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o HelloGet404Response) ToMap() (map[string]interface{}, error) {
+func (o TweetsPost400Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
@@ -87,38 +87,38 @@ func (o HelloGet404Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableHelloGet404Response struct {
-	value *HelloGet404Response
+type NullableTweetsPost400Response struct {
+	value *TweetsPost400Response
 	isSet bool
 }
 
-func (v NullableHelloGet404Response) Get() *HelloGet404Response {
+func (v NullableTweetsPost400Response) Get() *TweetsPost400Response {
 	return v.value
 }
 
-func (v *NullableHelloGet404Response) Set(val *HelloGet404Response) {
+func (v *NullableTweetsPost400Response) Set(val *TweetsPost400Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableHelloGet404Response) IsSet() bool {
+func (v NullableTweetsPost400Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableHelloGet404Response) Unset() {
+func (v *NullableTweetsPost400Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableHelloGet404Response(val *HelloGet404Response) *NullableHelloGet404Response {
-	return &NullableHelloGet404Response{value: val, isSet: true}
+func NewNullableTweetsPost400Response(val *TweetsPost400Response) *NullableTweetsPost400Response {
+	return &NullableTweetsPost400Response{value: val, isSet: true}
 }
 
-func (v NullableHelloGet404Response) MarshalJSON() ([]byte, error) {
+func (v NullableTweetsPost400Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableHelloGet404Response) UnmarshalJSON(src []byte) error {
+func (v *NullableTweetsPost400Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -9,11 +9,13 @@ type PostCardProps = {
 }
 
 export default function PostCard({ post, onClick }: PostCardProps) {
-  const { myUserId } = usePostCard();
+  const { myUserId, mutate } = usePostCard();
 
   return (
     <Flex direction="column" padding="md" onClick={onClick}>
-      <Post myUserId={myUserId} post={post} />
+      <Post myUserId={myUserId} post={post} updateSuccess={() => {
+        mutate("/tweets")
+      }} />
     </Flex>
   );
 }
