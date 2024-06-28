@@ -10,6 +10,8 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH0 = '/hello';
   const PATH1 = '/tweets';
   const GET = 'GET';
+  const POST = 'POST';
+  const PUT = 'PUT';
 
   return {
     hello: {
@@ -45,6 +47,18 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
            */
           $get: (option?: { config?: T | undefined } | undefined) =>
             fetch<Methods_ogekxv['get']['resBody'], BasicHeaders, Methods_ogekxv['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          /**
+           * Return updated time
+           * @returns A successful response
+           */
+          put: (option: { body: Methods_ogekxv['put']['reqBody'], config?: T | undefined }) =>
+            fetch<Methods_ogekxv['put']['resBody'], BasicHeaders, Methods_ogekxv['put']['status']>(prefix, prefix1, PUT, option).json(),
+          /**
+           * Return updated time
+           * @returns A successful response
+           */
+          $put: (option: { body: Methods_ogekxv['put']['reqBody'], config?: T | undefined }) =>
+            fetch<Methods_ogekxv['put']['resBody'], BasicHeaders, Methods_ogekxv['put']['status']>(prefix, prefix1, PUT, option).json().then(r => r.body),
           $path: () => `${prefix}${prefix1}`,
         };
       },
@@ -60,6 +74,18 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
        */
       $get: (option?: { query?: Methods_sjgy3w['get']['query'] | undefined, config?: T | undefined } | undefined) =>
         fetch<Methods_sjgy3w['get']['resBody'], BasicHeaders, Methods_sjgy3w['get']['status']>(prefix, PATH1, GET, option).json().then(r => r.body),
+      /**
+       * Return id and created time
+       * @returns A successful response
+       */
+      post: (option: { body: Methods_sjgy3w['post']['reqBody'], config?: T | undefined }) =>
+        fetch<Methods_sjgy3w['post']['resBody'], BasicHeaders, Methods_sjgy3w['post']['status']>(prefix, PATH1, POST, option).json(),
+      /**
+       * Return id and created time
+       * @returns A successful response
+       */
+      $post: (option: { body: Methods_sjgy3w['post']['reqBody'], config?: T | undefined }) =>
+        fetch<Methods_sjgy3w['post']['resBody'], BasicHeaders, Methods_sjgy3w['post']['status']>(prefix, PATH1, POST, option).json().then(r => r.body),
       $path: (option?: { method?: 'get' | undefined; query: Methods_sjgy3w['get']['query'] } | undefined) =>
         `${prefix}${PATH1}${option && option.query ? `?${dataToURLString(option.query)}` : ''}`,
     },
