@@ -7,6 +7,7 @@ export type PostResponse = {
   created_at: string;
   updated_at: string;
   deleted_at: null;
+  is_liked: boolean;
 };
 
 export function decodePostResponse(data: any): PostResponse {
@@ -18,6 +19,7 @@ export function decodePostResponse(data: any): PostResponse {
     created_at: data.created_at,
     updated_at: data.updated_at,
     deleted_at: data.deleted_at,
+    is_liked: Math.random() < 0.5, // （仮置き）TODO: 変更必須
   };
 }
 
