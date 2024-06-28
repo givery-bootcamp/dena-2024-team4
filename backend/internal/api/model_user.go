@@ -12,7 +12,6 @@ package openapi
 
 import (
 	"encoding/json"
-	"time"
 	"bytes"
 	"fmt"
 )
@@ -25,10 +24,6 @@ type User struct {
 	Id int `json:"id"`
 	Username string `json:"username"`
 	DisplayName string `json:"display_name"`
-	Password string `json:"password"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
-	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 }
 
 type _User User
@@ -37,14 +32,11 @@ type _User User
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUser(id int, username string, displayName string, password string, createdAt time.Time, updatedAt time.Time) *User {
+func NewUser(id int, username string, displayName string) *User {
 	this := User{}
 	this.Id = id
 	this.Username = username
 	this.DisplayName = displayName
-	this.Password = password
-	this.CreatedAt = createdAt
-	this.UpdatedAt = updatedAt
 	return &this
 }
 
@@ -128,110 +120,6 @@ func (o *User) SetDisplayName(v string) {
 	o.DisplayName = v
 }
 
-// GetPassword returns the Password field value
-func (o *User) GetPassword() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Password
-}
-
-// GetPasswordOk returns a tuple with the Password field value
-// and a boolean to check if the value has been set.
-func (o *User) GetPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Password, true
-}
-
-// SetPassword sets field value
-func (o *User) SetPassword(v string) {
-	o.Password = v
-}
-
-// GetCreatedAt returns the CreatedAt field value
-func (o *User) GetCreatedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value
-// and a boolean to check if the value has been set.
-func (o *User) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CreatedAt, true
-}
-
-// SetCreatedAt sets field value
-func (o *User) SetCreatedAt(v time.Time) {
-	o.CreatedAt = v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value
-func (o *User) GetUpdatedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
-// and a boolean to check if the value has been set.
-func (o *User) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UpdatedAt, true
-}
-
-// SetUpdatedAt sets field value
-func (o *User) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = v
-}
-
-// GetDeletedAt returns the DeletedAt field value if set, zero value otherwise.
-func (o *User) GetDeletedAt() time.Time {
-	if o == nil || IsNil(o.DeletedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.DeletedAt
-}
-
-// GetDeletedAtOk returns a tuple with the DeletedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *User) GetDeletedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.DeletedAt) {
-		return nil, false
-	}
-	return o.DeletedAt, true
-}
-
-// HasDeletedAt returns a boolean if a field has been set.
-func (o *User) HasDeletedAt() bool {
-	if o != nil && !IsNil(o.DeletedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetDeletedAt gets a reference to the given time.Time and assigns it to the DeletedAt field.
-func (o *User) SetDeletedAt(v time.Time) {
-	o.DeletedAt = &v
-}
-
 func (o User) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -245,12 +133,6 @@ func (o User) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["username"] = o.Username
 	toSerialize["display_name"] = o.DisplayName
-	toSerialize["password"] = o.Password
-	toSerialize["created_at"] = o.CreatedAt
-	toSerialize["updated_at"] = o.UpdatedAt
-	if !IsNil(o.DeletedAt) {
-		toSerialize["deleted_at"] = o.DeletedAt
-	}
 	return toSerialize, nil
 }
 
@@ -262,9 +144,6 @@ func (o *User) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"username",
 		"display_name",
-		"password",
-		"created_at",
-		"updated_at",
 	}
 
 	allProperties := make(map[string]interface{})
