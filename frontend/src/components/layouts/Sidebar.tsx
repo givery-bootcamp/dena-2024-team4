@@ -1,5 +1,5 @@
 import PostForm from '@/features/Post/components/PostForm';
-import { Button, Divider, Flex, HStack, Icon, VStack, Modal, useDisclosure, Spacer, VStack, ui } from '@yamada-ui/react';
+import { Button, Divider, Flex, HStack, Icon, Modal, useDisclosure, Spacer, VStack, ui } from '@yamada-ui/react';
 import { UserMenu } from '@/features/User/UserMenu';
 import { IconType } from 'react-icons';
 import { FaHouse } from 'react-icons/fa6';
