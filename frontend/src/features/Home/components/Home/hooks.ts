@@ -5,7 +5,7 @@ import useSWR from 'swr';
 
 export const useHome = (offset: number, limit: number) => {
   const router = useRouter();
-  const { data, error, isLoading } = useSWR('/tweets', () => getPostsFetcher(offset, limit));
+  const { data, error, isLoading, mutate } = useSWR('/tweets', () => getPostsFetcher(offset, limit));
 
   const handleOnTapPost = useCallback(
     (postId: string) => {
@@ -14,5 +14,5 @@ export const useHome = (offset: number, limit: number) => {
     [router],
   );
 
-  return { handleOnTapPost, data, error, isLoading };
+  return { handleOnTapPost, data, error, isLoading, mutate };
 };
