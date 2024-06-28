@@ -1,8 +1,10 @@
+import { deletePostFetcher } from '@/features/apis/deletePost';
 import { updatePost } from '@/features/apis/updatePost';
 import { PostResponse } from '@/pages/api/PostResponse';
 import { m, useDisclosure } from '@yamada-ui/react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { useSWRConfig } from 'swr';
 
 export enum Model {
   Edit,
@@ -11,6 +13,7 @@ export enum Model {
 }
 
 export const usePost = (post: PostResponse) => {
+  const { mutate } = useSWRConfig();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [model, setModel] = useState<Model | null>(null);
   const [title, setTitle] = useState(post.title);
@@ -60,11 +63,11 @@ export const usePost = (post: PostResponse) => {
     setModel(null);
   };
   // 削除を確定した時の処理（モーダルで削除ボタンを押した時）
-  const handleDeleteButtonAction = (event: React.MouseEvent) => {
+  const handleDeleteButtonAction = async (event: React.MouseEvent) => {
     event.stopPropagation();
-    // ~~~~~~
-    // ここに削除処理
-    // ~~~~~~
+
+    await deletePostFetcher(post.id);
+    await mutate('/tweets');
     onClose();
     setModel(null);
   };
