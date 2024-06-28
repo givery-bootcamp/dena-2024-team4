@@ -45,7 +45,6 @@ services:
       timeout: 5s
       retries: 6
       start_period: 10s
-
   swagger-editor:
     image: swaggerapi/swagger-editor
     platform: linux/amd64
@@ -57,7 +56,6 @@ services:
     environment:
       - SWAGGER_FILE=/openapi.yaml
       - WITH_CREDENTIALS=true
-
   swagger-ui:
     image: swaggerapi/swagger-ui
     container_name: swagger-ui
