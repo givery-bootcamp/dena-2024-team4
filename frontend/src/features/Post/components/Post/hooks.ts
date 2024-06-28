@@ -1,7 +1,7 @@
 import { updatePost } from '@/features/apis/updatePost';
 import { PostResponse } from '@/pages/api/PostResponse';
 import { m, useDisclosure } from '@yamada-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 export enum Model {
@@ -15,6 +15,11 @@ export const usePost = (post: PostResponse) => {
   const [model, setModel] = useState<Model | null>(null);
   const [title, setTitle] = useState(post.title);
   const [body, setBody] = useState(post.body);
+
+  useEffect(() => {
+    setTitle(post.title);
+    setBody(post.body);
+  }, [post]);
 
   const handleMenuButtonAction = (event: React.MouseEvent) => {
     event.stopPropagation();
