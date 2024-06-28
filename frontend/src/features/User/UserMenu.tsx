@@ -20,7 +20,7 @@ export const UserMenu: React.FC = () => {
   return (
     <Popover placement="top">
     <PopoverTrigger>
-    <HStack ref={ref} cursor={"pointer"} onClick={handleClick} bg={hovered ? "blue.200" : "transparent"} >
+    <HStack ref={ref} cursor={"pointer"} onClick={handleClick} bg={hovered ? "gray.100" : "transparent" } rounded="32px" p={2} >
             <Avatar size="md" name="Hirotomo Yamada" />
             <Flex direction={"column"}>
                 <Text whiteSpace={"nowrap"}>ユーザー名</Text>
