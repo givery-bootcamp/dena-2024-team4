@@ -14,14 +14,12 @@ export const UserMenu: React.FC = () => {
   const logout = useCallback(() => {
     router.push('/logout');
   }, [router])
-  
-  const { hovered, ref } = useHover()
 
   return (
     <Popover placement="top">
       <PopoverTrigger>
-          <Button lineHeight={"1.3"}>
-            <HStack ref={ref} cursor={"pointer"} bg={hovered ? "gray.100" : "transparent" } rounded="32px" p={2} >
+          <Button lineHeight={"1.3"} bg={"white"} _hover={{ backgroundColor: "gray.100" }}>
+            <HStack cursor={"pointer"} rounded="32px" p={2} >
                 <Avatar size="sm" name="Hirotomo Yamada" />
                 <Flex direction={"column"}>
                     <Text whiteSpace={"nowrap"}>ユーザー名</Text>
