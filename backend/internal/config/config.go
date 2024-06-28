@@ -8,6 +8,7 @@ import (
 var HostName = "127.0.0.1"
 var Port = 9000
 var CorsAllowOrigin = "http://localhost:3000"
+var CorsAllowOriginSwagger = "http://localhost:8080"
 var DBHostName = "db"
 var DBUserName = "root"
 var DBPassword = ""
@@ -25,6 +26,9 @@ func init() {
 	}
 	if v := os.Getenv("CORS_ALLOW_ORIGIN"); v != "" {
 		CorsAllowOrigin = v
+	}
+	if v := os.Getenv("CorsAllowOriginSwagger"); v != "" {
+		CorsAllowOriginSwagger = v
 	}
 	if v := os.Getenv("DB_HOSTNAME"); v != "" {
 		DBHostName = v

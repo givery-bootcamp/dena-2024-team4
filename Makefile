@@ -53,8 +53,29 @@ help:
 	@echo "  be/ci           : pushする前にbackendのコードを整える"
 
 # initコマンドを実行すると、プロジェクトを初期化し、バックグラウンドで実行する
+.PHONY: cp/be/env
+cp/be/env:
+	cp ./backend/.env.dev ./backend/.env
+
 .PHONY: init
 init:
+	@if [ ! -f ./backend/.env ]; then \
+		echo "backend/.envファイルが存在しません。backend/.envファイルを作成します。"; \
+		${MAKE} cp/be/env; \
+		echo "新しいbackend/.envファイルが作成されました。必要な環境変数を設定してください。"; \
+	fi
+	@if [ -f ./backend/.env ]; then \
+		while IFS= read -r line; do \
+			if [[ ! -z "$$line" && "$$line" != \#* ]]; then \
+				key=$${line%%=*}; \
+				value=$${line#*=}; \
+				if [[ -z "$$value" ]]; then \
+					echo "環境変数 $$key は設定されていません。すべての値を埋めてください。"; \
+					exit 1; \
+				fi; \
+			fi; \
+		done < ./backend/.env; \
+	fi
 	${MAKE} build
 	${MAKE} up/d
 
@@ -228,3 +249,20 @@ be/test:
 be/ci:
 	${MAKE} be/fmt
 	${MAKE} be/test
+
+# FrontendのAPI Modelをdocs/openapi.yamlから生成する
+.PHONY: fe/gen
+fe/gen:
+	@${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh -c 'rm -rf src/libs/aspida'
+	@${DOCKER_COMPOSE_IMPL} exec frontend /bin/sh -c 'bunx openapi2aspida -i docs/openapi.yaml -o src/libs/aspida'
+
+# BackendのAPI Modelをdocs/openapi.yamlから生成する
+.PHONY: be/gen
+be/gen:
+	@${DOCKER_COMPOSE_IMPL} exec backend /bin/sh -c 'rm -rf internal/api'
+	docker run --rm \
+		-v ${PWD}:/local openapitools/openapi-generator-cli generate \
+		-i /local/docs/openapi.yaml \
+		-g go \
+		-o /local/backend/internal/api --global-property models,supportingFiles=utils.go,modelDocs=false \
+		--type-mappings=integer=int,int32=int32,int64=int64,string=string,bool=bool,float=float,double=float

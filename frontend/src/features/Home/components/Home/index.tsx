@@ -9,7 +9,7 @@ export const Home: React.FC = () => {
   const posts = decodePostResponses(data || [])
 
   return (
-    <VStack direction="column" divider={<Divider />} display={"inline-block"}>
+    <VStack direction="column" divider={<Divider />} display={"inline-block"} overflowY="scroll" height={"100vh"}>
       <PostForm />
       {posts.map((post) => (
         <PostCard key={post.id} post={post} onClick={() => {

@@ -21,8 +21,8 @@ export const SigninModal: React.FC = () => {
         <Input
           required
           onChange={handleOnChange}
-          name={SIGNIN_INPUT_NAME.ID}
-          placeholder="ユーザーID"
+          name={SIGNIN_INPUT_NAME.USERNAME}
+          placeholder="ユーザー名"
           w="full"
         />
         <Input
