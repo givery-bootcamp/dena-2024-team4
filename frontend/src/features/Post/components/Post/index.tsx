@@ -10,25 +10,39 @@ import {
   MenuItem,
   MenuList,
   IconButton,
-  useDisclosure,
+  Input,
   Button,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
+  Textarea,
 } from '@yamada-ui/react';
-import { useState } from 'react';
 import { FaEllipsis } from 'react-icons/fa6';
 import { FaRegFlag } from 'react-icons/fa6';
-import { RiDeleteBinLine } from 'react-icons/ri';
+import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
+import { Model, usePost } from './hooks';
+import { PostMenuModel } from '../PostMenuModel';
 
 type PostProps = {
   myUserId: number;
   post: PostResponse;
+  updateSuccess: () => void;
 };
 
-export default function Post({ myUserId, post }: PostProps) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export default function Post({ myUserId, post, updateSuccess }: PostProps) {
+  const {
+    isOpen,
+    model,
+    title,
+    body,
+    handleMenuButtonAction,
+    handleEditMenuButtonAction,
+    handleDeleteMenuButtonAction,
+    handleReportMenuButtonAction,
+    handleCancelButtonAction,
+    handleEditButtonAction,
+    handleDeleteButtonAction,
+    handleReportButtonAction,
+    handleOnChangeTitle,
+    handleOnChangeBody,
+  } = usePost(post);
 
   return (
     <>
@@ -43,60 +57,44 @@ export default function Post({ myUserId, post }: PostProps) {
             as={IconButton}
             variant="link"
             icon={<Icon as={FaEllipsis} />}
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
+            onClick={handleMenuButtonAction}
           />
           <MenuList>
-            {(myUserId === post.user_id && (
-              <MenuItem
-                color="red"
-                icon={<Icon as={RiDeleteBinLine} color="red" />}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  isOpen ? onClose() : onOpen();
-                }}
-              >
-                投稿を削除
-              </MenuItem>
-            )) || (
-                <MenuItem
-                  icon={<Icon as={FaRegFlag} />}
-                  onClick={(event) => {
-                    event.stopPropagation();
-                  }}
-                >
-                  投稿を報告
+            {myUserId === post.user_id ? (
+              <>
+                <MenuItem icon={<Icon as={RiEditLine} />} onClick={handleEditMenuButtonAction}>
+                  投稿を編集
                 </MenuItem>
-              )}
+                <MenuItem color="red" icon={<Icon as={RiDeleteBinLine} color="red" />} onClick={handleDeleteMenuButtonAction}>
+                  投稿を削除
+                </MenuItem>
+              </>
+            ) : (
+              <MenuItem icon={<Icon as={FaRegFlag} />} onClick={handleReportMenuButtonAction}>
+                投稿を報告
+              </MenuItem>
+            )}
           </MenuList>
         </Menu>
-        <Modal isOpen={isOpen} onClose={onClose} size="md">
-          <ModalHeader>投稿を削除</ModalHeader>
-          <ModalBody>この投稿を削除しますか？</ModalBody>
-          <ModalFooter>
-            <Button
-              variant="outline"
-              colorScheme="primary"
-              onClick={(event) => {
-                event.stopPropagation();
-                onClose();
-              }}
-            >
-              キャンセル
-            </Button>
-            <Button
-              variant="solid"
-              colorScheme="red"
-              onClick={(event) => {
-                event.stopPropagation();
-                onClose();
-              }}
-            >
-              削除
-            </Button>
-          </ModalFooter>
-        </Modal>
+
+        <PostMenuModel isOpen={isOpen} header={
+          model === Model.Edit && <Input placeholder="タイトルを入力" value={title} onClick={(event) => event.stopPropagation()} onChange={handleOnChangeTitle} /> ||
+          model === Model.Delete && <Text>投稿を削除</Text> ||
+          model === Model.Report && <Text>投稿を報告</Text>
+        } body={
+          model === Model.Edit && <Textarea variant="outline" placeholder="いまどうしてる" value={body} onClick={(event) => event.stopPropagation()} onChange={handleOnChangeBody} /> ||
+          model === Model.Delete && <Text>この投稿を削除しますか？</Text> ||
+          model === Model.Report && <Text>この投稿を報告しますか？</Text>
+        } footer={
+          <>
+            <Button variant="outline" colorScheme="primary" onClick={handleCancelButtonAction}>キャンセル</Button>
+            {
+              model === Model.Edit && <Button colorScheme="primary" onClick={(event) => handleEditButtonAction(event, updateSuccess)} isDisabled={title === "" || body === ""}>編集</Button> ||
+              model === Model.Delete && <Button colorScheme="red" onClick={handleDeleteButtonAction}>削除</Button> ||
+              model === Model.Report && <Button colorScheme="primary" onClick={handleReportButtonAction}>報告</Button>
+            }
+          </>
+        } />
       </Flex>
       <Text as="b" fontSize="md">
         {post.title}
