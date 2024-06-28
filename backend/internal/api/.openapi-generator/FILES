@@ -9,6 +9,8 @@ model__tweets_post_201_response.go
 model__tweets_post_400_response.go
 model__tweets_post_500_response.go
 model__tweets_post_request.go
+model__user_get_200_response.go
+model__user_get_401_response.go
 model_tweet.go
 model_user.go
 utils.go

@@ -5,4 +5,5 @@ backend/myapp
 .DS_Store
 .vscode/
 .metals
-.env*
+.env
+cookies.txt
