@@ -4,6 +4,7 @@ export const savePostFetcher = (userId: number, title: string, body: string) =>
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify({ "user_id": userId, "title": title, "body": body }),
   }).then((res) => {
     res.json()
