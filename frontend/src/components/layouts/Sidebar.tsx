@@ -1,4 +1,5 @@
-import { Button, Divider, Flex, HStack, Icon, VStack } from '@yamada-ui/react';
+import { UserMenu } from '@/features/User/UserMenu';
+import { Button, Divider, Flex, HStack, Icon, Spacer, VStack, ui } from '@yamada-ui/react';
 import { IconType } from 'react-icons';
 import { FaHouse } from 'react-icons/fa6';
 import { FaUser } from 'react-icons/fa6';
@@ -28,8 +29,8 @@ const items: SidebarItem[] = [
 
 export default function Sidebar({ children }: SidebarProps) {
   return (
-    <Flex flexDirection="row">
-      <VStack w="300px" h="100vh" padding="md" position="sticky" top="0">
+    <Flex overflow={'hidden'}>
+      <VStack maxWidth={"280px"} w={"full"} h="100vh" display={"grid"} gridTemplateRows={"repeat(3,auto) 1fr"} padding="md">
         {items.map((item, index) => (
           <Button
             key={index}
@@ -47,8 +48,11 @@ export default function Sidebar({ children }: SidebarProps) {
         <Button fontSize="lg" p="md" rounded="40" bg="sky.400">
           ポストする
         </Button>
+        <Flex justifyContent={'end'} direction={'column'}>
+          <UserMenu />
+        </Flex>
       </VStack>
-      <Divider orientation="vertical" h="100vh" position="sticky" top="0" />
+      <Divider orientation="vertical" h="100vh" />
       {children}
     </Flex>
   );

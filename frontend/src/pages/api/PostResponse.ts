@@ -22,5 +22,6 @@ export function decodePostResponse(data: any): PostResponse {
 }
 
 export function decodePostResponses(data: any[]): PostResponse[] {
+  if (!data.length) return [];
   return data.map((d) => decodePostResponse(d));
 }

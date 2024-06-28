@@ -4,6 +4,7 @@ model__hello_get_200_response.go
 model__hello_get_400_response.go
 model__signin_post_200_response.go
 model__signin_post_request.go
+model__status_get_200_response.go
 model__tweets__tweet_id__put_204_response.go
 model__tweets__tweet_id__put_404_response.go
 model__tweets__tweet_id__put_500_response.go

@@ -374,6 +374,32 @@ paths:
                     type: string
                     example: Internal server error
 
+  /status:
+    get:
+      summary: Get signin status
+      description: Return signin status
+      tags:
+        - Auth
+      parameters:
+        - in: cookie
+          name: jwt
+          schema:
+            type: string
+          required: true
+      # security:
+      #   - cookieAuth: []
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: authenticated
+
   /comments:
     get:
       summary: Get comments
