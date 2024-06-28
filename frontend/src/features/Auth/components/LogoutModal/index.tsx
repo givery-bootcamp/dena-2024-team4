@@ -19,11 +19,6 @@ const LogoutModal = () => {
     return (
       <div>
         <Modal isOpen={true}>
-        <Image
-            src="https://not-found.com/not-found.png"
-            fallback="https://via.placeholder.com/512"
-            size="px"
-        />
         <ModalHeader display={"flex"} justifyContent={"center"}>Xからログアウトしますか</ModalHeader>
             <ModalBody>
             いつでもログインし直すことができます。アカウントを切り替える場合は、既存のアカウントを追加すると切り替えることができます。
