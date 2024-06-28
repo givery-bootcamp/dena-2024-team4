@@ -1,6 +1,7 @@
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader, Flex, Image } from "@yamada-ui/react";
 import { useRouter } from "next/router";
 import { useCallback } from 'react';
+import { deleteCookie } from 'cookies-next';
 
 const LogoutModal = () => {
 
@@ -11,6 +12,7 @@ const LogoutModal = () => {
 
     const logout = useCallback(() => {
         // 1.ログアウト処理(cookieで実装)
+        deleteCookie("jwt");
 
         // 2.signInに遷移
         router.push("/signin")
