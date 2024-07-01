@@ -3,10 +3,6 @@ export type User = {
   id: number
   username: string
   display_name: string
-  password: string
-  created_at: string
-  updated_at: string
-  deleted_at?: string | undefined
 }
 
 export type Tweet = {
@@ -20,4 +16,14 @@ export type Tweet = {
   deleted_at?: string | undefined
 }
 
-export type TweetList = Tweet[]
+export type TweetsList = {
+  tweet?: Tweet | undefined
+}[]
+
+export type Error404Response = {
+  message?: string | undefined
+}
+
+export type Error500Response = {
+  message?: string | undefined
+}

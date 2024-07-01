@@ -5,26 +5,25 @@ interface PostFormProps {
   onClose?: () => void;
 }
 
-const PostForm: React.FC<PostFormProps>  = ({ onClose }) => {
-  const { handleOnSubmit, isFocus, setIsFocus } = usePostForm();
+const PostForm: React.FC<PostFormProps> = ({ onClose }) => {
+  const { username, handleOnSubmit, isFocus, setIsFocus } = usePostForm();
 
   return (
     <ui.form padding={8} onSubmit={handleOnSubmit(onClose)}>
       <HStack my={4} alignItems={'flex-start'}>
-        <Avatar size="md" name="Hirotomo Yamada" />
+        <Avatar size="md" name={username} />
         <VStack>
-            <Input
-              placeholder="タイトルを入力"
-              name="title"
-              display={isFocus ? "block" : "none"}
-            >
-            </Input>
+          <Input
+            placeholder="タイトルを入力"
+            name="title"
+            display={isFocus ? 'block' : 'none'}
+          ></Input>
           <Textarea
-              autosize
-              placeholder="いまどうしてる"
-              name="body"
-              onFocus={() => setIsFocus(true)}
-              required
+            autosize
+            placeholder="いまどうしてる"
+            name="body"
+            onFocus={() => setIsFocus(true)}
+            required
           ></Textarea>
         </VStack>
       </HStack>

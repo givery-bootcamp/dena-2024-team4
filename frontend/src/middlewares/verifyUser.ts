@@ -1,4 +1,4 @@
-import { getCookie } from 'cookies-next';
+import { getCookie, getCookies } from 'cookies-next';
 import { GetServerSideProps } from 'next';
 
 export const verifyUser: GetServerSideProps = async ({ req, res }) => {

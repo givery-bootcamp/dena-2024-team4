@@ -1,7 +1,7 @@
 import useSWR, { useSWRConfig } from 'swr';
 
 // 自分のユーザーID（仮置き）
-const MY_USER_ID = 2;
+const MY_USER_ID = 1;
 
 export const usePostCard = () => {
   const { mutate } = useSWRConfig();

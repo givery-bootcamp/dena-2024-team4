@@ -5,7 +5,7 @@ import PostCard from '@/features/Post/components/PostCard';
 import PostForm from '@/features/Post/components/PostForm';
 
 export const Home: React.FC = () => {
-  const { handleOnTapPost, data, error, isLoading } = useHome(0, 10);
+  const { handleOnTapPost, data, error, isLoading } = useHome(0, 100);
   const posts = decodePostResponses(data || [])
 
   return (

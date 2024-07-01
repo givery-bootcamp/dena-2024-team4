@@ -6,3 +6,10 @@ type User struct {
 	DisplayName string `json:"display_name" db:"display_name"`
 	Password    string `json:"password" db:"password"`
 }
+
+// アカウント作成用のリクエストボディ
+type CreateUserBody struct {
+	Username    *string `json:"username" db:"username"`
+	DisplayName *string `json:"display_name" db:"display_name"`
+	Password    *string `json:"password" db:"password"`
+}
