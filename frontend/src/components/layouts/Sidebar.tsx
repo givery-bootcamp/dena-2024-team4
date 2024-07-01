@@ -1,9 +1,11 @@
 import PostForm from '@/features/Post/components/PostForm';
-import { Button, Divider, Flex, HStack, Icon, Modal, useDisclosure, Spacer, VStack, ui } from '@yamada-ui/react';
+import { Button, Divider, Flex, Icon, Modal, useDisclosure, VStack } from '@yamada-ui/react';
 import { UserMenu } from '@/features/User/UserMenu';
 import { IconType } from 'react-icons';
 import { FaHouse } from 'react-icons/fa6';
 import { FaUser } from 'react-icons/fa6';
+import { useRouter } from 'next/router';
+import { toast } from 'sonner';
 
 type SidebarProps = {
   children: React.ReactNode;
@@ -15,25 +17,32 @@ type SidebarItem = {
   action: () => void;
 };
 
-const items: SidebarItem[] = [
-  {
-    title: 'ホーム',
-    icon: FaHouse,
-    action: () => console.log('ホーム'),
-  },
-  {
-    title: 'プロフィール',
-    icon: FaUser,
-    action: () => console.log('プロフィール'),
-  },
-];
-
 export default function Sidebar({ children }: SidebarProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
+  const items: SidebarItem[] = [
+    {
+      title: 'ホーム',
+      icon: FaHouse,
+      action: () => router.push('/home'),
+    },
+    {
+      title: 'プロフィール',
+      icon: FaUser,
+      action: () => toast('Coming soon...'),
+    },
+  ];
 
   return (
     <Flex overflow={'hidden'}>
-      <VStack maxWidth={"280px"} w={"full"} h="100vh" display={"grid"} gridTemplateRows={"repeat(3,auto) 1fr"} padding="md">
+      <VStack
+        maxWidth={'280px'}
+        w={'full'}
+        h="100vh"
+        display={'grid'}
+        gridTemplateRows={'repeat(3,auto) 1fr'}
+        padding="md"
+      >
         {items.map((item, index) => (
           <Button
             key={index}
