@@ -13,7 +13,7 @@ export type Methods = {
 
     status: 200
     /** A successful response */
-    resBody: Types.TweetList
+    resBody: Types.TweetsList
   }
 
   /** Return id and created time */

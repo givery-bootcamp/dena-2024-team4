@@ -12,10 +12,12 @@ model__tweets_post_201_response.go
 model__tweets_post_400_response.go
 model__tweets_post_500_response.go
 model__tweets_post_request.go
-model_error404_response.go
-model_error500_response.go
 model__user_get_200_response.go
 model__user_get_401_response.go
+model__user_post_200_response.go
+model__user_post_request.go
+model_error404_response.go
+model_error500_response.go
 model_tweet.go
 model_tweets_list_inner.go
 model_user.go

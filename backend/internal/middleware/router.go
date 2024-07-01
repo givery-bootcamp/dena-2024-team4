@@ -16,6 +16,9 @@ func SetupRoutes(app *gin.Engine) {
 	// usernameとpasswordを受けとり、サインインする
 	app.POST("/signin", controllers.SignIn)
 
+	// ユーザーの新規作成
+	app.POST("/user", controllers.PostUser)
+
 	// 認証が必要なエンドポイント
 	auth := app.Group("/")
 	auth.Use(AuthRequired())

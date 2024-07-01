@@ -18,19 +18,21 @@ export const SignupModal: React.FC = () => {
         gridTemplateRows="repeat(3, auto) 1fr"
         minH={{ base: 350, md: 'auto' }}
       >
+        <Input name={SIGNUP_INPUT_NAME.DISPLAYNAME} required placeholder="表示名" w="full" />
         <Input
+          name={SIGNUP_INPUT_NAME.NAME}
           onChange={handleOnChange}
-          name={SIGNUP_INPUT_NAME.ID}
           required
-          placeholder="ユーザーID"
+          placeholder="ユーザー名"
           w="full"
         />
-        <Input name={SIGNUP_INPUT_NAME.NAME} required placeholder="ユーザー名" w="full" />
         <Input
           onChange={handleOnChange}
           name={SIGNUP_INPUT_NAME.PASSWORD}
           required
           placeholder="パスワード"
+          type="password"
+          autoComplete="current-password"
           w="full"
         />
         <Button type="submit">登録</Button>

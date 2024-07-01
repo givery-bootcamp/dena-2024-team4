@@ -9,6 +9,11 @@ export type Methods = {
     resBody: Types.Tweet
   }
 
+  /** Delete tweet */
+  delete: {
+    status: 200
+  }
+
   /** Return updated time */
   put: {
     status: 204

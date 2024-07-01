@@ -30,6 +30,8 @@ export const SigninModal: React.FC = () => {
           onChange={handleOnChange}
           name={SIGNIN_INPUT_NAME.PASSWORD}
           placeholder="パスワード"
+          type="password"
+          autoComplete="current-password"
           w="full"
         />
         <Button type="submit">ログイン</Button>
