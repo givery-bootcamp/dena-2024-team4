@@ -31,7 +31,7 @@ func SignIn(ctx *gin.Context) {
 		return
 	}
 
-	ctx.SetSameSite(http.SameSiteNoneMode)
+	ctx.SetSameSite(http.SameSiteStrictMode)
 
 	// JWTをCookieに設定。とりあえず期限は24時間
 	// クライアント側のCookieに保存される

@@ -11,7 +11,13 @@ const LogoutModal = () => {
 
   const logout = useCallback(() => {
     // 1.ログアウト処理(cookieで実装)
-    deleteCookie('jwt');
+    deleteCookie('jwt', {
+      path: '/',
+      domain: 'track-bootcamp.run',
+      secure: true,
+      httpOnly: false,
+      sameSite: 'strict',
+    });
 
     // 2.signInに遷移
     router.push('/signin');
