@@ -88,6 +88,13 @@ export const usePost = (post: PostResponse) => {
     setBody(event.target.value);
   };
 
+  const handleOnTapComment = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    // ~~~~~~
+    // ここにコメント処理
+    // ~~~~~~
+  };
+
   return {
     isOpen,
     model,
@@ -103,5 +110,6 @@ export const usePost = (post: PostResponse) => {
     handleReportButtonAction,
     handleOnChangeTitle,
     handleOnChangeBody,
+    handleOnTapComment,
   };
 };
