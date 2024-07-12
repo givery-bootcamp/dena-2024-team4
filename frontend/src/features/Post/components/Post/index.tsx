@@ -16,7 +16,7 @@ import {
 } from '@yamada-ui/react';
 import { FaEllipsis } from 'react-icons/fa6';
 import { FaRegFlag } from 'react-icons/fa6';
-import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
+import { RiDeleteBinLine, RiEditLine, RiHeart3Fill, RiHeart3Line } from 'react-icons/ri';
 import { Model, usePost } from './hooks';
 import { PostMenuModel } from '../PostMenuModel';
 
@@ -42,6 +42,7 @@ export default function Post({ myUserId, post, updateSuccess }: PostProps) {
     handleReportButtonAction,
     handleOnChangeTitle,
     handleOnChangeBody,
+    handleOnTapLike,
   } = usePost(post);
 
   return (
@@ -96,10 +97,9 @@ export default function Post({ myUserId, post, updateSuccess }: PostProps) {
           </>
         } />
       </Flex>
-      <Text as="b" fontSize="md">
-        {post.title}
-      </Text>
+      <Text as="b" fontSize="md">{post.title}</Text>
       <Text fontSize="md">{post.body}</Text>
+      <Icon as={post.is_liked ? RiHeart3Fill : RiHeart3Line} size="xl" color={post.is_liked ? "red" : "black"} _hover={{ color: "red" }} onClick={handleOnTapLike} />
     </>
   );
 }
